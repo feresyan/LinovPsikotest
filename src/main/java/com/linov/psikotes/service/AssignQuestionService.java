@@ -1,0 +1,152 @@
+package com.linov.psikotes.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.linov.psikotes.dao.AssignQuestionDao;
+import com.linov.psikotes.entity.AssignQuestion;
+
+@Service("assignQuestionService")
+public class AssignQuestionService {
+
+	@Autowired
+	private AssignQuestionDao aqDao;
+
+	public List<AssignQuestion> getAllAq(){
+		List<AssignQuestion> list = aqDao.getAll();
+		return list;
+	}
+	
+	public AssignQuestion findById(String id) {
+		AssignQuestion aq = aqDao.findById(id);
+		return aq;
+	}
+	
+	public AssignQuestion insertAq(AssignQuestion aq) throws Exception{
+		try {
+			//Check if id is null
+			valIdNull(aq);
+			
+			//Check if user id and package question id not null
+			valBkNotNull(aq);
+			
+			//Check if user id and package question are not exist in DB
+			AssignQuestion resultAq = findBK(aq);
+			valBkNotExist(resultAq);
+			
+			//Check if nonBK not null
+			valNonBk(aq);
+			
+			//Save
+			return aqDao.save(aq);
+		} catch (Exception e) {
+			// TODO: handle exception
+			throw new Exception(e.getMessage());
+		}
+	}
+	
+	public void updateAq(AssignQuestion aq) throws Exception{
+		try {
+			//Get old data of assign question from DB
+			AssignQuestion oldAq = findById(aq.getAssignQuestionId());
+			
+			//Check if id not null
+			valIdNotNull(aq);
+			
+			//Check if user and package question id not null
+			valBkNotNull(aq);
+			
+			//Check if user and package question not getting replaced
+			valBkNotChange(oldAq, aq);
+			
+			//Check if nonBk not null
+			valNonBk(aq);
+			
+			//Save
+			aqDao.save(aq);
+		} catch (Exception e) {
+			// TODO: handle exception
+			throw new Exception(e.getMessage());
+		}
+		
+	}
+	
+	public void deleteAq(String id) throws Exception{
+		try {
+			//Check if id is exist in DB
+			valIdExist(id);
+			
+			//Delete
+			aqDao.delete(id);
+		} catch (Exception e) {
+			// TODO: handle exception
+			throw new Exception(e.getMessage());
+		}
+	}
+	
+	public AssignQuestion findBK(AssignQuestion aq) {
+		return aqDao.findBK(aq.getUser().getUserId(), aq.getPackageQuestion().getPackageQuestionId());
+	}
+	
+	// VALIDASI POST
+	
+	 	private static Exception valIdNull(AssignQuestion aq) throws Exception{
+	 		if(aq.getAssignQuestionId() !=null) {
+	 			throw new Exception("Id harus kosong");
+	 		}
+	 		return null;
+	 	}
+	 	
+	 	private static Exception valBkNotNull(AssignQuestion aq) throws Exception{
+	 		if (aq.getUser().getUserId() == null || aq.getUser().getUserId().trim().equals("") 
+	 				|| aq.getPackageQuestion().getPackageQuestionId() == null || aq.getPackageQuestion().getPackageQuestionId().trim().equals("")) 
+	 		{
+	 			throw new Exception("User dan package question tidak boleh kosong");
+	 		}
+	 		return null;
+	 	}
+	 	
+	 	private static Exception valBkNotExist(AssignQuestion aq) throws Exception{		
+	 		if(aq.getAssignQuestionId() != null) {
+	 			throw new Exception("Question sudah di assign ke user");
+	 		}
+	 		return null;
+	 	}
+	 	
+	 	private static Exception valNonBk(AssignQuestion aq) throws Exception{
+	 		if( aq.getActiveState() == null || aq.getActiveState().trim().equals("")) 
+	 		{
+	 			throw new Exception("Active state tidak boleh kosong");
+	 		}
+	 		return null;
+	 	}
+	 	
+	 	// VAlIDASI PUT (valIdNotNull,valIdExist, valBkNotNull, valBkNotChange, valNonBk)
+	 	
+	 	private static Exception valIdNotNull(AssignQuestion aq) throws Exception{
+	 		if(aq.getAssignQuestionId() == null || aq.getAssignQuestionId().trim().equals("")) {
+	 			throw new Exception("Id tidak boleh kosong");
+	 		}
+	 		return null;
+	 	}
+	 	
+	 	private static Exception valIdExist(String id) throws Exception{
+	 		if(id == null) {
+	 			throw new Exception("Assign Question tidak ditemukan!");
+	 		}
+	 		return null;
+	 	}
+	 	
+	 	private static Exception valBkNotChange(AssignQuestion oldAq, AssignQuestion newAq) throws Exception{
+	 		if( !oldAq.getUser().getUserId().equalsIgnoreCase(newAq.getUser().getUserId())
+	 				|| !oldAq.getPackageQuestion().getPackageQuestionId().equalsIgnoreCase(newAq.getPackageQuestion().getPackageQuestionId())) {
+	 			throw new Exception("UC tidak dapat diubah!");
+	 		}
+	 		return null;
+	 	}
+	 	
+	 	// VALIDASI DELETE ( valIdExist )
+	
+}
