@@ -36,6 +36,17 @@ public class DetailAppAnsDao extends CommonDao{
 	
 	@SuppressWarnings("unchecked")
 	@Transactional
+	public List<DetailApplicantAnswer> getAllByAppAnsId(String id) {
+		List<DetailApplicantAnswer> list = super.entityManager
+				.createQuery("from DetailApplicantAnswer where applicant_answer_id = :field1")
+				.setParameter("field1", id)
+				.getResultList();
+		if(list.size()==0) return null;
+		else return (List<DetailApplicantAnswer>)list;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Transactional
 	public DetailApplicantAnswer findById(String id) {
 		List<DetailApplicantAnswer> list = super.entityManager
 				.createQuery("from DetailApplicantAnswer where detail_answer_id=:id")

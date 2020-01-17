@@ -24,6 +24,10 @@ public class QuestionType {
 	@Column(name="question_type_title")
 	private String questionTypeTitle;
 	
+	@Column(name="answer_type")
+	private String answerType;
+	
+	
 	@Column(name="amount_of_time")
 	private Time amountOfTime;
 	
@@ -60,6 +64,14 @@ public class QuestionType {
 
 	public void setActiveState(String activeState) {
 		this.activeState = activeState;
+	}
+
+	public String getAnswerType() {
+		return answerType;
+	}
+
+	public void setAnswerType(String answerType) {
+		this.answerType = answerType;
 	}
 	
 }

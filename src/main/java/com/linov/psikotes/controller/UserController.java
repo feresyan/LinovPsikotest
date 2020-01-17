@@ -109,7 +109,7 @@ public class UserController {
 	
 	@GetMapping("")
 	public ResponseEntity<?> getAllUser() throws ErrorException {
-		return ResponseEntity.ok(userService.getAllRole());
+		return ResponseEntity.ok(userService.getAllUser());
 	}
 	
 

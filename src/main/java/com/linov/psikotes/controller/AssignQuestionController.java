@@ -1,5 +1,7 @@
 package com.linov.psikotes.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,9 +26,11 @@ public class AssignQuestionController {
 	private AssignQuestionService aqService;
 	
 	@PostMapping("")
-	public ResponseEntity<?> insert(@RequestBody AssignQuestion aq) throws ErrorException{
+	public ResponseEntity<?> insert(@RequestBody List<AssignQuestion> aq) throws ErrorException{
 		try {
-			aqService.insertAq(aq);
+			for (AssignQuestion data : aq) {
+				aqService.insertAq(data);
+			}
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}

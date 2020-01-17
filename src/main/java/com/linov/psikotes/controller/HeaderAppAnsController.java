@@ -28,10 +28,10 @@ public class HeaderAppAnsController {
 	@PostMapping("")
 	public ResponseEntity<?> insert(@RequestBody HeaderApplicantAnswer appAns) throws ErrorException{
 		try {
-//			long millis=System.currentTimeMillis();  
-//			java.sql.Date date=new java.sql.Date(millis);
 			Date date =new Date();  
-			appAns.setTimestamp(date);	
+			appAns.setTimestamp(date);
+			appAns.setTotalPoints(0);
+			appAns.setStatus("Belum Mengerjakan");
 			appAnsService.insertHeaderApplicantAnswer(appAns);
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());

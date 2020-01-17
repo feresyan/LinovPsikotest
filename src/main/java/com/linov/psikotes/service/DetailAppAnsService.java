@@ -28,6 +28,11 @@ public class DetailAppAnsService {
 		return list;
 	}
 	
+	public List<DetailApplicantAnswer> getAllDetailByAppAnsId(String id){
+		List<DetailApplicantAnswer> list = dAppAnsDao.getAllByAppAnsId(id);
+		return list;
+	}
+	
 	public DetailApplicantAnswer findById(String id) {
 		DetailApplicantAnswer dAppAns = dAppAnsDao.findById(id);
 		return dAppAns;
@@ -59,7 +64,7 @@ public class DetailAppAnsService {
 			valFkPackQuestId(packQuest);
 			
 			//Check if nonBK null or not
-			valNonBk(detailAns);
+//			valNonBk(detailAns);
 			
 			//Save
 			return dAppAnsDao.save(detailAns);

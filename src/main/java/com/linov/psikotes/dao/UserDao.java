@@ -1,11 +1,13 @@
 package com.linov.psikotes.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
+import com.linov.psikotes.entity.PojoUser;
 import com.linov.psikotes.entity.User;
 
 @Repository("userDao")
@@ -25,14 +27,26 @@ public class UserDao extends CommonDao {
 	
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public List<User> getAll() {
+	public List<PojoUser> getAll() {
 		List<User> list = super.entityManager
 				.createQuery("from User where active_state=:status and role_id=:role order by timestamp desc")
 				.setParameter("status", "active")
 				.setParameter("role", "role2")
 				.getResultList();
 		if(list.size()==0) return null;
-		else return (List<User>)list;
+		else {
+			List<PojoUser> listPojoUser = new ArrayList<PojoUser>();
+			for (User data : list) {
+				PojoUser pu = new PojoUser();
+				pu.setUserId(data.getUserId());
+				pu.setUsername(data.getUsername());
+				pu.setRole(data.getRole());
+				pu.setProfile(data.getProfile());
+				listPojoUser.add(pu);
+			}
+			return (List<PojoUser>)listPojoUser;
+		}
+			
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -64,16 +78,23 @@ public class UserDao extends CommonDao {
 	
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public User findByUsername(String username) {
+	public PojoUser findByUsername(String username) {
 		List<User> list = super.entityManager
 				.createQuery("from User where username = :field1 and role_id = :field2")
 				.setParameter("field1", username)
 				.setParameter("field2", "role2")
 				.getResultList();
 		if(list.size()==0)
-			return new User();
+			return new PojoUser();
 		else
-			return (User)list.get(0);
+		{
+			PojoUser pu = new PojoUser();
+			pu.setUserId(list.get(0).getUserId());
+			pu.setUsername(list.get(0).getUsername());
+			pu.setRole(list.get(0).getRole());
+			pu.setProfile(list.get(0).getProfile());
+			return pu;
+		}
 	}
 	
 }

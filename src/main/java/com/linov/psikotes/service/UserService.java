@@ -8,6 +8,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.linov.psikotes.dao.UserDao;
+import com.linov.psikotes.entity.PojoUser;
 import com.linov.psikotes.entity.Profile;
 import com.linov.psikotes.entity.Role;
 import com.linov.psikotes.entity.User;
@@ -27,8 +28,8 @@ public class UserService {
 	@Autowired
 	private JavaMailSender javaMailSender;
 
-	public List<User> getAllRole(){
-		List<User> list = userDao.getAll();
+	public List<PojoUser> getAllUser(){
+		List<PojoUser> list = userDao.getAll();
 		return list;
 	}
 	
@@ -37,8 +38,8 @@ public class UserService {
 		return user;
 	}
 	
-	public User findByUsername(String username) {
-		User user = userDao.findByUsername(username);
+	public PojoUser findByUsername(String username) {
+		PojoUser user = userDao.findByUsername(username);
 		return user;
 	}
 	
