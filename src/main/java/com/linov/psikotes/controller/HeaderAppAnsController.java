@@ -1,7 +1,5 @@
 package com.linov.psikotes.controller;
 
-import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,15 +26,11 @@ public class HeaderAppAnsController {
 	@PostMapping("")
 	public ResponseEntity<?> insert(@RequestBody HeaderApplicantAnswer appAns) throws ErrorException{
 		try {
-			Date date =new Date();  
-			appAns.setTimestamp(date);
-			appAns.setTotalPoints(0);
-			appAns.setStatus("Belum Mengerjakan");
 			appAnsService.insertHeaderApplicantAnswer(appAns);
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
-		return ResponseEntity.status(HttpStatus.CREATED).body("Jawaban kandidat berhasil ditambah");
+		return ResponseEntity.status(HttpStatus.CREATED).body("Status: 201 Created");
 	}
 	
 	@PutMapping("")
@@ -46,7 +40,7 @@ public class HeaderAppAnsController {
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
-		return ResponseEntity.status(HttpStatus.OK).body("Jawaban Kandidat Berhasil Diperbarui");
+		return ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
 	}
 	
 	@DeleteMapping("/{id}")
@@ -56,17 +50,27 @@ public class HeaderAppAnsController {
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 		}
-		return ResponseEntity.status(HttpStatus.OK).body("Jawaban kandidat Berhasil Dihapus");
+		return ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
 	}
 	
 	@GetMapping("/id/{id}")
 	public ResponseEntity<?> getById(@PathVariable String id) throws ErrorException {
-		return ResponseEntity.ok(appAnsService.findById(id));
+		try {
+			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
+			return ResponseEntity.ok(appAnsService.findById(id));			
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+		}
 	}
 	
 	@GetMapping("")
 	public ResponseEntity<?> getAllUser() throws ErrorException {
-		return ResponseEntity.ok(appAnsService.getAllHeaderApplicantAnswer());
+		try {
+			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
+			return ResponseEntity.ok(appAnsService.getAllHeaderApplicantAnswer());
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+		}
 	}
 	
 }

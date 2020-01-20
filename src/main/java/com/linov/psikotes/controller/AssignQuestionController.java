@@ -34,7 +34,7 @@ public class AssignQuestionController {
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
-		return ResponseEntity.status(HttpStatus.CREATED).body("AssignQuestion Berhasil Ditambah");
+		return ResponseEntity.status(HttpStatus.CREATED).body("Status: 201 Created");
 	}
 	
 	@PutMapping("")
@@ -44,7 +44,7 @@ public class AssignQuestionController {
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
-		return ResponseEntity.status(HttpStatus.OK).body("AssignQuestion Berhasil Diperbarui");
+		return ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
 	}
 	
 	@DeleteMapping("/{id}")
@@ -54,17 +54,37 @@ public class AssignQuestionController {
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 		}
-		return ResponseEntity.status(HttpStatus.OK).body("AssignQuestion Berhasil Dihapus");
+		return ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
 	}
 	
 	@GetMapping("/id/{id}")
 	public ResponseEntity<?> getById(@PathVariable String id) throws ErrorException {
-		return ResponseEntity.ok(aqService.findById(id));
+		try {
+			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
+			return ResponseEntity.ok(aqService.findById(id));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+		}
+	}
+	
+	@GetMapping("/user/{userId}")
+	public ResponseEntity<?> getAllQuestByUserId(@PathVariable String userId) throws ErrorException {
+		try {
+			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
+			return ResponseEntity.ok(aqService.getAllQuestByUserId(userId));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+		}
 	}
 	
 	@GetMapping("")
 	public ResponseEntity<?> getAllUser() throws ErrorException {
-		return ResponseEntity.ok(aqService.getAllAq());
+		try {
+			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
+			return ResponseEntity.ok(aqService.getAllAq());
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+		}
 	}
 	
 }

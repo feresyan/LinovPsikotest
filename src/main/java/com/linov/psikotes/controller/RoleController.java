@@ -31,7 +31,7 @@ public class RoleController {
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
-		return ResponseEntity.status(HttpStatus.CREATED).body("Role Berhasil Ditambah");
+		return ResponseEntity.status(HttpStatus.CREATED).body("Status: 201 Created");
 	}
 	
 	@PutMapping("")
@@ -41,7 +41,7 @@ public class RoleController {
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
-		return ResponseEntity.status(HttpStatus.OK).body("Role Berhasil Diperbarui");
+		return ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
 	}
 	
 	@DeleteMapping("/{id}")
@@ -51,17 +51,27 @@ public class RoleController {
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 		}
-		return ResponseEntity.status(HttpStatus.OK).body("Role Berhasil Dihapus");
+		return ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
 	}
 	
 	@GetMapping("/id/{id}")
 	public ResponseEntity<?> getById(@PathVariable String id) throws ErrorException {
-		return ResponseEntity.ok(roleService.findById(id));
+		try {
+			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
+			return ResponseEntity.ok(roleService.findById(id));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+		}
 	}
 	
 	@GetMapping("")
-	public ResponseEntity<?> getAllUser() throws ErrorException {
-		return ResponseEntity.ok(roleService.getAllRole());
+	public ResponseEntity<?> getAllRole() throws ErrorException {
+		try {
+			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
+			return ResponseEntity.ok(roleService.getAllRole());
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+		}
 	}
 	
 	

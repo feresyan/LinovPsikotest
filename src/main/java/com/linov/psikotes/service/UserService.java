@@ -1,5 +1,6 @@
 package com.linov.psikotes.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.linov.psikotes.dao.UserDao;
+import com.linov.psikotes.entity.PojoSignUp;
 import com.linov.psikotes.entity.PojoUser;
 import com.linov.psikotes.entity.Profile;
 import com.linov.psikotes.entity.Role;
@@ -41,6 +43,38 @@ public class UserService {
 	public PojoUser findByUsername(String username) {
 		PojoUser user = userDao.findByUsername(username);
 		return user;
+	}
+	
+	public void signUp(PojoSignUp pojoSignUp) throws Exception{
+		//insert profile to DB
+		Profile theProfile = ps.insertProfile(pojoSignUp.getProfile());
+		
+		//Set random password to new user
+		User user = new User();
+		String password = getRandomPassword(8);
+		user.setPassword(password);
+		
+		//set role to new user
+		user.setRole(rs.findByCode("candidate"));
+		
+		//set profile id to new user
+		user.setProfile(theProfile);
+		
+		//set username to new user
+		user.setUsername(pojoSignUp.getUsername());
+		
+		//set active state
+		user.setActiveState("active");
+		
+		//Sending password via email candidate
+		sendEmail(pojoSignUp.getProfile().getEmail(),password);
+		
+		//Set Timestamp
+		Date date =new Date();  
+		user.setTimestamp(date);
+		
+		//insert user to DB
+		insertUser(user);
 	}
 	
 	public void insertUser(User user) throws Exception{

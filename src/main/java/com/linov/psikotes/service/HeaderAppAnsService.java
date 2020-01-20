@@ -1,5 +1,6 @@
 package com.linov.psikotes.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,13 @@ public class HeaderAppAnsService {
 	
 	public HeaderApplicantAnswer insertHeaderApplicantAnswer(HeaderApplicantAnswer appAns) throws Exception{
 		try {
+			
+			//set all field
+			Date date =new Date();  
+			appAns.setTimestamp(date);
+			appAns.setTotalPoints(0);
+			appAns.setStatus("Belum Mengerjakan");
+			
 			//Check if id null 
 			valIdNull(appAns);
 			

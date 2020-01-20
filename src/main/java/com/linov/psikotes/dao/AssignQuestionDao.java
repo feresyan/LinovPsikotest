@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import com.linov.psikotes.entity.AssignQuestion;
+import com.linov.psikotes.entity.PackageQuestion;
 
 @Repository("assignQuestionDao")
 public class AssignQuestionDao extends CommonDao{
@@ -37,6 +38,24 @@ public class AssignQuestionDao extends CommonDao{
 	
 	@SuppressWarnings("unchecked")
 	@Transactional
+	public List<PackageQuestion> getAllQuestByUserId(String userId) {
+		List<AssignQuestion> list = super.entityManager
+				.createQuery("from AssignQuestion where user_id=:field1")
+				.setParameter("field1", userId)
+				.getResultList();
+		
+		List<PackageQuestion> listQuestion = super.entityManager
+				.createQuery("from PackageQuestion where package_id=:field1")
+				.setParameter("field1", list.get(0).getPack().getPackageId())
+				.getResultList();
+		if(list.size()==0)
+			return null;
+		else
+			return listQuestion;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Transactional
 	public AssignQuestion findById(String id) {
 		List<AssignQuestion> list = super.entityManager
 				.createQuery("from AssignQuestion where assign_question_id=:id")
@@ -50,11 +69,11 @@ public class AssignQuestionDao extends CommonDao{
 	
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public AssignQuestion findBK(String userId, String pqId) {
+	public AssignQuestion findBK(String userId, String packId) {
 		List<AssignQuestion> list = super.entityManager
-				.createQuery("from AssignQuestion where user_id=:userId and package_question_id=:pqId")
-				.setParameter("userId", userId)
-				.setParameter("pqId", pqId)
+				.createQuery("from AssignQuestion where user_id = :field1 and package_id = :field2")
+				.setParameter("field1", userId)
+				.setParameter("field2", packId)
 				.getResultList();
 		if(list.size()==0)
 			return new AssignQuestion();

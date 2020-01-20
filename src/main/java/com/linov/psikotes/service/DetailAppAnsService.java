@@ -21,7 +21,14 @@ public class DetailAppAnsService {
 	private HeaderAppAnsDao appAnsDao;
 	
 	@Autowired
+	private HeaderAppAnsService hAppAnsService;
+	
+	@Autowired
 	private PackageQuestionService pqDao;
+	
+	@Autowired
+	private PackageQuestionService pqService;
+	
 
 	public List<DetailApplicantAnswer> getAllDetail(){
 		List<DetailApplicantAnswer> list = dAppAnsDao.getAll();
@@ -116,6 +123,91 @@ public class DetailAppAnsService {
 			// TODO: handle exception
 			throw new Exception(e.getMessage());
 		}
+	}
+	
+	public void calculatePoints(List<DetailApplicantAnswer> dAppAns) throws Exception {
+		//make var to store total points from all question
+		Integer totalTruePoints = 0;
+		
+		//Make var to store total question
+		Integer totalQuestion = 0;
+		
+		for (DetailApplicantAnswer data : dAppAns) 
+		{
+			
+			//sum total question
+			totalQuestion+=1;
+			
+			//get package question record to get answer type
+			PackageQuestion pq =  pqService.findById(data.getPackQuestion().getPackageQuestionId());
+			
+			//make temporary var for total points
+			Integer tempPoints = 0;
+			
+			if(pq.getQuestion().getQuestionType().getAnswerType().equalsIgnoreCase("Pilihan ganda")) {
+				if(pq.getQuestion().getCorrectAnswer().getAnswer1() != null && pq.getQuestion().getCorrectAnswer().getAnswer2() != null) {
+					
+					//sum the points
+					totalTruePoints+=10;
+					
+					if(pq.getQuestion().getCorrectAnswer().getAnswer1().equalsIgnoreCase(data.getAppAnswer().getAnswer1())) {
+						tempPoints+=5;
+						totalTruePoints+=5;
+					} else if (pq.getQuestion().getCorrectAnswer().getAnswer2().equalsIgnoreCase(data.getAppAnswer().getAnswer2())) {
+						tempPoints+=5;
+					}
+				}
+				else 
+				{
+					//sum the points
+					totalTruePoints+=10;
+					
+					if(pq.getQuestion().getCorrectAnswer().getAnswer1().equalsIgnoreCase(data.getAppAnswer().getAnswer1())) {
+						tempPoints+=10;
+					}
+				}
+				
+				//set point for question for multiple choice question
+				data.setPoint(tempPoints);
+				insertDetail(data);
+				
+			}//
+			else 
+			{
+				//set point for question to 0 for essay question
+				data.setPoint(tempPoints);
+				insertDetail(data);
+			}
+			
+		}
+		
+		//Get Header applicant answer record
+		HeaderApplicantAnswer headerAppAns = hAppAnsService.findById(dAppAns.get(0).getHeaderAppAnswer().getApplicantAnswerId());
+		
+		//Get all answer for specific user
+		List<DetailApplicantAnswer> listDetail = getAllDetailByAppAnsId(headerAppAns.getApplicantAnswerId());
+		
+		//make temporary var for storing total points
+		Integer totalPoints = 0;
+		for (DetailApplicantAnswer detail : listDetail) {
+			totalPoints+= detail.getPoint();
+		}
+		
+		//Set total points from sum point
+		headerAppAns.setTotalPoints(totalPoints);
+		
+		//set status from total points that user get
+		//get average
+		Integer avg = totalTruePoints / totalQuestion;
+		Integer kkm = avg * 75 /100;
+		
+		if((totalPoints/totalQuestion) >= kkm) {
+			headerAppAns.setStatus("Lulus");
+		} else {
+			headerAppAns.setStatus("Tidak lulus");
+		}
+		
+		hAppAnsService.updateHeaderApplicantAnswer(headerAppAns);
 	}
 	
 	// VALIDASI POST

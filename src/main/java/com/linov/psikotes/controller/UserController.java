@@ -1,7 +1,5 @@
 package com.linov.psikotes.controller;
 
-import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,11 +12,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.linov.psikotes.entity.Profile;
+import com.linov.psikotes.entity.PojoSignUp;
 import com.linov.psikotes.entity.User;
 import com.linov.psikotes.exception.ErrorException;
-import com.linov.psikotes.service.ProfileService;
-import com.linov.psikotes.service.RoleService;
 import com.linov.psikotes.service.UserService;
 
 @RestController
@@ -28,51 +24,14 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	@Autowired
-	private ProfileService profileService;
-	
-	@Autowired
-	private RoleService roleService;
-	
 	@PostMapping("")
-	public ResponseEntity<?> insert(@RequestBody Profile profile) throws ErrorException{
+	public ResponseEntity<?> insert(@RequestBody PojoSignUp pojoSignUp) throws ErrorException{
 		try {
-			//insert profile to DB
-			Profile theProfile = profileService.insertProfile(profile);
-			
-			//Set random password to new user
-			User user = new User();
-			String password = userService.getRandomPassword(8);
-			user.setPassword(password);
-			
-			//set role to new user
-			user.setRole(roleService.findByCode("candidate"));
-			
-			//set profile id to new user
-			user.setProfile(theProfile);
-			
-			//set username to new user
-			String username = userService.getRandomPassword(8);
-			user.setUsername(username);
-			
-			//set active state
-			user.setActiveState("active");
-			
-			//Sending password via email candidate
-			userService.sendEmail(profile.getEmail(),password);
-			
-			//Set Timestamp
-			Date date =new Date();  
-			user.setTimestamp(date);
-			
-			//insert user to DB
-			userService.insertUser(user);
-			
-			
+			userService.signUp(pojoSignUp);
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
-		return ResponseEntity.status(HttpStatus.CREATED).body("User Berhasil Ditambah");
+		return ResponseEntity.status(HttpStatus.CREATED).body("Status: 201 Created");
 	}
 	
 	@PutMapping("")
@@ -84,7 +43,7 @@ public class UserController {
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
-		return ResponseEntity.status(HttpStatus.OK).body("User Berhasil Diperbarui");
+		return ResponseEntity.status(HttpStatus.OK).body("Status: 200 Ok");
 	}
 	
 	@DeleteMapping("/{id}")
@@ -94,22 +53,37 @@ public class UserController {
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 		}
-		return ResponseEntity.status(HttpStatus.OK).body("User Berhasil Dihapus");
+		return ResponseEntity.status(HttpStatus.OK).body("Status: 200 Ok");
 	}
 	
 	@GetMapping("/id/{id}")
 	public ResponseEntity<?> getById(@PathVariable String id) throws ErrorException {
-		return ResponseEntity.ok(userService.findById(id));
+		try {
+			ResponseEntity.status(HttpStatus.OK).body("Status: 200 Ok");
+			return ResponseEntity.ok(userService.findById(id));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+		}
 	}
 	
 	@GetMapping("/username/{username}")
 	public ResponseEntity<?> getByUsername(@PathVariable String username) throws ErrorException {
-		return ResponseEntity.ok(userService.findByUsername(username));
+		try {
+			ResponseEntity.status(HttpStatus.OK).body("Status: 200 Ok");
+			return ResponseEntity.ok(userService.findByUsername(username));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+		}
 	}
 	
 	@GetMapping("")
 	public ResponseEntity<?> getAllUser() throws ErrorException {
-		return ResponseEntity.ok(userService.getAllUser());
+		try {
+			ResponseEntity.status(HttpStatus.OK).body("Status: 200 Ok");
+			return ResponseEntity.ok(userService.getAllUser());
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+		}
 	}
 	
 

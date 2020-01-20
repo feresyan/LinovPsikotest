@@ -30,7 +30,7 @@ public class PackageController {
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
-		return ResponseEntity.status(HttpStatus.CREATED).body("Package Berhasil Ditambah");
+		return ResponseEntity.status(HttpStatus.CREATED).body("Status: 201 Created");
 	}
 	
 	@PutMapping("")
@@ -40,7 +40,7 @@ public class PackageController {
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
-		return ResponseEntity.status(HttpStatus.OK).body("Package Berhasil Diperbarui");
+		return ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
 	}
 	
 	@DeleteMapping("/{id}")
@@ -50,17 +50,27 @@ public class PackageController {
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 		}
-		return ResponseEntity.status(HttpStatus.OK).body("Package Berhasil Dihapus");
+		return ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
 	}
 	
 	@GetMapping("/id/{id}")
-	public ResponseEntity<?> getById(@PathVariable String id) throws ErrorException {
-		return ResponseEntity.ok(packageService.findById(id));
+	public ResponseEntity<?> getById(@PathVariable String id) throws ErrorException {		
+		try {
+			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
+			return ResponseEntity.ok(packageService.findById(id));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+		}
 	}
 	
 	@GetMapping("")
-	public ResponseEntity<?> getAllUser() throws ErrorException {
-		return ResponseEntity.ok(packageService.getAllPackage());
+	public ResponseEntity<?> getAllPackage() throws ErrorException {
+		try {
+			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
+			return ResponseEntity.ok(packageService.getAllPackage());
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+		}
 	}
 	
 }

@@ -30,7 +30,7 @@ public class QuestionTypeController {
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
-		return ResponseEntity.status(HttpStatus.CREATED).body("QuestionType Berhasil Ditambah");
+		return ResponseEntity.status(HttpStatus.CREATED).body("Status: 201 Created");
 	}
 	
 	@PutMapping("")
@@ -40,7 +40,7 @@ public class QuestionTypeController {
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
-		return ResponseEntity.status(HttpStatus.OK).body("QuestionType Berhasil Diperbarui");
+		return ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
 	}
 	
 	@DeleteMapping("/{id}")
@@ -50,17 +50,27 @@ public class QuestionTypeController {
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 		}
-		return ResponseEntity.status(HttpStatus.OK).body("QuestionType Berhasil Dihapus");
+		return ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
 	}
 	
 	@GetMapping("/id/{id}")
 	public ResponseEntity<?> getById(@PathVariable String id) throws ErrorException {
-		return ResponseEntity.ok(questionTypeService.findById(id));
+		try {
+			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
+			return ResponseEntity.ok(questionTypeService.findById(id));
+		}catch(Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+		}		
 	}
 	
 	@GetMapping("")
 	public ResponseEntity<?> getAllQuestionType() throws ErrorException {
-		return ResponseEntity.ok(questionTypeService.getAllQuestionType());
+		try {
+			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
+			return ResponseEntity.ok(questionTypeService.getAllQuestionType());
+		}catch(Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+		}
 	}
 		
 }

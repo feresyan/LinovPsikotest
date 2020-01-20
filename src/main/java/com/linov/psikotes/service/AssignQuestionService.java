@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.linov.psikotes.dao.AssignQuestionDao;
 import com.linov.psikotes.entity.AssignQuestion;
+import com.linov.psikotes.entity.PackageQuestion;
 
 @Service("assignQuestionService")
 public class AssignQuestionService {
@@ -17,6 +18,10 @@ public class AssignQuestionService {
 	public List<AssignQuestion> getAllAq(){
 		List<AssignQuestion> list = aqDao.getAll();
 		return list;
+	}
+	
+	public List<PackageQuestion> getAllQuestByUserId(String userId){
+		return aqDao.getAllQuestByUserId(userId);
 	}
 	
 	public AssignQuestion findById(String id) {
@@ -87,7 +92,7 @@ public class AssignQuestionService {
 	}
 	
 	public AssignQuestion findBK(AssignQuestion aq) {
-		return aqDao.findBK(aq.getUser().getUserId(), aq.getPackageQuestion().getPackageQuestionId());
+		return aqDao.findBK(aq.getUser().getUserId(), aq.getPack().getPackageId());
 	}
 	
 	// VALIDASI POST
@@ -101,9 +106,9 @@ public class AssignQuestionService {
 	 	
 	 	private static Exception valBkNotNull(AssignQuestion aq) throws Exception{
 	 		if (aq.getUser().getUserId() == null || aq.getUser().getUserId().trim().equals("") 
-	 				|| aq.getPackageQuestion().getPackageQuestionId() == null || aq.getPackageQuestion().getPackageQuestionId().trim().equals("")) 
+	 				|| aq.getPack().getPackageId() == null || aq.getPack().getPackageId().trim().equals("")) 
 	 		{
-	 			throw new Exception("User dan package question tidak boleh kosong");
+	 			throw new Exception("User dan package tidak boleh kosong");
 	 		}
 	 		return null;
 	 	}
@@ -141,7 +146,7 @@ public class AssignQuestionService {
 	 	
 	 	private static Exception valBkNotChange(AssignQuestion oldAq, AssignQuestion newAq) throws Exception{
 	 		if( !oldAq.getUser().getUserId().equalsIgnoreCase(newAq.getUser().getUserId())
-	 				|| !oldAq.getPackageQuestion().getPackageQuestionId().equalsIgnoreCase(newAq.getPackageQuestion().getPackageQuestionId())) {
+	 				|| !oldAq.getPack().getPackageId().equalsIgnoreCase(newAq.getPack().getPackageId())) {
 	 			throw new Exception("UC tidak dapat diubah!");
 	 		}
 	 		return null;
