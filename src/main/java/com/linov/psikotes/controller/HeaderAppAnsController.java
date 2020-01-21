@@ -64,7 +64,7 @@ public class HeaderAppAnsController {
 	}
 	
 	@GetMapping("")
-	public ResponseEntity<?> getAllUser() throws ErrorException {
+	public ResponseEntity<?> getAllHeader() throws ErrorException {
 		try {
 			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
 			return ResponseEntity.ok(appAnsService.getAllHeaderApplicantAnswer());

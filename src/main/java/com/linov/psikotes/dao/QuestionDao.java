@@ -65,6 +65,19 @@ public class QuestionDao extends CommonDao {
 	
 	@SuppressWarnings("unchecked")
 	@Transactional
+	public List<Question> findFileName() {
+		List<Question> list = super.entityManager
+				.createQuery("select choice from Question ")
+//				.setParameter("title", title)
+				.getResultList();
+		if(list.size()==0)
+			return null;
+		else
+			return list;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Transactional
 	public List<Question> search(SearchQuestion searchQuest) {
 		StringBuilder query = new StringBuilder();
 		query.append("from Question where 1=1");

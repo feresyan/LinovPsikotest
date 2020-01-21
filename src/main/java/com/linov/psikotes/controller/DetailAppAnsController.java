@@ -67,6 +67,11 @@ public class DetailAppAnsController {
 		return ResponseEntity.ok(dAppAnsService.findById(id));
 	}
 	
+	@GetMapping("/user/{id}")
+	public ResponseEntity<?> getAllDetailByHeaderId(@PathVariable String id) throws ErrorException {
+		return ResponseEntity.ok(dAppAnsService.getAllDetailByAppAnsId(id));
+	}
+	
 	@GetMapping("")
 	public ResponseEntity<?> getAllUser() throws ErrorException {
 		return ResponseEntity.ok(dAppAnsService.getAllDetail());

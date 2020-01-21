@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -33,6 +34,11 @@ public class QuestionService {
 		return list;
 	}
 	
+	public List<Question> getChoice(){
+		List<Question> list = questionDao.findFileName();
+		return list;
+	}
+	
 	public List<Question> search(SearchQuestion searchQuest){
 		List<Question> list = questionDao.search(searchQuest);
 		return list;
@@ -45,6 +51,7 @@ public class QuestionService {
 	
 	public Question insertQuestion(Question question) throws Exception{
 		try {
+			
 			//Check if id null
 			valIdNull(question);
 			
@@ -126,59 +133,125 @@ public class QuestionService {
 		Choice c = new Choice();
 		Answer a = new Answer();
 		ListImg l = new ListImg();
-		
+
 		//ListImage
 		for (int i = 0; i < listImage.length; i++) {
-			byte[] byteQuestion2 = listImage[i].getBytes();
-			Path path = Paths.get(UPLOADED_FOLDER + listImage[i].getOriginalFilename());
-			Files.write(path, byteQuestion2);
-			
-			if(l.getImgA()==null) {
-				l.setImgA(path.toString());
-			}else if (l.getImgB()==null) {
-				l.setImgB(path.toString());
-			}else if (l.getImgC()==null) {
-				l.setImgC(path.toString());
-			}else if (l.getImgD()==null) {
-				l.setImgD(path.toString());
-			}else if(l.getImgE()==null) {
-				l.setImgE(path.toString());
-			}else if(l.getImgF()==null) {
-				l.setImgF(path.toString());
+			if (!listImage[i].isEmpty()) {
+				
+				//Check file extension
+				valFileExt(listImage[i].getOriginalFilename());
+				
+				//Check file size
+				valFileSize(listImage[i].getSize());
+				
+//				//Stringbuilder
+//				StringBuilder newFileName = new StringBuilder();
+//				
+//				//Make random String for fileName
+//				newFileName.append(getRandomPassword(20));
+//				
+//				//Get Extension File
+//				String ext = FilenameUtils.getExtension(listImage[i].getOriginalFilename());
+//				newFileName.append(ext.toString());
+				
+				byte[] byteQuestion2 = listImage[i].getBytes();
+				Path path = Paths.get(UPLOADED_FOLDER + listImage[i].getOriginalFilename());
+								
+				Files.write(path, byteQuestion2);
+				
+				if(l.getImgA()==null) {
+					l.setImgA(path.toString());
+				}else if (l.getImgB()==null) {
+					l.setImgB(path.toString());
+				}else if (l.getImgC()==null) {
+					l.setImgC(path.toString());
+				}else if (l.getImgD()==null) {
+					l.setImgD(path.toString());
+				}else if(l.getImgE()==null) {
+					l.setImgE(path.toString());
+				}else if(l.getImgF()==null) {
+					l.setImgF(path.toString());
+				}
 			}
-			
 		}
+
 
 		
 		//choice image
 		for (int i = 0; i < choice.length; i++) {
-			byte[] byteQuestion2 = choice[i].getBytes();
-			Path path2 = Paths.get(UPLOADED_FOLDER + choice[i].getOriginalFilename());
-			Files.write(path2, byteQuestion2);
-			
-			if(c.getChoiceA()==null) {
-				c.setChoiceA(path2.toString());
-			}else if (c.getChoiceB()==null) {
-				c.setChoiceB(path2.toString());
-			}else if (c.getChoiceC()==null) {
-				c.setChoiceC(path2.toString());
-			}else if (c.getChoiceD()==null) {
-				c.setChoiceD(path2.toString());
-			}else if(c.getChoiceE()==null) {
-				c.setChoiceE(path2.toString());
+			if (!choice[i].isEmpty()) {
+				
+				//Check file extension
+				valFileExt(choice[i].getOriginalFilename());
+				
+				//Check file size
+				valFileSize(choice[i].getSize());
+				
+//				//Stringbuilder
+//				StringBuilder newFileName = new StringBuilder();
+//				
+//				//Make random String for fileName
+//				newFileName.append(getRandomPassword(20));
+//				
+//				//Get Extension File
+//				String ext = FilenameUtils.getExtension(listImage[i].getOriginalFilename());
+//				newFileName.append(ext.toString());
+				
+				byte[] byteQuestion2 = choice[i].getBytes();
+				Path path2 = Paths.get(UPLOADED_FOLDER + choice[i].getOriginalFilename());
+				Files.write(path2, byteQuestion2);
+				
+				if(c.getChoiceA()==null) {
+					c.setChoiceA(path2.toString());
+				}else if (c.getChoiceB()==null) {
+					c.setChoiceB(path2.toString());
+				}else if (c.getChoiceC()==null) {
+					c.setChoiceC(path2.toString());
+				}else if (c.getChoiceD()==null) {
+					c.setChoiceD(path2.toString());
+				}else if(c.getChoiceE()==null) {
+					c.setChoiceE(path2.toString());
+				}
+			}
+			else
+			{
+				throw new Exception("Pilihan harus diisi");
 			}
 		}
 		
 		//correct answer image
 		for (int i = 0; i < correctAnswer.length; i++) {
-			byte[] byteQuestion = correctAnswer[i].getBytes();
-			Path path = Paths.get(UPLOADED_FOLDER + correctAnswer[i].getOriginalFilename());
-			Files.write(path, byteQuestion);
-			
-			if(a.getAnswer1()==null) {
-				a.setAnswer1(path.toString());
-			}else if (a.getAnswer2()==null) {
-				a.setAnswer2(path.toString());
+			if (!correctAnswer[i].isEmpty()) {
+				
+				//Check file extension
+				valFileExt(correctAnswer[i].getOriginalFilename());
+				
+				//Check file size
+				valFileSize(correctAnswer[i].getSize());
+				
+//				//Stringbuilder
+//				StringBuilder newFileName = new StringBuilder();
+//				
+//				//Make random String for fileName
+//				newFileName.append(getRandomPassword(20));
+//				
+//				//Get Extension File
+//				String ext = FilenameUtils.getExtension(listImage[i].getOriginalFilename());
+//				newFileName.append(ext.toString());
+				
+				byte[] byteQuestion = correctAnswer[i].getBytes();
+				Path path = Paths.get(UPLOADED_FOLDER + correctAnswer[i].getOriginalFilename());
+				Files.write(path, byteQuestion);
+				
+				if(a.getAnswer1()==null) {
+					a.setAnswer1(path.toString());
+				}else if (a.getAnswer2()==null) {
+					a.setAnswer2(path.toString());
+				}
+			}
+			else
+			{
+				throw new Exception("Jawaban harus diisi!");
 			}
 		}
 			
@@ -214,25 +287,34 @@ public class QuestionService {
 		Choice c = new Choice();
 		Answer a = new Answer();
 		ListImg l = new ListImg();
-		
+
 		//ListImage
 		for (int i = 0; i < listImage.length; i++) {
-			byte[] byteQuestion2 = listImage[i].getBytes();
-			Path path3 = Paths.get(UPLOADED_FOLDER + listImage[i].getOriginalFilename());
-			Files.write(path3, byteQuestion2);
-			
-			if(l.getImgA()==null) {
-				l.setImgA(path3.toString());
-			}else if (l.getImgB()==null) {
-				l.setImgB(path3.toString());
-			}else if (l.getImgC()==null) {
-				l.setImgC(path3.toString());
-			}else if (l.getImgD()==null) {
-				l.setImgD(path3.toString());
-			}else if(l.getImgE()==null) {
-				l.setImgE(path3.toString());
-			}else if(l.getImgF()==null) {
-				l.setImgF(path3.toString());
+			if (!listImage[i].isEmpty()) {
+				
+				//Check file extension
+				valFileExt(listImage[i].getOriginalFilename());
+				
+				//Check file size
+				valFileSize(listImage[i].getSize());
+				
+				byte[] byteQuestion2 = listImage[i].getBytes();
+				Path path3 = Paths.get(UPLOADED_FOLDER + listImage[i].getOriginalFilename());
+				Files.write(path3, byteQuestion2);
+				
+				if(l.getImgA()==null) {
+					l.setImgA(path3.toString());
+				}else if (l.getImgB()==null) {
+					l.setImgB(path3.toString());
+				}else if (l.getImgC()==null) {
+					l.setImgC(path3.toString());
+				}else if (l.getImgD()==null) {
+					l.setImgD(path3.toString());
+				}else if(l.getImgE()==null) {
+					l.setImgE(path3.toString());
+				}else if(l.getImgF()==null) {
+					l.setImgF(path3.toString());
+				}
 			}
 			
 		}
@@ -240,33 +322,57 @@ public class QuestionService {
 		
 		//choice image
 		for (int i = 0; i < choice.length; i++) {
-			byte[] byteQuestion2 = choice[i].getBytes();
-			Path path2 = Paths.get(UPLOADED_FOLDER + choice[i].getOriginalFilename());
-			Files.write(path2, byteQuestion2);
-			
-			if(c.getChoiceA()==null) {
-				c.setChoiceA(path2.toString());
-			}else if (c.getChoiceB()==null) {
-				c.setChoiceB(path2.toString());
-			}else if (c.getChoiceC()==null) {
-				c.setChoiceC(path2.toString());
-			}else if (c.getChoiceD()==null) {
-				c.setChoiceD(path2.toString());
-			}else if(c.getChoiceE()==null) {
-				c.setChoiceE(path2.toString());
+			if (!choice[i].isEmpty()) {
+				
+				//Check file extension
+				valFileExt(choice[i].getOriginalFilename());
+				
+				//Check file size
+				valFileSize(choice[i].getSize());
+				
+				byte[] byteQuestion2 = choice[i].getBytes();
+				Path path2 = Paths.get(UPLOADED_FOLDER + choice[i].getOriginalFilename());
+				Files.write(path2, byteQuestion2);
+				
+				if(c.getChoiceA()==null) {
+					c.setChoiceA(path2.toString());
+				}else if (c.getChoiceB()==null) {
+					c.setChoiceB(path2.toString());
+				}else if (c.getChoiceC()==null) {
+					c.setChoiceC(path2.toString());
+				}else if (c.getChoiceD()==null) {
+					c.setChoiceD(path2.toString());
+				}else if(c.getChoiceE()==null) {
+					c.setChoiceE(path2.toString());
+				}
+			}
+			else
+			{
+				throw new Exception("Pertanyaan harus disii!");
 			}
 		}
 		
 		//correct answer image
 		for (int i = 0; i < correctAnswer.length; i++) {
-			byte[] byteQuestion = correctAnswer[i].getBytes();
-			Path path = Paths.get(UPLOADED_FOLDER + correctAnswer[i].getOriginalFilename());
-			Files.write(path, byteQuestion);
-			
-			if(a.getAnswer1()==null) {
-				a.setAnswer1(path.toString());
-			}else if (a.getAnswer2()==null) {
-				a.setAnswer2(path.toString());
+			if (!correctAnswer[i].isEmpty()) {
+				
+				//Check file extension
+				valFileExt(correctAnswer[i].getOriginalFilename());
+				
+				//Check file size
+				valFileSize(correctAnswer[i].getSize());
+				
+				byte[] byteQuestion = correctAnswer[i].getBytes();
+				Path path = Paths.get(UPLOADED_FOLDER + correctAnswer[i].getOriginalFilename());
+				Files.write(path, byteQuestion);
+				
+				if(a.getAnswer1()==null) {
+					a.setAnswer1(path.toString());
+				}else if (a.getAnswer2()==null) {
+					a.setAnswer2(path.toString());
+				}
+			} else {
+				throw new Exception("Jawaban harus diisi");
 			}
 		}
 			
@@ -283,7 +389,64 @@ public class QuestionService {
 		updateQuestion(question);
 	}
 	
+	public static String getRandomPassword(int n) 
+    { 
+  
+        // chose a Character random from this String 
+        String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                                    + "0123456789"
+                                    + "abcdefghijklmnopqrstuvxyz"; 
+  
+        // create StringBuffer size of AlphaNumericString 
+        StringBuilder sb = new StringBuilder(n); 
+  
+        for (int i = 0; i < n; i++) { 
+  
+            // generate a random number between 
+            // 0 to AlphaNumericString variable length 
+            int index 
+                = (int)(AlphaNumericString.length() 
+                        * Math.random()); 
+  
+            // add Character one by one in end of sb 
+            sb.append(AlphaNumericString 
+                          .charAt(index)); 
+        } 
+  
+        return sb.toString(); 
+    }
+	
 	// VALIDASI POST
+	
+	private static Exception valFileExt(String fileName) throws Exception {
+		String ext = FilenameUtils.getExtension(fileName);
+		if(ext.equalsIgnoreCase("jpg") || ext.equalsIgnoreCase("png")) {
+			return null;
+		}
+		throw new Exception("ekstensi file hanya jpg/png! ");
+	}
+	
+	private static Exception valFileSize(Long byteFile) throws Exception {
+		if((byteFile/1024) < 500) {
+			return null;
+		}
+		throw new Exception("Maksimal besar file hanya 1 mb!");
+	}
+	
+//	private static  String valFileName(Question question,String oriFileName) {
+//		if(
+//				question.getChoice().getChoiceA().equalsIgnoreCase(oriFileName) || 
+//				question.getChoice().getChoiceB().equalsIgnoreCase(oriFileName) || 
+//				question.getChoice().getChoiceC().equalsIgnoreCase(oriFileName) ||
+//				question.getChoice().getChoiceD().equalsIgnoreCase(oriFileName) ||
+//				question.getCorrectAnswer().getAnswer1().equalsIgnoreCase(oriFileName) ||
+//				question.getCorrectAnswer().getAnswer2().equalsIgnoreCase(oriFileName)
+//				) 
+//		{
+//			return getRandomPassword(12);
+//		}
+//		return oriFileName;
+//	}
 	
  	private static Exception valIdNull(Question q) throws Exception{
  		if(q.getQuestionId() !=null ) {

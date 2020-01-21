@@ -3,7 +3,6 @@ package com.linov.psikotes.controller;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,10 +28,10 @@ public class QuestionController {
 	@Autowired
 	private QuestionService questionService;
 	
-//	 private static String UPLOADED_FOLDER = "D://BootCamp//Project Akhir//Project//psikotes//src//main//resources//img//question//";
+	 private static String UPLOADED_FOLDER = "D://BootCamp//Project Akhir//Project//psikotes//src//main//resources//img//question//";
 	
-	 @Value("uploaded.folder")
-	 private String path;
+//	@Value("uploaded.folder")
+//	private String path;
 	 
 	@PostMapping("/img")
 	public ResponseEntity<?> insertImg(
@@ -45,7 +44,7 @@ public class QuestionController {
 			@RequestPart String activeState) throws ErrorException{
 		try {
 			//set all images and insert to DB
-			questionService.insertQuestionImg(path, questionTypeId, questionTitle, questionDesc, listImage, choice, correctAnswer, activeState);
+			questionService.insertQuestionImg(UPLOADED_FOLDER, questionTypeId, questionTitle, questionDesc, listImage, choice, correctAnswer, activeState);
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
@@ -76,7 +75,7 @@ public class QuestionController {
 			@RequestPart String activeState) throws ErrorException{
 		try {
 			//update images question and update to DB
-			questionService.updateQuestionImg(path, questionId, questionTypeId, questionTitle, questionDesc, listImage, choice, correctAnswer, activeState);
+			questionService.updateQuestionImg(UPLOADED_FOLDER, questionId, questionTypeId, questionTitle, questionDesc, listImage, choice, correctAnswer, activeState);
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
@@ -129,6 +128,16 @@ public class QuestionController {
 		try {
 			 ResponseEntity.status(HttpStatus.OK).body("Status: 200 Ok");
 			 return ResponseEntity.ok(questionService.getAllQuestion());
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+		}
+	}
+	
+	@GetMapping("/choice")
+	public ResponseEntity<?> getAllChoice() throws ErrorException {
+		try {
+			 ResponseEntity.status(HttpStatus.OK).body("Status: 200 Ok");
+			 return ResponseEntity.ok(questionService.getChoice());
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 		}
