@@ -11,7 +11,7 @@
 	<groupId>com.linov</groupId>
 	<artifactId>psikotes</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Linov Psikotest</name>
+	<name>psikotes</name>
 	<description>Linov Psikotest Project</description>
 	<packaging>war</packaging>
 
