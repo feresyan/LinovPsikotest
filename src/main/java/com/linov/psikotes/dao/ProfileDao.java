@@ -28,8 +28,7 @@ public class ProfileDao extends CommonDao{
 	@Transactional
 	public List<Profile> getAll() {
 		List<Profile> list = super.entityManager
-				.createQuery("from Profile where active_state=:status")
-				.setParameter("status", "active")
+				.createQuery("from Profile")
 				.getResultList();
 		if(list.size()==0) return null;
 		else return (List<Profile>)list;
