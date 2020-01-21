@@ -11,7 +11,7 @@
 	<groupId>com.linov</groupId>
 	<artifactId>psikotes</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>/psikotes</name>
+	<name>Linov Psikotest</name>
 	<description>Linov Psikotest Project</description>
 	<packaging>war</packaging>
 
@@ -98,7 +98,7 @@
 				<configuration>
 					<url>http://127.0.0.1:8080/manager/text</url>
 					<server>TomcatServer</server>
-					<path>/antrian</path>
+					<path>/psikotes</path>
 					<warSourceDirectory>WebContent</warSourceDirectory>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 					<username>admin</username>
@@ -111,7 +111,7 @@
 				<configuration>
 					<url>http://127.0.0.1:8080/manager/text</url>
 					<server>TomcatServer</server>
-					<path>/antrian</path>
+					<path>/psikotes</path>
 					<warSourceDirectory>WebContent</warSourceDirectory>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 					<username>admin</username>
