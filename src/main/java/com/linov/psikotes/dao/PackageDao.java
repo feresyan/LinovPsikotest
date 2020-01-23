@@ -46,14 +46,14 @@ public class PackageDao extends CommonDao{
 				
 				PojoPackage pjPack = new PojoPackage();
 				
-				Query query  = super.entityManager
-						.createNativeQuery("Select count(*) FROM tbl_package_question WHERE package_id = :field1")
-						.setParameter("field1", list.get(i));
-				BigInteger count =  (BigInteger) query.getSingleResult();
+//				Query query  = super.entityManager
+//						.createNativeQuery("Select count(*) FROM tbl_package_question WHERE package_id = :field1")
+//						.setParameter("field1", list.get(i));
+//				BigInteger count =  (BigInteger) query.getSingleResult();
 				
 				pjPack.setPackageId(list.get(i).getPackageId());
 				pjPack.setPackageName(list.get(i).getPackageName());
-				pjPack.setAmountOfQuestion(count.intValue());
+//				pjPack.setAmountOfQuestion(count.intValue());
 				pjPack.setAmountOfTime(list.get(0).getTime());
 				listPojoPackage.add(pjPack);
 			}
