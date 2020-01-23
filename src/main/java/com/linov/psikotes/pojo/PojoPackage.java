@@ -1,16 +1,12 @@
 package com.linov.psikotes.pojo;
 
-import java.util.List;
-
-import com.linov.psikotes.entity.Question;
-
 public class PojoPackage {
 
 	private String packageId;
 	private String packageName;
 	private Integer amountOfQuestion;
 	private Integer amountOfTime;
-	private List<Question> listQuestion;
+	
 	
 	
 	public String getPackageId() {
@@ -44,13 +40,7 @@ public class PojoPackage {
 	public void setAmountOfTime(Integer amountOfTime) {
 		this.amountOfTime = amountOfTime;
 	}
-
-	public List<Question> getListQuestion() {
-		return listQuestion;
-	}
-
-	public void setListQuestion(List<Question> listQuestion) {
-		this.listQuestion = listQuestion;
-	}
+	
+	
 	
 }
