@@ -28,6 +28,15 @@ public class PackageDao extends CommonDao{
 //		super.entityManager.remove(role);
 	}
 	
+	@Transactional
+	public BigInteger getTotalQuestion(String id) {
+		Query query  = super.entityManager
+				.createNativeQuery("Select count(*) FROM tbl_package_question WHERE package_id = :field1")
+				.setParameter("field1", id);
+		BigInteger count =  (BigInteger) query.getSingleResult(); 
+		return count;
+	}
+	
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<PojoPackage> getAll() {
@@ -45,15 +54,9 @@ public class PackageDao extends CommonDao{
 			for (int i = 0; i < list.size(); i++) {
 				
 				PojoPackage pjPack = new PojoPackage();
-				
-//				Query query  = super.entityManager
-//						.createNativeQuery("Select count(*) FROM tbl_package_question WHERE package_id = :field1")
-//						.setParameter("field1", list.get(i));
-//				BigInteger count =  (BigInteger) query.getSingleResult();
-				
+								
 				pjPack.setPackageId(list.get(i).getPackageId());
 				pjPack.setPackageName(list.get(i).getPackageName());
-//				pjPack.setAmountOfQuestion(count.intValue());
 				pjPack.setAmountOfTime(list.get(0).getTime());
 				listPojoPackage.add(pjPack);
 			}
@@ -62,6 +65,7 @@ public class PackageDao extends CommonDao{
 		}
 		
 	}
+	
 	
 	@SuppressWarnings("unchecked")
 	@Transactional

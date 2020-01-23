@@ -17,6 +17,10 @@ public class PackageService {
 
 	public List<PojoPackage> getAllPackage(){
 		List<PojoPackage> list = packageDao.getAll();
+		for (PojoPackage pjPack : list) {
+			pjPack.setAmountOfQuestion(packageDao.getTotalQuestion(pjPack.getPackageId()).intValue()); 
+		}
+		
 		return list;
 	}
 	
