@@ -69,6 +69,16 @@ public class PackageQuestionController {
 		}
 	}
 	
+	@GetMapping("/package/id/{id}")
+	public ResponseEntity<?> getByPackageId(@PathVariable String id) throws ErrorException {
+		try {
+			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
+			return ResponseEntity.ok(pqService.findByPackageId(id));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+		}
+	}
+	
 	@GetMapping("")
 	public ResponseEntity<?> getAllQuestPack() throws ErrorException {
 		try {

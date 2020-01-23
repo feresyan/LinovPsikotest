@@ -29,8 +29,13 @@ public class PackageQuestionService {
 	}
 	
 	public PackageQuestion findById(String id) {
-		PackageQuestion profile = pqDao.findById(id);
-		return profile;
+		PackageQuestion pq = pqDao.findById(id);
+		return pq;
+	}
+	
+	public PackageQuestion findByPackageId(String id) {
+		PackageQuestion pq = pqDao.findByPackageId(id);
+		return pq;
 	}
 	
 	public PackageQuestion insertPq(PackageQuestion pq) throws Exception{

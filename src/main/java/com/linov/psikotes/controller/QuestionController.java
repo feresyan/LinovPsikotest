@@ -115,7 +115,7 @@ public class QuestionController {
 		}
 	}
 	
-	@GetMapping("/search")
+	@PostMapping("/search")
 	public ResponseEntity<?> search(@RequestBody SearchQuestion searchQuest) throws ErrorException {
 		try {
 			 ResponseEntity.status(HttpStatus.OK).body("Status: 200 Ok");

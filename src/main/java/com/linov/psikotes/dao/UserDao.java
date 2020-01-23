@@ -97,4 +97,19 @@ public class UserDao extends CommonDao {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public User findByUsernameWithPassword(String username) {
+		List<User> list = super.entityManager
+				.createQuery("from User where username = :field1")
+				.setParameter("field1", username)
+				.getResultList();
+		if(list.size()==0)
+			return null;
+		else
+		{
+			return list.get(0);
+		}
+	}
+	
 }

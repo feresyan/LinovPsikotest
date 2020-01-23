@@ -50,6 +50,19 @@ public class PackageQuestionDao extends CommonDao {
 	
 	@SuppressWarnings("unchecked")
 	@Transactional
+	public PackageQuestion findByPackageId(String id) {
+		List<PackageQuestion> list = super.entityManager
+				.createQuery("from PackageQuestion where package_id = :id")
+				.setParameter("id", id)
+				.getResultList();
+		if(list.size()==0)
+			return new PackageQuestion();
+		else
+			return (PackageQuestion)list.get(0);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Transactional
 	public PackageQuestion findPackageQuestion(String packageId, String questionId) {
 		List<PackageQuestion> list = super.entityManager
 				.createQuery("from PackageQuestion where package_id=:packageId and question_id=:questionId")

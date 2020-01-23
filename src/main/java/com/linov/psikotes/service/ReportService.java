@@ -42,9 +42,10 @@ public class ReportService {
 			prc.setAddress(data.getHeaderAppAnswer().getUser().getProfile().getAddress());
 			prc.setPhone(data.getHeaderAppAnswer().getUser().getProfile().getPhone());
 			prc.setEmail(data.getHeaderAppAnswer().getUser().getProfile().getEmail());
-			prc.setQuestion(data.getPackQuestion().getQuestion().getQuestionTitle());
-			prc.setQuestionType(data.getPackQuestion().getQuestion().getQuestionType().getQuestionTypeTitle());
+			prc.setQuestionTitle(data.getPackQuestion().getQuestion().getQuestionTitle());
+			prc.setQuestionTypeTitle(data.getPackQuestion().getQuestion().getQuestionType().getQuestionTypeTitle());
 			prc.setPoint(data.getPoint());
+			prc.setTotalPoints(data.getHeaderAppAnswer().getTotalPoints());
 			listReport.add(prc);
 		}
 		

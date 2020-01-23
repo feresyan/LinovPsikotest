@@ -5,9 +5,11 @@ public class PojoReportCandidate {
 	private String address;
 	private String phone;
 	private String email;
-	private String question;
-	private String questionType;
+	private String questionTitle;
+	private String questionTypeTitle;
 	private Integer point;
+	private Integer totalPoints;
+	
 	public String getProfileName() {
 		return profileName;
 	}
@@ -32,17 +34,19 @@ public class PojoReportCandidate {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getQuestion() {
-		return question;
+	
+	public String getQuestionTitle() {
+		return questionTitle;
 	}
-	public void setQuestion(String question) {
-		this.question = question;
+	public void setQuestionTitle(String questionTitle) {
+		this.questionTitle = questionTitle;
 	}
-	public String getQuestionType() {
-		return questionType;
+	
+	public String getQuestionTypeTitle() {
+		return questionTypeTitle;
 	}
-	public void setQuestionType(String questionType) {
-		this.questionType = questionType;
+	public void setQuestionTypeTitle(String questionTypeTitle) {
+		this.questionTypeTitle = questionTypeTitle;
 	}
 	public Integer getPoint() {
 		return point;
@@ -51,5 +55,11 @@ public class PojoReportCandidate {
 		this.point = point;
 	}
 	
+	public Integer getTotalPoints() {
+		return totalPoints;
+	}
+	public void setTotalPoints(Integer totalPoints) {
+		this.totalPoints = totalPoints;
+	}
 	
 }

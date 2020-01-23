@@ -82,25 +82,25 @@ public class QuestionDao extends CommonDao {
 		StringBuilder query = new StringBuilder();
 		query.append("from Question where 1=1");
 		if( searchQuest.getType() != null) {
-			query.append(" and questionType.questionTypeTitle like :field1");
+			query.append(" and lower(questionType.questionTypeTitle) like :field1");
 		}
 		if(searchQuest.getTitle() != null ) {
-			query.append(" and question_title like :field2 ");
+			query.append(" and lower(question_title) like :field2 ");
 		}
 		if(searchQuest.getDescription() != null ) {
-			query.append(" and question_desc like :field3 ");
+			query.append(" and lower(question_desc) like :field3 ");
 		}
 		
 		Query queryExecuted = super.entityManager.createQuery(query.toString());
 		
-		if (searchQuest.getType() != null) {
-			queryExecuted.setParameter("field1", "%" + searchQuest.getType() + "%");
+		if (searchQuest.getType() != null  ) {
+			queryExecuted.setParameter("field1", "%" + searchQuest.getType().toLowerCase() + "%");
 		}
-		if (searchQuest.getTitle() != null) {
-			queryExecuted.setParameter("field2", "%" + searchQuest.getTitle() + "%");
+		if (searchQuest.getTitle() != null ) {
+			queryExecuted.setParameter("field2", "%" + searchQuest.getTitle().toLowerCase() + "%");
 		}
-		if (searchQuest.getTitle() != null) {
-			queryExecuted.setParameter("field3", "%" + searchQuest.getDescription() + "%");
+		if (searchQuest.getDescription() != null ) {
+			queryExecuted.setParameter("field3", "%" + searchQuest.getDescription().toLowerCase() + "%");
 		}
 		
 		List<Question> list = queryExecuted.getResultList();
