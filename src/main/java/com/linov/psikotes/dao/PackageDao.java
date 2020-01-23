@@ -31,7 +31,7 @@ public class PackageDao extends CommonDao{
 	@Transactional
 	public BigInteger getTotalQuestion(String id) {
 		Query query  = super.entityManager
-				.createNativeQuery("Select count(*) FROM tbl_package_question WHERE package_id = :field1")
+				.createNativeQuery("Select count(*) FROM group1.tbl_package_question WHERE package_id = :field1")
 				.setParameter("field1", id);
 		BigInteger count =  (BigInteger) query.getSingleResult(); 
 		return count;
