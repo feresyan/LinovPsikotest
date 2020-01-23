@@ -47,7 +47,7 @@ public class DetailAppAnsController {
 	@PutMapping("")
 	public ResponseEntity<?> update(@RequestBody DetailApplicantAnswer dAppAns) throws ErrorException{
 		try {
-			dAppAnsService.updateProfile(dAppAns);
+			dAppAnsService.updateDetail(dAppAns);
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
@@ -57,7 +57,7 @@ public class DetailAppAnsController {
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@PathVariable String id) throws ErrorException {
 		try {
-			dAppAnsService.deleteProfile(id);
+			dAppAnsService.deleteDetail(id);
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 		}
@@ -73,6 +73,11 @@ public class DetailAppAnsController {
 	public ResponseEntity<?> getAllDetailByHeaderId(@PathVariable String id) throws ErrorException {
 		return ResponseEntity.ok(dAppAnsService.getAllDetailByAppAnsId(id));
 	}
+	
+//	@GetMapping("/essay/user/{id}")
+//	public ResponseEntity<?> getAllEssayQuestByAppAnsId(@PathVariable String id) throws ErrorException {
+//		return ResponseEntity.ok(dAppAnsService.getAllEssayQuestByAppAnsId(id));
+//	}
 	
 	@GetMapping("")
 	public ResponseEntity<?> getAllUser() throws ErrorException {

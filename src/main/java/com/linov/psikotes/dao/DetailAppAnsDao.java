@@ -1,7 +1,9 @@
 package com.linov.psikotes.dao;
 
+import java.math.BigInteger;
 import java.util.List;
 
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
@@ -40,6 +42,38 @@ public class DetailAppAnsDao extends CommonDao{
 		List<DetailApplicantAnswer> list = super.entityManager
 				.createQuery("from DetailApplicantAnswer where applicant_answer_id = :field1")
 				.setParameter("field1", id)
+				.getResultList();
+		if(list.size()==0) return null;
+		else return (List<DetailApplicantAnswer>)list;
+	}
+	
+	@Transactional
+	public BigInteger getTotalQuestByAppAnsId(String id) {
+		Query query  = super.entityManager
+				.createNativeQuery("Select count(*) FROM tbl_detail_applicant_answer WHERE applicant_answer_id = :field1")
+				.setParameter("field1", id);
+		BigInteger count =  (BigInteger) query.getSingleResult(); 
+		return count;
+	}
+	
+	@Transactional
+	public BigInteger getTotalPointsByAppAnsId(String id) {
+		Query query  = super.entityManager
+				.createNativeQuery("Select sum(point) FROM tbl_detail_applicant_answer WHERE applicant_answer_id = :field1")
+				.setParameter("field1", id);
+		BigInteger count =  (BigInteger) query.getSingleResult(); 
+		return count;
+	}
+	
+	
+	
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<DetailApplicantAnswer> getAllEssayQuestByAppAnsId(String id) {
+		List<DetailApplicantAnswer> list = super.entityManager
+				.createQuery("from DetailApplicantAnswer where applicant_answer_id = :field1 and packQuestion.question.questionType.answerType = :field2")
+				.setParameter("field1", id)
+				.setParameter("field2", "Essay")
 				.getResultList();
 		if(list.size()==0) return null;
 		else return (List<DetailApplicantAnswer>)list;

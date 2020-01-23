@@ -22,6 +22,9 @@ public class Package {
 	@Column(name="package_name")
 	private String packageName;
 	
+	@Column(name="time")
+	private Integer time;
+	
 	@Column(name="active_state")
 	private String activeState;
 
@@ -48,5 +51,13 @@ public class Package {
 	public void setActiveState(String activeState) {
 		this.activeState = activeState;
 	}
-	
+
+	public Integer getTime() {
+		return time;
+	}
+
+	public void setTime(Integer time) {
+		this.time = time;
+	}
+
 }

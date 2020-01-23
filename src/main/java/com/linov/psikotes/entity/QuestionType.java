@@ -1,6 +1,5 @@
 package com.linov.psikotes.entity;
 
-import java.sql.Time;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,10 +26,6 @@ public class QuestionType {
 	@Column(name="answer_type")
 	private String answerType;
 	
-	
-	@Column(name="amount_of_time")
-	private Time amountOfTime;
-	
 	@Column(name="active_state")
 	private String activeState;
 
@@ -48,14 +43,6 @@ public class QuestionType {
 
 	public void setQuestionTypeTitle(String questionTypeTitle) {
 		this.questionTypeTitle = questionTypeTitle;
-	}
-
-	public Time getAmountOfTime() {
-		return amountOfTime;
-	}
-
-	public void setAmountOfTime(Time amountOfTime) {
-		this.amountOfTime = amountOfTime;
 	}
 
 	public String getActiveState() {

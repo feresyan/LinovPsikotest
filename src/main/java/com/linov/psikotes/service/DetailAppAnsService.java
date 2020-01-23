@@ -40,6 +40,11 @@ public class DetailAppAnsService {
 		return list;
 	}
 	
+	public List<DetailApplicantAnswer> getAllEssayQuestByAppAnsId(String id){
+		List<DetailApplicantAnswer> list = dAppAnsDao.getAllEssayQuestByAppAnsId(id);
+		return list;
+	}
+	
 	public DetailApplicantAnswer findById(String id) {
 		DetailApplicantAnswer dAppAns = dAppAnsDao.findById(id);
 		return dAppAns;
@@ -82,7 +87,7 @@ public class DetailAppAnsService {
 		}
 	}
 	
-	public void updateProfile(DetailApplicantAnswer detailAns) throws Exception{
+	public void updateDetail(DetailApplicantAnswer detailAns) throws Exception{
 		try {
 			//Get old data of detail Answer
 			DetailApplicantAnswer oldDetailAns= findById(detailAns.getDetailAnswerId());
@@ -105,13 +110,37 @@ public class DetailAppAnsService {
 			//save
 			dAppAnsDao.save(detailAns);
 			
+			//Get total question 
+			Integer totalQuestion = dAppAnsDao.getTotalQuestByAppAnsId(detailAns.getHeaderAppAnswer().getApplicantAnswerId()).intValue();
+			Integer totalAllPoints = totalQuestion * 10;
+			Integer totalPointsByUser = dAppAnsDao.getTotalPointsByAppAnsId(detailAns.getHeaderAppAnswer().getApplicantAnswerId()).intValue();
+			
+			//Get Header applicant answer record
+			HeaderApplicantAnswer headerAppAns = hAppAnsService.findById(detailAns.getHeaderAppAnswer().getApplicantAnswerId());
+			
+			//Set total points from sum point
+			headerAppAns.setTotalPoints(totalPointsByUser);
+			
+			//set status from total points that user get
+			//get average
+			Integer avg = totalAllPoints / totalQuestion;
+			Integer kkm = avg * 75 /100;
+			
+			if((totalPointsByUser/totalQuestion) >= kkm) {
+				headerAppAns.setStatus("Lulus");
+			} else {
+				headerAppAns.setStatus("Tidak lulus");
+			}
+			
+			hAppAnsService.updateHeaderApplicantAnswer(headerAppAns);
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 			throw new Exception(e.getMessage());
 		}
 	}
 	
-	public void deleteProfile(String id) throws Exception{
+	public void deleteDetail(String id) throws Exception{
 		try {
 			//Check if id exist in DB
 			valIdExist(id);
@@ -126,17 +155,9 @@ public class DetailAppAnsService {
 	}
 	
 	public void calculatePoints(List<DetailApplicantAnswer> dAppAns) throws Exception {
-		//make var to store total points from all question
-		Integer totalTruePoints = 0;
-		
-		//Make var to store total question
-		Integer totalQuestion = 0;
-		
+				
 		for (DetailApplicantAnswer data : dAppAns) 
 		{
-			
-			//sum total question
-			totalQuestion+=1;
 			
 			//get package question record to get answer type
 			PackageQuestion pq =  pqService.findById(data.getPackQuestion().getPackageQuestionId());
@@ -146,25 +167,19 @@ public class DetailAppAnsService {
 			
 			if(pq.getQuestion().getQuestionType().getAnswerType().equalsIgnoreCase("Pilihan ganda")) {
 				if(pq.getQuestion().getCorrectAnswer().getAnswer1() != null && pq.getQuestion().getCorrectAnswer().getAnswer2() != null) {
-					
-					//sum the points
-					totalTruePoints+=10;
-					
-					if(pq.getQuestion().getCorrectAnswer().getAnswer1().equalsIgnoreCase(data.getAppAnswer().getAnswer1())) {
-						tempPoints+=5;
-						totalTruePoints+=5;
-					} else if (pq.getQuestion().getCorrectAnswer().getAnswer2().equalsIgnoreCase(data.getAppAnswer().getAnswer2())) {
-						tempPoints+=5;
+										
+					if(pq.getQuestion().getCorrectAnswer().getAnswer1().equalsIgnoreCase(data.getAppAnswer().getAnswer1()) && pq.getQuestion().getCorrectAnswer().getAnswer2().equalsIgnoreCase(data.getAppAnswer().getAnswer2())) {
+						tempPoints+=10;
 					}
 				}
 				else 
 				{
-					//sum the points
-					totalTruePoints+=10;
 					
-					if(pq.getQuestion().getCorrectAnswer().getAnswer1().equalsIgnoreCase(data.getAppAnswer().getAnswer1())) {
-						tempPoints+=10;
+					if (pq.getQuestion().getCorrectAnswer().getAnswer1().equalsIgnoreCase(data.getAppAnswer().getAnswer1())) {
+						tempPoints+=10;	
+						
 					}
+					
 				}
 				
 				//set point for question for multiple choice question
@@ -184,24 +199,22 @@ public class DetailAppAnsService {
 		//Get Header applicant answer record
 		HeaderApplicantAnswer headerAppAns = hAppAnsService.findById(dAppAns.get(0).getHeaderAppAnswer().getApplicantAnswerId());
 		
-		//Get all answer for specific user
-		List<DetailApplicantAnswer> listDetail = getAllDetailByAppAnsId(headerAppAns.getApplicantAnswerId());
+		Integer totalQuestion = dAppAnsDao.getTotalQuestByAppAnsId(dAppAns.get(0).getHeaderAppAnswer().getApplicantAnswerId()).intValue();
 		
-		//make temporary var for storing total points
-		Integer totalPoints = 0;
-		for (DetailApplicantAnswer detail : listDetail) {
-			totalPoints+= detail.getPoint();
-		}
+		Integer totalTruePoints = totalQuestion * 10;
+		
+		//Get total points for specific user
+		Integer totalPointsByUser = dAppAnsDao.getTotalPointsByAppAnsId(dAppAns.get(0).getHeaderAppAnswer().getApplicantAnswerId()).intValue();
 		
 		//Set total points from sum point
-		headerAppAns.setTotalPoints(totalPoints);
+		headerAppAns.setTotalPoints(totalPointsByUser);
 		
 		//set status from total points that user get
 		//get average
 		Integer avg = totalTruePoints / totalQuestion;
 		Integer kkm = avg * 75 /100;
 		
-		if((totalPoints/totalQuestion) >= kkm) {
+		if((totalPointsByUser/totalQuestion) >= kkm) {
 			headerAppAns.setStatus("Lulus");
 		} else {
 			headerAppAns.setStatus("Tidak lulus");
@@ -235,8 +248,7 @@ public class DetailAppAnsService {
 	}
 	
 	private static Exception valNonBk(DetailApplicantAnswer detailAns) throws Exception{
-		if( detailAns.getAppAnswer().getAnswer1() == null || detailAns.getAppAnswer().getAnswer2() == null
-				|| detailAns.getPoint() == null) {
+		if( detailAns.getPoint() == null) {
 			throw new Exception("Tidak boleh ada field yang kosong");
 		}
 		return null;

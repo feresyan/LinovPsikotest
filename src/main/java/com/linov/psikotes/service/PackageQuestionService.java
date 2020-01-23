@@ -33,8 +33,8 @@ public class PackageQuestionService {
 		return pq;
 	}
 	
-	public PackageQuestion findByPackageId(String id) {
-		PackageQuestion pq = pqDao.findByPackageId(id);
+	public List<PackageQuestion> findByPackageId(String id) {
+		List<PackageQuestion> pq = pqDao.findByPackageId(id);
 		return pq;
 	}
 	
