@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.linov.psikotes.entity.Package;
+import com.linov.psikotes.pojo.PojoPackage;
 import com.linov.psikotes.dao.PackageDao;
 
 @Service("packageService")
@@ -14,8 +15,8 @@ public class PackageService {
 	@Autowired
 	private PackageDao packageDao;
 
-	public List<Package> getAllPackage(){
-		List<Package> list = packageDao.getAll();
+	public List<PojoPackage> getAllPackage(){
+		List<PojoPackage> list = packageDao.getAll();
 		return list;
 	}
 	

@@ -1,12 +1,16 @@
 package com.linov.psikotes.dao;
 
+import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
 import com.linov.psikotes.entity.Package;
+import com.linov.psikotes.pojo.PojoPackage;
 
 @Repository("packageDao")
 public class PackageDao extends CommonDao{
@@ -26,13 +30,37 @@ public class PackageDao extends CommonDao{
 	
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public List<Package> getAll() {
+	public List<PojoPackage> getAll() {
 		List<Package> list = super.entityManager
 				.createQuery("from Package where active_state=:status")
 				.setParameter("status", "active")
 				.getResultList();
-		if(list.size()==0) return null;
-		else return (List<Package>)list;
+		
+		if(list.size()==0) 
+		{
+			return null;
+		} else {
+			List<PojoPackage> listPojoPackage = new ArrayList<PojoPackage>();
+			
+			for (int i = 0; i < list.size(); i++) {
+				
+				PojoPackage pjPack = new PojoPackage();
+				
+				Query query  = super.entityManager
+						.createNativeQuery("Select count(*) FROM tbl_package_question WHERE package_id = :field1")
+						.setParameter("field1", list.get(i));
+				BigInteger count =  (BigInteger) query.getSingleResult();
+				
+				pjPack.setPackageId(list.get(i).getPackageId());
+				pjPack.setPackageName(list.get(i).getPackageName());
+				pjPack.setAmountOfQuestion(count.intValue());
+				pjPack.setAmountOfTime(list.get(0).getTime());
+				listPojoPackage.add(pjPack);
+			}
+			
+			return listPojoPackage;
+		}
+		
 	}
 	
 	@SuppressWarnings("unchecked")
