@@ -28,7 +28,7 @@ public class PackageQuestionDao extends CommonDao {
 	@Transactional
 	public List<PackageQuestion> getAll() {
 		List<PackageQuestion> list = super.entityManager
-				.createQuery("from PackageQuestion where active_state=:status")
+				.createQuery("from PackageQuestion where lower(active_state) = :status")
 				.setParameter("status", "active")
 				.getResultList();
 		if(list.size()==0) return null;
@@ -52,8 +52,9 @@ public class PackageQuestionDao extends CommonDao {
 	@Transactional
 	public List<PackageQuestion> findByPackageId(String id) {
 		List<PackageQuestion> list = super.entityManager
-				.createQuery("from PackageQuestion where package_id = :id")
+				.createQuery("from PackageQuestion where package_id = :id and lower(active_state) = :field2")
 				.setParameter("id", id)
+				.setParameter("field2", "active")
 				.getResultList();
 		if(list.size()==0)
 			return null;
