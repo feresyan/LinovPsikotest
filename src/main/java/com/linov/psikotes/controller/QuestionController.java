@@ -31,8 +31,6 @@ public class QuestionController {
 	@Autowired
 	private QuestionService questionService;
 	
-//	 private static String UPLOADED_FOLDER = "D://BootCamp//Project Akhir//Project//psikotes//src//main//resources//img//question//";
-	
 	@Value("${uploaded.folder}")
 	private String path;
 	 

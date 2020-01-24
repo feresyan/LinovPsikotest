@@ -82,7 +82,7 @@ public class PackageQuestionController {
 	@GetMapping("")
 	public ResponseEntity<?> getAllQuestPack() throws ErrorException {
 		try {
-			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
+//			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
 			return ResponseEntity.ok(pqService.getAllPq());
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
