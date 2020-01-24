@@ -168,14 +168,14 @@ public class DetailAppAnsService {
 			if(pq.getQuestion().getQuestionType().getAnswerType().equalsIgnoreCase("Pilihan ganda")) {
 				if(pq.getQuestion().getCorrectAnswer().getAnswer1() != null && pq.getQuestion().getCorrectAnswer().getAnswer2() != null) {
 										
-					if(pq.getQuestion().getCorrectAnswer().getAnswer1().getImgName().equalsIgnoreCase(data.getAppAnswer().getAnswer1().getImgName()) && pq.getQuestion().getCorrectAnswer().getAnswer2().getImgName().equalsIgnoreCase(data.getAppAnswer().getAnswer2().getImgName())) {
+					if(pq.getQuestion().getCorrectAnswer().getAnswer1().equalsIgnoreCase(data.getAppAnswer().getAnswer1()) && pq.getQuestion().getCorrectAnswer().getAnswer2().equalsIgnoreCase(data.getAppAnswer().getAnswer2())) {
 						tempPoints+=10;
 					}
 				}
 				else 
 				{
 					
-					if (pq.getQuestion().getCorrectAnswer().getAnswer1().getImgName().equalsIgnoreCase(data.getAppAnswer().getAnswer1().getImgName())) {
+					if (pq.getQuestion().getCorrectAnswer().getAnswer1().equalsIgnoreCase(data.getAppAnswer().getAnswer1())) {
 						tempPoints+=10;	
 						
 					}

@@ -1,61 +1,49 @@
 package com.linov.psikotes.entity;
 
-import com.linov.psikotes.pojo.PojoImage;
-
 public class ListImg {
 	
-	private PojoImage imgA;
-	private PojoImage imgB;
-	private PojoImage imgC;
-	private PojoImage imgD;
-	private PojoImage imgE;
-	private PojoImage imgF;
+	private String imgA;
+	private String imgB;
+	private String imgC;
+	private String imgD;
+	private String imgE;
+	private String imgF;
 	
-	public PojoImage getImgA() {
+	
+	public String getImgA() {
 		return imgA;
 	}
-	
-	public void setImgA(PojoImage imgA) {
+	public void setImgA(String imgA) {
 		this.imgA = imgA;
 	}
-	
-	public PojoImage getImgB() {
+	public String getImgB() {
 		return imgB;
 	}
-	
-	public void setImgB(PojoImage imgB) {
+	public void setImgB(String imgB) {
 		this.imgB = imgB;
 	}
-	
-	public PojoImage getImgC() {
+	public String getImgC() {
 		return imgC;
 	}
-	
-	public void setImgC(PojoImage imgC) {
+	public void setImgC(String imgC) {
 		this.imgC = imgC;
 	}
-	
-	public PojoImage getImgD() {
+	public String getImgD() {
 		return imgD;
 	}
-	
-	public void setImgD(PojoImage imgD) {
+	public void setImgD(String imgD) {
 		this.imgD = imgD;
 	}
-	
-	public PojoImage getImgE() {
+	public String getImgE() {
 		return imgE;
 	}
-	
-	public void setImgE(PojoImage imgE) {
+	public void setImgE(String imgE) {
 		this.imgE = imgE;
 	}
-	
-	public PojoImage getImgF() {
+	public String getImgF() {
 		return imgF;
 	}
-	
-	public void setImgF(PojoImage imgF) {
+	public void setImgF(String imgF) {
 		this.imgF = imgF;
 	}
 	
