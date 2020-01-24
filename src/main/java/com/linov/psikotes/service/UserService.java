@@ -45,6 +45,11 @@ public class UserService {
 		return user;
 	}
 	
+	public PojoUser findByName(String name) {
+		PojoUser user = userDao.findByProfileName(name);
+		return user;
+	}
+	
 	public void signUp(PojoSignUp pojoSignUp) throws Exception{
 		//insert profile to DB
 		Profile theProfile = ps.insertProfile(pojoSignUp.getProfile());

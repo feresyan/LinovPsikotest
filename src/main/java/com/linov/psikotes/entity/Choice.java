@@ -1,42 +1,53 @@
 package com.linov.psikotes.entity;
 
+import com.linov.psikotes.pojo.PojoImage;
+
 public class Choice {
 
-	private String choiceA;
-	private String choiceB;
-	private String choiceC;
-	private String choiceD;
-	private String choiceE;
-		
-	public String getChoiceA() {
+	private PojoImage choiceA;
+	private PojoImage choiceB;
+	private PojoImage choiceC;
+	private PojoImage choiceD;
+	private PojoImage choiceE;
+	
+	public PojoImage getChoiceA() {
 		return choiceA;
 	}
 	
-	public void setChoiceA(String choiceA) {
+	public void setChoiceA(PojoImage choiceA) {
 		this.choiceA = choiceA;
 	}
-	public String getChoiceB() {
+	
+	public PojoImage getChoiceB() {
 		return choiceB;
 	}
-	public void setChoiceB(String choiceB) {
+	
+	public void setChoiceB(PojoImage choiceB) {
 		this.choiceB = choiceB;
 	}
-	public String getChoiceC() {
+	
+	public PojoImage getChoiceC() {
 		return choiceC;
 	}
-	public void setChoiceC(String choiceC) {
+	
+	public void setChoiceC(PojoImage choiceC) {
 		this.choiceC = choiceC;
 	}
-	public String getChoiceD() {
+	
+	public PojoImage getChoiceD() {
 		return choiceD;
 	}
-	public void setChoiceD(String choiceD) {
+	
+	public void setChoiceD(PojoImage choiceD) {
 		this.choiceD = choiceD;
 	}
-	public String getChoiceE() {
+	
+	public PojoImage getChoiceE() {
 		return choiceE;
 	}
-	public void setChoiceE(String choiceE) {
+	
+	public void setChoiceE(PojoImage choiceE) {
 		this.choiceE = choiceE;
 	}
+	
 }

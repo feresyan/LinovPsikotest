@@ -78,6 +78,16 @@ public class UserController {
 		}
 	}
 	
+	@GetMapping("/name/{name}")
+	public ResponseEntity<?> getByProfileName(@PathVariable String name) throws ErrorException {
+		try {
+			ResponseEntity.status(HttpStatus.OK).body("Status: 200 Ok");
+			return ResponseEntity.ok(userService.findByName(name));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+		}
+	}
+	
 	@GetMapping("")
 	public ResponseEntity<?> getAllUser() throws ErrorException {
 		try {

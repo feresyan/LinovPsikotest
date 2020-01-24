@@ -51,6 +51,7 @@ public class DetailAppAnsDao extends CommonDao{
 	public BigInteger getTotalQuestByAppAnsId(String id) {
 		Query query  = super.entityManager
 				.createNativeQuery("Select count(*) FROM group1.tbl_detail_applicant_answer WHERE applicant_answer_id = :field1")
+//				.createNativeQuery("Select count(*) FROM tbl_detail_applicant_answer WHERE applicant_answer_id = :field1")
 				.setParameter("field1", id);
 		BigInteger count =  (BigInteger) query.getSingleResult(); 
 		return count;
@@ -60,6 +61,7 @@ public class DetailAppAnsDao extends CommonDao{
 	public BigInteger getTotalPointsByAppAnsId(String id) {
 		Query query  = super.entityManager
 				.createNativeQuery("Select sum(point) group1.FROM tbl_detail_applicant_answer WHERE applicant_answer_id = :field1")
+//				.createNativeQuery("Select sum(point) FROM tbl_detail_applicant_answer WHERE applicant_answer_id = :field1")
 				.setParameter("field1", id);
 		BigInteger count =  (BigInteger) query.getSingleResult(); 
 		return count;
