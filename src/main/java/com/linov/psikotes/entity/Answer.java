@@ -9,7 +9,6 @@ public class Answer {
 	public String getAnswer1() {
 		return answer1;
 	}
-	
 	public void setAnswer1(String answer1) {
 		this.answer1 = answer1;
 	}
@@ -18,6 +17,7 @@ public class Answer {
 	}
 	public void setAnswer2(String answer2) {
 		this.answer2 = answer2;
-	}	
+	}
+	
 	
 }

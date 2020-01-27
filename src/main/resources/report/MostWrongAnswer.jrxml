@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.11.0.final using JasperReports Library version 6.11.0-0c4056ccaa4d25a5a8c45672d2f764ea3498bebb  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="fa58448b-a4f6-42d0-beb8-17fba0ba85a8">
+	
+	<field name="questionTitle" class="java.lang.String">
+	</field>
+	<field name="totalCorrect" class="java.lang.String">
+	</field>
+	<field name="totalQuestion" class="java.lang.String">
+	</field>
+	<field name="percentation" class="java.lang.String">
+	</field>
+	
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="177" y="20" width="201" height="40" uuid="e140b3c1-29d4-496e-8f9a-dd33293ecb5e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[Question Report]]></text>
+			</staticText>
+			<image>
+				<reportElement x="1" y="0" width="182" height="50" uuid="7b51ae96-9163-4707-891c-fa57a0cdaf9a"/>
+				<imageExpression><![CDATA["https://raw.githubusercontent.com/feresyan/LinovPsikotest/master/src/main/resources/report/lwcn-logo.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	
+	<pageHeader>
+		<band height="45" splitType="Stretch">
+			<staticText>
+				<reportElement x="1" y="7" width="239" height="30" uuid="27ea1bdf-93c4-4dc9-84ca-41ce938b6f24"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[questions most answered wrongly]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	
+	<columnHeader>
+		<band height="38" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="177" height="30" uuid="7b926984-643d-4e29-8d9f-0ce4c1143ace">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e4bf26b3-2fff-44f7-95e9-c0660273e9ad"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Question title]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="181" y="0" width="119" height="30" uuid="5bad49a5-786f-4de0-9c19-7ad621b2791b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7da3c04a-7569-40c5-a708-524f44cffcb6"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Total Question ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="307" y="0" width="119" height="30" uuid="8664aa9e-d147-481f-bc6c-7c6fb71f21ba">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7da3c04a-7569-40c5-a708-524f44cffcb6"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Total Wrong]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="436" y="0" width="119" height="30" uuid="a31e5228-ec96-4ad2-acee-0d4e1eda9efd">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7da3c04a-7569-40c5-a708-524f44cffcb6"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Percentation ]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	
+	<detail>
+		<band height="43" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="177" height="30" uuid="8447c20f-5824-411f-a30b-1248cabf57f3">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e4bf26b3-2fff-44f7-95e9-c0660273e9ad"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{questionTitle}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="181" y="0" width="119" height="30" uuid="cba72184-803f-4569-a499-7ee1529bf118">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7da3c04a-7569-40c5-a708-524f44cffcb6"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{totalQuestion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="307" y="0" width="119" height="30" uuid="11e23fe3-6b6b-4246-b72b-f3b1af18dc82">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7da3c04a-7569-40c5-a708-524f44cffcb6"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{totalCorrect}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="460" y="0" width="50" height="30" uuid="d2a6187f-d117-49a3-9802-4384c7f37dab">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7da3c04a-7569-40c5-a708-524f44cffcb6"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{percentation}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="510" y="0" width="10" height="30" uuid="dff1a452-ee38-4e24-a462-ef7b9aa74392"/>
+				<text><![CDATA[%]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="60" splitType="Stretch">
+			<staticText>
+				<reportElement x="228" y="30" width="100" height="30" uuid="77158a87-90a9-408f-bae7-31c9279e9b38"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[All Rights Reserved]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

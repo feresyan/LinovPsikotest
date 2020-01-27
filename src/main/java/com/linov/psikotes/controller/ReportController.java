@@ -14,19 +14,85 @@ import com.linov.psikotes.service.ReportService;
 
 
 @RestController
-@RequestMapping("/report/candidate")
+@RequestMapping("/report")
 @CrossOrigin("*")
 public class ReportController {
 	
 	@Autowired
 	private ReportService reportService;
 	
-	@GetMapping("/{id}/{format}")
+	@GetMapping("/candidate/{id}/{format}")
 	public ResponseEntity<?> getReportByHeaderId(@PathVariable String id, @PathVariable String format) throws ErrorException {
 		
 		try {
 			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
 			return ResponseEntity.ok(reportService.candidateReport(format, id));
+		}catch(Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+		}
+	}
+	
+	@GetMapping("/question/correct/{format}")
+	public ResponseEntity<?> getReportCorrectAnswer(@PathVariable String format) throws ErrorException {
+		
+		try {
+			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
+			return ResponseEntity.ok(reportService.reportCorrectQuestion(format));
+		}catch(Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+		}
+	}
+	
+	@GetMapping("/question/wrong/{format}")
+	public ResponseEntity<?> getReportFalseAnswer(@PathVariable String format) throws ErrorException {
+		
+		try {
+			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
+			return ResponseEntity.ok(reportService.reportFalseQuestion(format));
+		}catch(Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+		}
+	}
+	
+	@GetMapping("/package-question/correct/{format}")
+	public ResponseEntity<?> getReportCorrectAnsAtPack(@PathVariable String format) throws ErrorException {
+		
+		try {
+			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
+			return ResponseEntity.ok(reportService.reportCorrectAnsAtPack(format));
+		}catch(Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+		}
+	}
+	
+	@GetMapping("/package-qustion/wrong/{format}")
+	public ResponseEntity<?> getReportWrongAnsAtPack(@PathVariable String format) throws ErrorException {
+		
+		try {
+			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
+			return ResponseEntity.ok(reportService.reportWrongAnsAtPack(format));
+		}catch(Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+		}
+	}
+	
+	@GetMapping("/package/correct/{format}")
+	public ResponseEntity<?> getPackageByTheMostCorrectAnswer(@PathVariable String format) throws ErrorException {
+		
+		try {
+			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
+			return ResponseEntity.ok(reportService.reportGetPackageByTheMostCorrectAnswer(format));
+		}catch(Exception e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+		}
+	}
+	
+	@GetMapping("/package/wrong/{format}")
+	public ResponseEntity<?> getPackageByTheMostWrongAnswer(@PathVariable String format) throws ErrorException {
+		
+		try {
+			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
+			return ResponseEntity.ok(reportService.reportGetPackageByTheMostWrongAnswer(format));
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}

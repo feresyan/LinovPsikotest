@@ -48,7 +48,7 @@ public class DetailApplicantAnswer {
 	
 	@Column(name = "point")
 	private Integer point;
-	
+
 	public String getDetailAnswerId() {
 		return detailAnswerId;
 	}
@@ -85,8 +85,9 @@ public class DetailApplicantAnswer {
 		return point;
 	}
 
-	public void setPoint(int point) {
+	public void setPoint(Integer point) {
 		this.point = point;
 	}
+	
 	
 }

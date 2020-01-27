@@ -62,7 +62,8 @@ public class PackageQuestionController {
 	@GetMapping("/id/{id}")
 	public ResponseEntity<?> getById(@PathVariable String id) throws ErrorException {
 		try {
-			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
+//			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
+			ResponseEntity.status(HttpStatus.OK);
 			return ResponseEntity.ok(pqService.findById(id));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
@@ -72,7 +73,8 @@ public class PackageQuestionController {
 	@GetMapping("/package/id/{id}")
 	public ResponseEntity<?> getByPackageId(@PathVariable String id) throws ErrorException {
 		try {
-			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
+//			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
+			ResponseEntity.status(HttpStatus.OK);
 			return ResponseEntity.ok(pqService.findByPackageId(id));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
@@ -83,6 +85,7 @@ public class PackageQuestionController {
 	public ResponseEntity<?> getAllQuestPack() throws ErrorException {
 		try {
 //			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
+			ResponseEntity.status(HttpStatus.OK);
 			return ResponseEntity.ok(pqService.getAllPq());
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());

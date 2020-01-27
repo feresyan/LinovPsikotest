@@ -27,7 +27,7 @@
 		<band height="57" splitType="Stretch">
 			<image>
 				<reportElement x="0" y="10" width="120" height="29" uuid="067d5365-22c6-4010-b7f0-efe73cf4f6c4"/>
-				<imageExpression><![CDATA["D:/BootCamp/Project Akhir/Project/psikotes/src/main/resources/report/lwcn-logo.png"]]></imageExpression>
+				<imageExpression><![CDATA["https://raw.githubusercontent.com/feresyan/LinovPsikotest/master/src/main/resources/report/lwcn-logo.png"]]></imageExpression>
 			</image>
 			<staticText>
 				<reportElement x="178" y="10" width="201" height="40" uuid="c6948057-2344-48d8-b462-b9093a7a94e1"/>

@@ -1,6 +1,5 @@
 package com.linov.psikotes.service;
 
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -135,15 +134,15 @@ public class QuestionService {
 		Answer a = new Answer();
 		ListImg l = new ListImg();
 		
-		//create directory
-		Path p = Paths.get(UPLOADED_FOLDER);
-		if(!Files.exists(p)) {
-			try {
-				Files.createDirectories(p);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+//		//create directory
+//		Path p = Paths.get(UPLOADED_FOLDER);
+//		if(!Files.exists(p)) {
+//			try {
+//				Files.createDirectories(p);
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+//		}
 
 		//ListImage
 		for (int i = 0; i < listImage.length; i++) {
