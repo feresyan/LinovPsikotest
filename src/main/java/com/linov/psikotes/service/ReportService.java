@@ -138,7 +138,7 @@ public class ReportService {
 		List<PojoPackReport> list = reportDao.getTheMostCorrectAnsPack();
 		
 		//Load file and compile it
-		File file = ResourceUtils.getFile("classpath:report/candidate.jrxml");
+		File file = ResourceUtils.getFile("classpath:report/MostCorrectAnsBaseOnPack.jrxml");
 		JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
 		JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(list);
 		Map<String,Object> parameter = new HashMap<>();
@@ -146,11 +146,11 @@ public class ReportService {
 		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,parameter,dataSource);
 		
 		if(reportFormat.equalsIgnoreCase("html")) {
-			JasperExportManager.exportReportToHtmlFile(jasperPrint,path+"\\Candidate.html");
+			JasperExportManager.exportReportToHtmlFile(jasperPrint,path+"\\MostCorrectAnsBaseOnPack.html");
 		}
 		
 		if(reportFormat.equalsIgnoreCase("pdf")) {
-			JasperExportManager.exportReportToPdfFile(jasperPrint,path+"\\Candidate.pdf");
+			JasperExportManager.exportReportToPdfFile(jasperPrint,path+"\\MostCorrectAnsBaseOnPack.pdf");
 		}
 		
 		return "Report Generated in path : " + path;
@@ -166,7 +166,7 @@ public class ReportService {
 		List<PojoPackReport> list = reportDao.getTheMostWrongAnsPack();
 		
 		//Load file and compile it
-		File file = ResourceUtils.getFile("classpath:report/candidate.jrxml");
+		File file = ResourceUtils.getFile("classpath:report/MostWrongAnsBaseOnPack.jrxml");
 		JasperReport jasperReport = JasperCompileManager.compileReport(file.getAbsolutePath());
 		JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(list);
 		Map<String,Object> parameter = new HashMap<>();
@@ -174,11 +174,11 @@ public class ReportService {
 		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,parameter,dataSource);
 		
 		if(reportFormat.equalsIgnoreCase("html")) {
-			JasperExportManager.exportReportToHtmlFile(jasperPrint,path+"\\Candidate.html");
+			JasperExportManager.exportReportToHtmlFile(jasperPrint,path+"\\MostWrongAnsBaseOnPack.html");
 		}
 		
 		if(reportFormat.equalsIgnoreCase("pdf")) {
-			JasperExportManager.exportReportToPdfFile(jasperPrint,path+"\\Candidate.pdf");
+			JasperExportManager.exportReportToPdfFile(jasperPrint,path+"\\MostWrongAnsBaseOnPack.pdf");
 		}
 		
 		return "Report Generated in path : " + path;

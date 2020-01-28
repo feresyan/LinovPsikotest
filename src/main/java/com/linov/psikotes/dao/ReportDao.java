@@ -184,12 +184,32 @@ public class ReportDao extends CommonDao{
 							"limit 10");
 
 			List<BigInteger> listTotalCorrect = query.getResultList();
+			
+			 query  = super.entityManager
+					.createNativeQuery("select count(tmq.question_title)\r\n" + 
+							"from tbl_detail_applicant_answer tdaa\r\n" + 
+							"join tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id\r\n" + 
+							"join tbl_m_question tmq on tpq.question_id = tmq.question_id\r\n" + 
+							"join tbl_m_package tbp on tpq.package_id = tbp.package_id\r\n" + 
+							"where lower(tbp.package_name) ='" + listPack.get(i).getPackageName().toLowerCase() + "'\r\n" + 
+							"group by tmq.question_title, tbp.package_name\r\n" + 
+							"order by count(tmq.question_title) desc limit 10");
+
+				List<BigInteger> listTotalQuestion = query.getResultList();
+			
 				
 			for (int j = 0; j < listPackName.size(); j++) {
+				
 				PojoPackReport ppr = new PojoPackReport();
+				
+				//Get percentation
+				Double percentation = listTotalCorrect.get(j).doubleValue()/listTotalQuestion.get(j).doubleValue()*100;
+				
 				ppr.setPackageName(listPackName.get(j));
 				ppr.setQuestionTitle(listQuestTitle.get(j));
+				ppr.setTotalQuestion(listTotalQuestion.get(j).toString());
 				ppr.setTotalCorrect(listTotalCorrect.get(j).toString());
+				ppr.setPercentation(percentation.toString());
 				listPackReport.add(ppr);
 			}
 		} // end for package
@@ -246,12 +266,30 @@ public class ReportDao extends CommonDao{
 							"limit 10");
 
 			List<BigInteger> listTotalCorrect = query.getResultList();
+			
+			 query  = super.entityManager
+				.createNativeQuery("select count(tmq.question_title)\r\n" + 
+						"from tbl_detail_applicant_answer tdaa\r\n" + 
+						"join tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id\r\n" + 
+						"join tbl_m_question tmq on tpq.question_id = tmq.question_id\r\n" + 
+						"join tbl_m_package tbp on tpq.package_id = tbp.package_id\r\n" + 
+						"where lower(tbp.package_name) ='" + listPack.get(i).getPackageName().toLowerCase() + "'\r\n" + 
+						"group by tmq.question_title, tbp.package_name\r\n" + 
+						"order by count(tmq.question_title) desc limit 10");
+
+					List<BigInteger> listTotalQuestion = query.getResultList();
 				
 			for (int j = 0; j < listPackName.size(); j++) {
 				PojoPackReport ppr = new PojoPackReport();
+				
+				//Get percentation
+				Double percentation = listTotalCorrect.get(j).doubleValue()/listTotalQuestion.get(j).doubleValue()*100;
+				
 				ppr.setPackageName(listPackName.get(j));
 				ppr.setQuestionTitle(listQuestTitle.get(j));
+				ppr.setTotalQuestion(listTotalQuestion.get(j).toString());
 				ppr.setTotalCorrect(listTotalCorrect.get(j).toString());
+				ppr.setPercentation(percentation.toString());
 				listPackReport.add(ppr);
 			}
 		} // end for package

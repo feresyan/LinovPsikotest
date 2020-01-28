@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.11.0.final using JasperReports Library version 6.11.0-0c4056ccaa4d25a5a8c45672d2f764ea3498bebb  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="MostCorrectAnsOnPack" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="49ab78f5-ff01-4391-87d6-a8b2fa359876">
+	
+	<field name="packageName" class="java.lang.String">
+	</field>
+	<field name="questionTitle" class="java.lang.String">
+	</field>
+	<field name="totalQuestion" class="java.lang.String">
+	</field>
+	<field name="totalCorrect" class="java.lang.String">
+	</field>
+	<field name="percentation" class="java.lang.String">
+	</field>
+	
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="177" y="20" width="201" height="40" uuid="7ab6268a-af95-4080-915c-6a9fb27fb51b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18"/>
+				</textElement>
+				<text><![CDATA[Question Report]]></text>
+			</staticText>
+			<image>
+				<reportElement x="1" y="0" width="182" height="50" uuid="eb7abb43-7804-475d-aada-b2616e695815"/>
+				<imageExpression><![CDATA["https://raw.githubusercontent.com/feresyan/LinovPsikotest/master/src/main/resources/report/lwcn-logo.png"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	
+	<pageHeader>
+		<band height="39" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="279" height="30" uuid="e7efd83d-9f7b-4c62-9dfe-443ce2b44341"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Questions most answered wrongly On Package]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	
+	<columnHeader>
+		<band height="37" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="30" uuid="f266eb93-6d61-499e-b2c6-895196e09cf4">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4f8ca76a-58b4-4fe8-b62c-d9bcc1fe4e57"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Package]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="110" y="0" width="100" height="30" uuid="19f989c7-ef3f-43f6-8eba-d5642ae46574">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1b718d3b-8f2e-4430-bd48-005b7a82a854"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Question Title]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="220" y="0" width="100" height="30" uuid="33cf8f90-4be9-494f-909e-27e122978e47">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="da94e8d7-319b-4571-ad98-029c639b3f02"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Total Question ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="330" y="0" width="100" height="30" uuid="82fd8319-48e6-416b-a035-d8cdd829a6d8">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="da94e8d7-319b-4571-ad98-029c639b3f02"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Total Correct]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="0" width="100" height="30" uuid="26d39cbc-a9ba-4632-8263-e9cfbd02e0fe">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="da94e8d7-319b-4571-ad98-029c639b3f02"/>
+				</reportElement>
+				<box>
+					<bottomPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Percentation]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	
+	<detail>
+		<band height="36" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="30" uuid="ca6dc13f-9680-48d0-bcc8-e24d762f2222">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4f8ca76a-58b4-4fe8-b62c-d9bcc1fe4e57"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{packageName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="110" y="0" width="100" height="30" uuid="e6b1958d-7b28-4f98-9517-5b2337e854ea">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1b718d3b-8f2e-4430-bd48-005b7a82a854"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{questionTitle}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="220" y="0" width="100" height="30" uuid="a7a80d0d-2d0c-45bd-9570-feb978a98224">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="da94e8d7-319b-4571-ad98-029c639b3f02"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{totalQuestion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="330" y="0" width="100" height="30" uuid="78df7822-4359-4339-919a-5f611e8b20aa">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="da94e8d7-319b-4571-ad98-029c639b3f02"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{totalCorrect}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="460" y="0" width="50" height="30" uuid="941863fc-de1a-46f0-b24b-91a900af348e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="da94e8d7-319b-4571-ad98-029c639b3f02"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{percentation}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="498" y="0" width="12" height="30" uuid="e54bbc7d-13b9-4779-9a00-1671f0402669"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[%]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

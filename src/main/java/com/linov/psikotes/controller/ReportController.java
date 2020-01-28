@@ -65,7 +65,7 @@ public class ReportController {
 		}
 	}
 	
-	@GetMapping("/package-qustion/wrong/{format}")
+	@GetMapping("/package-question/wrong/{format}")
 	public ResponseEntity<?> getReportWrongAnsAtPack(@PathVariable String format) throws ErrorException {
 		
 		try {
