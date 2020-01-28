@@ -1,12 +1,22 @@
 package com.linov.psikotes.service;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 
 import com.linov.psikotes.dao.UserDao;
 import com.linov.psikotes.entity.PojoSignUp;
@@ -14,6 +24,12 @@ import com.linov.psikotes.entity.PojoUser;
 import com.linov.psikotes.entity.Profile;
 import com.linov.psikotes.entity.Role;
 import com.linov.psikotes.entity.User;
+import com.linov.psikotes.pojo.PojoEmail;
+
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+import freemarker.template.TemplateException;
+
 
 @Service("userService")
 public class UserService {
@@ -29,6 +45,16 @@ public class UserService {
 	
 	@Autowired
 	private JavaMailSender javaMailSender;
+	
+	
+	@Autowired
+	@Qualifier("emailConfigBean")
+	private Configuration emailConfig;
+	
+	@Autowired
+	public UserService(JavaMailSender javaMailSender) {
+		this.javaMailSender = javaMailSender;
+	}
 
 	public List<PojoUser> getAllUser(){
 		List<PojoUser> list = userDao.getAll();
@@ -47,6 +73,16 @@ public class UserService {
 	
 	public PojoUser findByName(String name) {
 		PojoUser user = userDao.findByProfileName(name);
+		return user;
+	}
+	
+	public PojoUser findByEmail(String email) {
+		PojoUser user = userDao.findByEmail(email);
+		return user;
+	}
+	
+	public PojoUser findByPhone(String phone) {
+		PojoUser user = userDao.findByPhone(phone);
 		return user;
 	}
 	
@@ -72,7 +108,11 @@ public class UserService {
 		user.setActiveState("active");
 		
 		//Sending password via email candidate
-		sendEmail(pojoSignUp.getProfile().getEmail(),password);
+		PojoEmail pojoEmail = new PojoEmail();
+		pojoEmail.setPassword(password);
+		pojoEmail.setSendTo(pojoSignUp.getProfile().getEmail());
+		pojoEmail.setSubject("Linov Psikotest - Lawencon International");
+		sendEmail(pojoEmail);
 		
 		//Set Timestamp
 		Date date =new Date();  
@@ -190,15 +230,47 @@ public class UserService {
         return sb.toString(); 
     }
     
-    public void sendEmail(String setTo,String password) {
-		SimpleMailMessage msg = new SimpleMailMessage();
-		msg.setTo(setTo);
-		msg.setSubject("Linov Psikotest");
-		msg.setText("Your Password is : " + password + 
-				"\n\n Your password is your responsibility" 
-				+"\n\n Best Regards \n\n\n Linov HR");
-		javaMailSender.send(msg);
-	}
+//    public void sendEmail(String setTo,String password) {
+//		SimpleMailMessage msg = new SimpleMailMessage();
+//		msg.setTo(setTo);
+//		msg.setSubject("Linov Psikotest");
+//		msg.setText("Your Password is : " + password + 
+//				"\n\n Your password is your responsibility" 
+//				+"\n\n Best Regards \n\n\n Linov HR");
+//		javaMailSender.send(msg);
+//	}
+    
+    public void sendEmail(PojoEmail pojoEmail) throws MessagingException, IOException, TemplateException {
+
+        Map<String, String> model = new HashMap<String, String>();
+        model.put("password", pojoEmail.getPassword());
+        /**
+         * Add below line if you need to create a token to verification emails and uncomment line:32 in "email.ftl"
+         * model.put("token",UUID.randomUUID().toString());
+         */
+
+        pojoEmail.setModel(model);
+
+
+        //log.info("Sending Email to: " + mailModel.getTo());
+
+
+        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, StandardCharsets.UTF_8.name());
+        mimeMessageHelper.addInline("logo.png", new ClassPathResource("classpath:/lwcn-logo.jpeg"));
+
+        Template template = emailConfig.getTemplate("email.ftl");
+        String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, pojoEmail.getModel());
+
+        mimeMessageHelper.setTo(pojoEmail.getSendTo());
+        mimeMessageHelper.setText(html, true);
+        mimeMessageHelper.setSubject(pojoEmail.getSubject());
+        mimeMessageHelper.setFrom("no-reply@gmail.com");
+
+
+        javaMailSender.send(message);
+
+    }
     
  // VALIDASI POST
 	

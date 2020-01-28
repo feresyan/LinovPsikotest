@@ -16,18 +16,30 @@
 	</background>
 	
 	<title>
-		<band height="79" splitType="Stretch">
+		<band height="110" splitType="Stretch">
 			<staticText>
-				<reportElement x="177" y="20" width="201" height="40" uuid="e140b3c1-29d4-496e-8f9a-dd33293ecb5e"/>
+				<reportElement x="180" y="70" width="201" height="40" uuid="4be02830-d53d-4dff-a537-104bc175893c"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="18"/>
 				</textElement>
 				<text><![CDATA[Question Report]]></text>
 			</staticText>
 			<image>
-				<reportElement x="1" y="0" width="182" height="50" uuid="7b51ae96-9163-4707-891c-fa57a0cdaf9a"/>
-				<imageExpression><![CDATA["https://raw.githubusercontent.com/feresyan/LinovPsikotest/master/src/main/resources/report/lwcn-logo.png"]]></imageExpression>
+				<reportElement x="1" y="1" width="50" height="50" uuid="dd307582-9810-4cf1-a631-3f96d7e1f39c"/>
+				<imageExpression><![CDATA["https://raw.githubusercontent.com/feresyan/LinovPsikotest/master/src/main/resources/report/lawencon.png"]]></imageExpression>
 			</image>
+			<staticText>
+				<reportElement x="56" y="1" width="250" height="60" uuid="a63025bc-6f74-4e60-afe0-b106887f2ccb"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[PT LAWENCON INTERNASIONAL
+WismaStacoLantai 5
+Jl. Casablanca kav 18 Jakarta Selatan 12960
+Telp. 021 –  83702192
+]]></text>
+			</staticText>
+
 		</band>
 	</title>
 	
@@ -38,7 +50,7 @@
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[questions most answered correctly]]></text>
+				<text><![CDATA[Questions Most Answered Correctly]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
@@ -130,9 +142,9 @@
 	<pageFooter>
 		<band height="60" splitType="Stretch">
 			<staticText>
-				<reportElement x="228" y="30" width="100" height="30" uuid="77158a87-90a9-408f-bae7-31c9279e9b38"/>
+				<reportElement x="181" y="30" width="200" height="30" uuid="96d5123d-e4c4-46ca-b5a0-adcb945317f0"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>
-				<text><![CDATA[All Rights Reserved]]></text>
+				<text><![CDATA[Copyright © 2020 by Lawencon International]]></text>
 			</staticText>
 		</band>
 	</pageFooter>

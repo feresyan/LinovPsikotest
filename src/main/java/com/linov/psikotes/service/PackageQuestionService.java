@@ -40,29 +40,37 @@ public class PackageQuestionService {
 	
 	public PackageQuestion insertPq(PackageQuestion pq) throws Exception{
 		try {
-			//Check if id null
-			valIdNull(pq);
+			PackageQuestion pqobj = pqDao.findPackageQuestion(pq.getPack().getPackageId(), pq.getQuestion().getQuestionId());
+			if (pqobj.getPackageQuestionId() != null) {
+				pqobj.setActiveState("active");
+				updatePq(pqobj);
+				return pqobj;
+			} else {
+				//Check if id null
+				valIdNull(pq);
+				
+				//Check if package id and question id not null
+				valBkNotNull(pq);
+				
+				//Check if package question is not exist in DB
+				PackageQuestion result = findPackageQuestion(pq);
+				valBkNotExist(result);
+				
+				//Check if nonBK not null
+				valNonBk(pq);
+				
+				//check if package as FK exist in DB
+				com.linov.psikotes.entity.Package pack = pDao.findById(pq.getPack().getPackageId());
+				valFkPackageNotNull(pack);
+				
+				//check if question as FK exist in DB
+				Question question = qDao.findById(pq.getQuestion().getQuestionId());
+				valFkQuestionNotNull(question);
+				
+				//save
+				return pqDao.save(pq);
+			}
 			
-			//Check if package id and question id not null
-			valBkNotNull(pq);
-			
-			//Check if package question is not exist in DB
-			PackageQuestion result = findPackageQuestion(pq);
-			valBkNotExist(result);
-			
-			//Check if nonBK not null
-			valNonBk(pq);
-			
-			//check if package as FK exist in DB
-			com.linov.psikotes.entity.Package pack = pDao.findById(pq.getPack().getPackageId());
-			valFkPackageNotNull(pack);
-			
-			//check if question as FK exist in DB
-			Question question = qDao.findById(pq.getQuestion().getQuestionId());
-			valFkQuestionNotNull(question);
-			
-			//save
-			return pqDao.save(pq);
 		} catch (Exception e) {
 			// TODO: handle exception
 			throw new Exception(e.getMessage());

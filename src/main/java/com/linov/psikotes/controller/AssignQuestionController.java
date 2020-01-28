@@ -1,4 +1,4 @@
-package com.linov.psikotes.controller;
+	package com.linov.psikotes.controller;
 
 import java.util.List;
 
@@ -36,7 +36,7 @@ public class AssignQuestionController {
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
-		return ResponseEntity.status(HttpStatus.CREATED).body("Status: 201 Created");
+		return ResponseEntity.status(HttpStatus.CREATED).body(aq);
 	}
 	
 	@PutMapping("")
@@ -46,7 +46,7 @@ public class AssignQuestionController {
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
-		return ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
+		return ResponseEntity.status(HttpStatus.OK).body(aq);
 	}
 	
 	@DeleteMapping("/{id}")
@@ -56,13 +56,13 @@ public class AssignQuestionController {
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 		}
-		return ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
+		AssignQuestion aq =  aqService.findById(id);
+		return ResponseEntity.status(HttpStatus.OK).body(aq);
 	}
 	
 	@GetMapping("/id/{id}")
 	public ResponseEntity<?> getById(@PathVariable String id) throws ErrorException {
 		try {
-			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
 			return ResponseEntity.ok(aqService.findById(id));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
@@ -72,7 +72,6 @@ public class AssignQuestionController {
 	@GetMapping("/user/{userId}")
 	public ResponseEntity<?> getAllQuestByUserId(@PathVariable String userId) throws ErrorException {
 		try {
-			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
 			return ResponseEntity.ok(aqService.getAllQuestByUserId(userId));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
@@ -82,7 +81,6 @@ public class AssignQuestionController {
 	@GetMapping("")
 	public ResponseEntity<?> getAllUser() throws ErrorException {
 		try {
-			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
 			return ResponseEntity.ok(aqService.getAllAq());
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());

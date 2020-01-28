@@ -32,7 +32,7 @@ public class QuestionTypeController {
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
-		return ResponseEntity.status(HttpStatus.CREATED).body("Status: 201 Created");
+		return ResponseEntity.status(HttpStatus.CREATED).body(questionType);
 	}
 	
 	@PutMapping("")
@@ -42,7 +42,7 @@ public class QuestionTypeController {
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
-		return ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
+		return ResponseEntity.status(HttpStatus.OK).body(questionType);
 	}
 	
 	@DeleteMapping("/{id}")
@@ -52,7 +52,7 @@ public class QuestionTypeController {
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 		}
-		return ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
+		return ResponseEntity.status(HttpStatus.OK).body(questionTypeService.findById(id));
 	}
 	
 	@GetMapping("/id/{id}")

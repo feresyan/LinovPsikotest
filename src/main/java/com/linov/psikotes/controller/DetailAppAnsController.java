@@ -41,7 +41,7 @@ public class DetailAppAnsController {
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
-		return ResponseEntity.status(HttpStatus.CREATED).body("Detail Berhasil Ditambah");
+		return ResponseEntity.status(HttpStatus.CREATED).body(dAppAns);
 	}
 	
 	@PutMapping("")
@@ -51,7 +51,7 @@ public class DetailAppAnsController {
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
-		return ResponseEntity.status(HttpStatus.OK).body("Detail Berhasil Diperbarui");
+		return ResponseEntity.status(HttpStatus.OK).body(dAppAns);
 	}
 	
 	@DeleteMapping("/{id}")
@@ -61,7 +61,7 @@ public class DetailAppAnsController {
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 		}
-		return ResponseEntity.status(HttpStatus.OK).body("Detail Berhasil Dihapus");
+		return ResponseEntity.status(HttpStatus.OK).body(dAppAnsService.findById(id));
 	}
 	
 	@GetMapping("/id/{id}")

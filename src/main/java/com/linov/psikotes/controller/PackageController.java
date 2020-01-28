@@ -32,7 +32,7 @@ public class PackageController {
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
-		return ResponseEntity.status(HttpStatus.CREATED).body("Status: 201 Created");
+		return ResponseEntity.status(HttpStatus.CREATED).body(pack);
 	}
 	
 	@PutMapping("")
@@ -42,7 +42,7 @@ public class PackageController {
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
-		return ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
+		return ResponseEntity.status(HttpStatus.OK).body(pack);
 	}
 	
 	@DeleteMapping("/{id}")
@@ -52,13 +52,14 @@ public class PackageController {
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 		}
-		return ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
+		return ResponseEntity.status(HttpStatus.OK).body(packageService.findById(id));
 	}
 	
 	@GetMapping("/id/{id}")
 	public ResponseEntity<?> getById(@PathVariable String id) throws ErrorException {		
 		try {
-			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
+			Object obj = "Status: 200 OK";
+			ResponseEntity.status(HttpStatus.OK).body(obj);
 			return ResponseEntity.ok(packageService.findById(id));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
@@ -68,7 +69,8 @@ public class PackageController {
 	@GetMapping("")
 	public ResponseEntity<?> getAllPackage() throws ErrorException {
 		try {
-			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
+			Object obj = "Status: 200 OK";
+			ResponseEntity.status(HttpStatus.OK).body(obj);
 			return ResponseEntity.ok(packageService.getAllPackage());
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());

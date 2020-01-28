@@ -18,18 +18,29 @@
 	</background>
 	
 	<title>
-		<band height="79" splitType="Stretch">
+		<band height="125" splitType="Stretch">
 			<staticText>
-				<reportElement x="177" y="20" width="201" height="40" uuid="7ab6268a-af95-4080-915c-6a9fb27fb51b"/>
+				<reportElement x="180" y="70" width="201" height="40" uuid="7ab6268a-af95-4080-915c-6a9fb27fb51b"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="18"/>
 				</textElement>
 				<text><![CDATA[Question Report]]></text>
 			</staticText>
 			<image>
-				<reportElement x="1" y="0" width="182" height="50" uuid="eb7abb43-7804-475d-aada-b2616e695815"/>
-				<imageExpression><![CDATA["https://raw.githubusercontent.com/feresyan/LinovPsikotest/master/src/main/resources/report/lwcn-logo.png"]]></imageExpression>
+				<reportElement x="0" y="0" width="50" height="50" uuid="b1744ffe-1a2c-4d11-b621-15ad2fbb220c"/>
+				<imageExpression><![CDATA["https://raw.githubusercontent.com/feresyan/LinovPsikotest/master/src/main/resources/report/lawencon.png"]]></imageExpression>
 			</image>
+			<staticText>
+				<reportElement x="56" y="0" width="250" height="60" uuid="1b4f477b-3a0c-4e0e-aaae-7a85df52503d"/>
+				<textElement>
+					<font size="10"/>
+				</textElement>
+				<text><![CDATA[PT LAWENCON INTERNASIONAL
+WismaStacoLantai 5
+Jl. Casablanca kav 18 Jakarta Selatan 12960
+Telp. 021 –  83702192
+]]></text>
+			</staticText>
 		</band>
 	</title>
 	
@@ -40,7 +51,7 @@
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[Questions most answered correctly On Package]]></text>
+				<text><![CDATA[Questions Most Answered Correctly on Package]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
@@ -148,7 +159,13 @@
 		<band height="45" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="54" splitType="Stretch"/>
+		<band height="60" splitType="Stretch">
+			<staticText>
+				<reportElement x="181" y="30" width="200" height="30" uuid="a712fcd5-c8eb-4435-b729-c792271e2151"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Copyright © 2020 by Lawencon International]]></text>
+			</staticText>
+		</band>
 	</pageFooter>
 	<summary>
 		<band height="42" splitType="Stretch"/>

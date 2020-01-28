@@ -33,7 +33,7 @@ public class UserController {
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
-		return ResponseEntity.status(HttpStatus.CREATED).body("Status: 201 Created");
+		return ResponseEntity.status(HttpStatus.CREATED).body(pojoSignUp);
 	}
 	
 	@PutMapping("")
@@ -45,7 +45,7 @@ public class UserController {
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
-		return ResponseEntity.status(HttpStatus.OK).body("Status: 200 Ok");
+		return ResponseEntity.status(HttpStatus.OK).body(user);
 	}
 	
 	@DeleteMapping("/{id}")
@@ -55,13 +55,12 @@ public class UserController {
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 		}
-		return ResponseEntity.status(HttpStatus.OK).body("Status: 200 Ok");
+		return ResponseEntity.status(HttpStatus.OK).body(userService.findById(id));
 	}
 	
 	@GetMapping("/id/{id}")
 	public ResponseEntity<?> getById(@PathVariable String id) throws ErrorException {
 		try {
-			ResponseEntity.status(HttpStatus.OK).body("Status: 200 Ok");
 			return ResponseEntity.ok(userService.findById(id));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
@@ -71,18 +70,34 @@ public class UserController {
 	@GetMapping("/username/{username}")
 	public ResponseEntity<?> getByUsername(@PathVariable String username) throws ErrorException {
 		try {
-			ResponseEntity.status(HttpStatus.OK).body("Status: 200 Ok");
 			return ResponseEntity.ok(userService.findByUsername(username));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 		}
 	}
 	
-	@GetMapping("/name/{name}")
+	@GetMapping("/search/name/{name}")
 	public ResponseEntity<?> getByProfileName(@PathVariable String name) throws ErrorException {
 		try {
-			ResponseEntity.status(HttpStatus.OK).body("Status: 200 Ok");
 			return ResponseEntity.ok(userService.findByName(name));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+		}
+	}
+	
+	@GetMapping("/search/email/{email}")
+	public ResponseEntity<?> getByEmail(@PathVariable String email) throws ErrorException {
+		try {
+			return ResponseEntity.ok(userService.findByEmail(email));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+		}
+	}
+	
+	@GetMapping("/search/phone/{phone}")
+	public ResponseEntity<?> getByPhone(@PathVariable String phone) throws ErrorException {
+		try {
+			return ResponseEntity.ok(userService.findByPhone(phone));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 		}
@@ -91,7 +106,6 @@ public class UserController {
 	@GetMapping("")
 	public ResponseEntity<?> getAllUser() throws ErrorException {
 		try {
-			ResponseEntity.status(HttpStatus.OK).body("Status: 200 Ok");
 			return ResponseEntity.ok(userService.getAllUser());
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());

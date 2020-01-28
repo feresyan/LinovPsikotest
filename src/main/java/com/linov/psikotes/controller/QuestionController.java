@@ -45,11 +45,11 @@ public class QuestionController {
 			@RequestPart String activeState) throws ErrorException{
 		try {
 			//set all images and insert to DB
-			questionService.insertQuestionImg(path, questionTypeId, questionTitle, questionDesc, listImage, choice, correctAnswer, activeState);
+			Question question = questionService.insertQuestionImg(path, questionTypeId, questionTitle, questionDesc, listImage, choice, correctAnswer, activeState);
+			return ResponseEntity.status(HttpStatus.CREATED).body(question);
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
-		return ResponseEntity.status(HttpStatus.CREATED).body("Status: 201 Created");
 	}
 	
 	@PostMapping("/text")
@@ -61,7 +61,7 @@ public class QuestionController {
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
-		return ResponseEntity.status(HttpStatus.CREATED).body("Status: 201 Created");
+		return ResponseEntity.status(HttpStatus.CREATED).body(question);
 	}
 	
 	@PutMapping("/update/img")
@@ -76,11 +76,11 @@ public class QuestionController {
 			@RequestPart String activeState) throws ErrorException{
 		try {
 			//update images question and update to DB
-			questionService.updateQuestionImg(path, questionId, questionTypeId, questionTitle, questionDesc, listImage, choice, correctAnswer, activeState);
+			Question question = questionService.updateQuestionImg(path, questionId, questionTypeId, questionTitle, questionDesc, listImage, choice, correctAnswer, activeState);
+			return ResponseEntity.status(HttpStatus.OK).body(question);
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
-		return ResponseEntity.status(HttpStatus.CREATED).body("Status: 200 Ok");
 	}
 	
 	@PutMapping("/update/text")
@@ -101,13 +101,12 @@ public class QuestionController {
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 		}
-		return ResponseEntity.status(HttpStatus.OK).body("Status: 200 Ok");
+		return ResponseEntity.status(HttpStatus.OK).body(questionService.findById(id));
 	}
 	
 	@GetMapping("/id/{id}")
 	public ResponseEntity<?> getById(@PathVariable String id) throws ErrorException {
 		try {
-			 ResponseEntity.status(HttpStatus.OK).body("Status: 200 Ok");
 			return ResponseEntity.ok(questionService.findById(id));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
@@ -117,7 +116,6 @@ public class QuestionController {
 	@PostMapping("/search")
 	public ResponseEntity<?> search(@RequestBody SearchQuestion searchQuest) throws ErrorException {
 		try {
-			 ResponseEntity.status(HttpStatus.OK).body("Status: 200 Ok");
 			 return ResponseEntity.ok(questionService.search(searchQuest));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
@@ -127,7 +125,6 @@ public class QuestionController {
 	@GetMapping("")
 	public ResponseEntity<?> getAllQuestion() throws ErrorException {
 		try {
-			 ResponseEntity.status(HttpStatus.OK).body("Status: 200 Ok");
 			 return ResponseEntity.ok(questionService.getAllQuestion());
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
@@ -137,7 +134,6 @@ public class QuestionController {
 	@GetMapping("/choice")
 	public ResponseEntity<?> getAllChoice() throws ErrorException {
 		try {
-			 ResponseEntity.status(HttpStatus.OK).body("Status: 200 Ok");
 			 return ResponseEntity.ok(questionService.getChoice());
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());

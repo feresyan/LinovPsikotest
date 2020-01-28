@@ -33,7 +33,7 @@ public class RoleController {
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
-		return ResponseEntity.status(HttpStatus.CREATED).body("Status: 201 Created");
+		return ResponseEntity.status(HttpStatus.CREATED).body(role);
 	}
 	
 	@PutMapping("")
@@ -43,7 +43,7 @@ public class RoleController {
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
-		return ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
+		return ResponseEntity.status(HttpStatus.OK).body(role);
 	}
 	
 	@DeleteMapping("/{id}")
@@ -53,13 +53,12 @@ public class RoleController {
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 		}
-		return ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
+		return ResponseEntity.status(HttpStatus.OK).body(roleService.findById(id));
 	}
 	
 	@GetMapping("/id/{id}")
 	public ResponseEntity<?> getById(@PathVariable String id) throws ErrorException {
 		try {
-			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
 			return ResponseEntity.ok(roleService.findById(id));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
@@ -69,7 +68,6 @@ public class RoleController {
 	@GetMapping("")
 	public ResponseEntity<?> getAllRole() throws ErrorException {
 		try {
-			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
 			return ResponseEntity.ok(roleService.getAllRole());
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());

@@ -300,43 +300,66 @@ public class ReportDao extends CommonDao{
 	@SuppressWarnings("unchecked")
 	@Transactional
 	public List<PojoPackReport> getPackageByTheMostCorrectAnswer() {
-			
+		
+		//Get all package that available
+		List<PojoPackage> listPack = packDao.getAll();
+		
 		//Make list PojoPackReport
 		List<PojoPackReport> listPackReport = new ArrayList<PojoPackReport>();
 		
-		Query query  = super.entityManager
-				.createNativeQuery("select tbp.package_name \r\n" + 
-						"from tbl_detail_applicant_answer tdaa \r\n" + 
-						"join tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id \r\n" + 
-						"join tbl_m_question tmq on tpq.question_id = tmq.question_id \r\n" + 
-						"join tbl_m_package tbp on tpq.package_id = tbp.package_id \r\n" + 
-						"where tdaa.point <> 0 and lower(tbp.active_state) = 'active' \r\n" + 
-						"group by tbp.package_name \r\n" + 
-						"order by count(tmq.question_title) desc \r\n" + 
-						"limit 10");
+		for (int i = 0; i < listPack.size(); i++) {
+			Query query  = super.entityManager
+					.createNativeQuery("select tbp.package_name \r\n" + 
+							"from tbl_detail_applicant_answer tdaa \r\n" + 
+							"join tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id \r\n" + 
+							"join tbl_m_question tmq on tpq.question_id = tmq.question_id \r\n" + 
+							"join tbl_m_package tbp on tpq.package_id = tbp.package_id \r\n" + 
+							"where tdaa.point <> 0 and lower(tbp.active_state) = 'active'and lower(tbp.package_name) ='"+ listPack.get(i).getPackageName().toLowerCase() +"' \r\n" + 
+							"group by tbp.package_name \r\n" + 
+							"order by count(tmq.question_title) desc \r\n" + 
+							"limit 10");
 
-		List<String> listPackName = query.getResultList(); 
-					
-			  query  = super.entityManager
-				.createNativeQuery("select count(tbp.package_name) \r\n" + 
-						"from tbl_detail_applicant_answer tdaa\r\n" + 
-						"join tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id\r\n" + 
-						"join tbl_m_question tmq on tpq.question_id = tmq.question_id\r\n" + 
-						"join tbl_m_package tbp on tpq.package_id = tbp.package_id\r\n" + 
-						"where tdaa.point <> 0 and lower(tbp.active_state) = 'active' \r\n" + 
-						"group by tbp.package_name\r\n" + 
-						"order by count(tmq.question_title) desc\r\n" + 
-						"limit 10");
+			List<String> listPackName = query.getResultList(); 
+						
+				  query  = super.entityManager
+					.createNativeQuery("select count(tbp.package_name) \r\n" + 
+							"from tbl_detail_applicant_answer tdaa\r\n" + 
+							"join tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id\r\n" + 
+							"join tbl_m_question tmq on tpq.question_id = tmq.question_id\r\n" + 
+							"join tbl_m_package tbp on tpq.package_id = tbp.package_id\r\n" + 
+							"where tdaa.point <> 0 and lower(tbp.active_state) = 'active' and lower(tbp.package_name) ='"+ listPack.get(i).getPackageName().toLowerCase() +"' \r\n" + 
+							"group by tbp.package_name\r\n" + 
+							"order by count(tmq.question_title) desc\r\n" + 
+							"limit 10");
 
-		List<BigInteger> listTotalCorrect = query.getResultList();
+			List<BigInteger> listTotalCorrect = query.getResultList();
+			
+				query  = super.entityManager
+						.createNativeQuery("select count(tmq.question_title)\r\n" + 
+								"from tbl_detail_applicant_answer tdaa\r\n" + 
+								"join tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id\r\n" + 
+								"join tbl_m_question tmq on tpq.question_id = tmq.question_id\r\n" + 
+								"join tbl_m_package tbp on tpq.package_id = tbp.package_id\r\n" + 
+								"where lower(tbp.package_name) ='"+ listPack.get(i).getPackageName().toLowerCase() +"' and lower(tbp.active_state) = 'active' \r\n" + 
+								"group by tbp.package_name\r\n" + 
+								"order by count(tmq.question_title) desc");
+
+			List<BigInteger> listTotalQuestion = query.getResultList();
 		
+			for (int j = 0; j < listPackName.size(); j++) {
+				PojoPackReport ppr = new PojoPackReport();
 				
-		for (int j = 0; j < listPackName.size(); j++) {
-			PojoPackReport ppr = new PojoPackReport();
-			ppr.setPackageName(listPackName.get(j));
-			ppr.setTotalCorrect(listTotalCorrect.get(j).toString());
-			listPackReport.add(ppr);
-		}
+				//Get percentation
+				Double percentation = listTotalCorrect.get(j).doubleValue()/listTotalQuestion.get(j).doubleValue()*100;
+				
+				ppr.setPackageName(listPackName.get(j));
+				ppr.setTotalCorrect(listTotalCorrect.get(j).toString());
+				ppr.setTotalQuestion(listTotalQuestion.get(j).toString());
+				ppr.setPercentation(percentation.toString());
+				listPackReport.add(ppr);
+			}
+		
+		}//end package
 		
 		
 		return listPackReport;
@@ -346,42 +369,65 @@ public class ReportDao extends CommonDao{
 	@Transactional
 	public List<PojoPackReport> getPackageByTheMostWrongAnswer() {
 			
+		//Get all package that available
+		List<PojoPackage> listPack = packDao.getAll();
+		
 		//Make list PojoPackReport
 		List<PojoPackReport> listPackReport = new ArrayList<PojoPackReport>();
 		
-		Query query  = super.entityManager
-				.createNativeQuery("select tbp.package_name \r\n" + 
-						"from tbl_detail_applicant_answer tdaa \r\n" + 
-						"join tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id \r\n" + 
-						"join tbl_m_question tmq on tpq.question_id = tmq.question_id \r\n" + 
-						"join tbl_m_package tbp on tpq.package_id = tbp.package_id \r\n" + 
-						"where tdaa.point = 0 and lower(tbp.active_state) = 'active' \r\n" + 
-						"group by tbp.package_name \r\n" + 
-						"order by count(tmq.question_title) desc \r\n" + 
-						"limit 10");
+		for (int i = 0; i < listPack.size(); i++) {
+			Query query  = super.entityManager
+					.createNativeQuery("select tbp.package_name \r\n" + 
+							"from tbl_detail_applicant_answer tdaa \r\n" + 
+							"join tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id \r\n" + 
+							"join tbl_m_question tmq on tpq.question_id = tmq.question_id \r\n" + 
+							"join tbl_m_package tbp on tpq.package_id = tbp.package_id \r\n" + 
+							"where tdaa.point = 0 and lower(tbp.active_state) = 'active'and lower(tbp.package_name) ='"+ listPack.get(i).getPackageName().toLowerCase() +"' \r\n" + 
+							"group by tbp.package_name \r\n" + 
+							"order by count(tmq.question_title) desc \r\n" + 
+							"limit 10");
 
-		List<String> listPackName = query.getResultList(); 
-					
-			  query  = super.entityManager
-				.createNativeQuery("select count(tbp.package_name) \r\n" + 
-						"from tbl_detail_applicant_answer tdaa\r\n" + 
-						"join tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id\r\n" + 
-						"join tbl_m_question tmq on tpq.question_id = tmq.question_id\r\n" + 
-						"join tbl_m_package tbp on tpq.package_id = tbp.package_id\r\n" + 
-						"where tdaa.point = 0 and lower(tbp.active_state) = 'active' \r\n" + 
-						"group by tbp.package_name\r\n" + 
-						"order by count(tmq.question_title) desc\r\n" + 
-						"limit 10");
+			List<String> listPackName = query.getResultList(); 
+						
+				  query  = super.entityManager
+					.createNativeQuery("select count(tbp.package_name) \r\n" + 
+							"from tbl_detail_applicant_answer tdaa\r\n" + 
+							"join tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id\r\n" + 
+							"join tbl_m_question tmq on tpq.question_id = tmq.question_id\r\n" + 
+							"join tbl_m_package tbp on tpq.package_id = tbp.package_id\r\n" + 
+							"where tdaa.point = 0 and lower(tbp.active_state) = 'active' and lower(tbp.package_name) ='"+ listPack.get(i).getPackageName().toLowerCase() +"' \r\n" + 
+							"group by tbp.package_name\r\n" + 
+							"order by count(tmq.question_title) desc\r\n" + 
+							"limit 10");
 
-		List<BigInteger> listTotalCorrect = query.getResultList();
+			List<BigInteger> listTotalCorrect = query.getResultList();
+			
+				query  = super.entityManager
+						.createNativeQuery("select count(tmq.question_title)\r\n" + 
+								"from tbl_detail_applicant_answer tdaa\r\n" + 
+								"join tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id\r\n" + 
+								"join tbl_m_question tmq on tpq.question_id = tmq.question_id\r\n" + 
+								"join tbl_m_package tbp on tpq.package_id = tbp.package_id\r\n" + 
+								"where lower(tbp.package_name) ='"+ listPack.get(i).getPackageName().toLowerCase() +"' and lower(tbp.active_state) = 'active' \r\n" + 
+								"group by tbp.package_name\r\n" + 
+								"order by count(tmq.question_title) desc");
+
+			List<BigInteger> listTotalQuestion = query.getResultList();
 		
+			for (int j = 0; j < listPackName.size(); j++) {
+				PojoPackReport ppr = new PojoPackReport();
 				
-		for (int j = 0; j < listPackName.size(); j++) {
-			PojoPackReport ppr = new PojoPackReport();
-			ppr.setPackageName(listPackName.get(j));
-			ppr.setTotalCorrect(listTotalCorrect.get(j).toString());
-			listPackReport.add(ppr);
-		}
+				//Get percentation
+				Double percentation = listTotalCorrect.get(j).doubleValue()/listTotalQuestion.get(j).doubleValue()*100;
+				
+				ppr.setPackageName(listPackName.get(j));
+				ppr.setTotalCorrect(listTotalCorrect.get(j).toString());
+				ppr.setTotalQuestion(listTotalQuestion.get(j).toString());
+				ppr.setPercentation(percentation.toString());
+				listPackReport.add(ppr);
+			}
+		
+		}//end package
 		
 		
 		return listPackReport;

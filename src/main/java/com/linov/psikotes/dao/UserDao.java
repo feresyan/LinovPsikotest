@@ -120,6 +120,46 @@ public class UserDao extends CommonDao {
 	
 	@SuppressWarnings("unchecked")
 	@Transactional
+	public PojoUser findByEmail(String email) {
+		List<User> list = super.entityManager
+				.createQuery("from User where lower(profile.email) like concat('%', :nameEmail, '%')")
+				.setParameter("nameEmail", email.toLowerCase())
+				.getResultList();
+		if(list.size()==0)
+			return new PojoUser();
+		else
+		{
+			PojoUser pu = new PojoUser();
+			pu.setUserId(list.get(0).getUserId());
+			pu.setUsername(list.get(0).getUsername());
+			pu.setRole(list.get(0).getRole());
+			pu.setProfile(list.get(0).getProfile());
+			return pu;
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public PojoUser findByPhone(String phone) {
+		List<User> list = super.entityManager
+				.createQuery("from User where profile.phone like concat('%', :phone, '%')")
+				.setParameter("phone", phone)
+				.getResultList();
+		if(list.size()==0)
+			return new PojoUser();
+		else
+		{
+			PojoUser pu = new PojoUser();
+			pu.setUserId(list.get(0).getUserId());
+			pu.setUsername(list.get(0).getUsername());
+			pu.setRole(list.get(0).getRole());
+			pu.setProfile(list.get(0).getProfile());
+			return pu;
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Transactional
 	public User findByUsernameWithPassword(String username) {
 		List<User> list = super.entityManager
 				.createQuery("from User where username = :field1")

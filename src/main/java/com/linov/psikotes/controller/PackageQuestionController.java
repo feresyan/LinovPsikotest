@@ -36,7 +36,7 @@ public class PackageQuestionController {
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
-		return ResponseEntity.status(HttpStatus.CREATED).body("Status: 201 Created");
+		return ResponseEntity.status(HttpStatus.CREATED).body(pq);
 	}
 	
 	@PutMapping("")
@@ -46,7 +46,7 @@ public class PackageQuestionController {
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
-		return ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
+		return ResponseEntity.status(HttpStatus.OK).body(pq);
 	}
 	
 	@DeleteMapping("/{id}")
@@ -56,14 +56,12 @@ public class PackageQuestionController {
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 		}
-		return ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
+		return ResponseEntity.status(HttpStatus.OK).body(pqService.findById(id));
 	}
 	
 	@GetMapping("/id/{id}")
 	public ResponseEntity<?> getById(@PathVariable String id) throws ErrorException {
 		try {
-//			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
-			ResponseEntity.status(HttpStatus.OK);
 			return ResponseEntity.ok(pqService.findById(id));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
@@ -73,8 +71,6 @@ public class PackageQuestionController {
 	@GetMapping("/package/id/{id}")
 	public ResponseEntity<?> getByPackageId(@PathVariable String id) throws ErrorException {
 		try {
-//			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
-			ResponseEntity.status(HttpStatus.OK);
 			return ResponseEntity.ok(pqService.findByPackageId(id));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
@@ -84,8 +80,6 @@ public class PackageQuestionController {
 	@GetMapping("")
 	public ResponseEntity<?> getAllQuestPack() throws ErrorException {
 		try {
-//			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
-			ResponseEntity.status(HttpStatus.OK);
 			return ResponseEntity.ok(pqService.getAllPq());
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());

@@ -117,7 +117,7 @@ public class QuestionService {
 		}
 	}
 	
-	public void insertQuestionImg(
+	public Question insertQuestionImg(
 				 String UPLOADED_FOLDER,
 				 String questionTypeId,
 				 String questionTitle,
@@ -278,9 +278,10 @@ public class QuestionService {
 		question.setTimestamp(date);
 		question.setActiveState(activeState);
 		insertQuestion(question);
+		return question;
 	}
 	
-	public void updateQuestionImg(
+	public Question updateQuestionImg(
 				 String UPLOADED_FOLDER,
 				 String questionId,
 				 String questionTypeId,
@@ -397,6 +398,7 @@ public class QuestionService {
 		question.setListImg(l);
 		question.setActiveState(activeState);
 		updateQuestion(question);
+		return question;
 	}
 	
 	public static String getRandomPassword(int n) 
@@ -440,7 +442,7 @@ public class QuestionService {
 		if((byteFile/1024) < 500) {
 			return null;
 		}
-		throw new Exception("Maksimal besar file hanya 1 mb!");
+		throw new Exception("Maksimal besar file hanya 500 KB!");
 	}
 	
 //	private static  String valFileName(Question question,String oriFileName) {

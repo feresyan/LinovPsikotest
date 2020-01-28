@@ -40,7 +40,7 @@ public class ProfileController {
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
-		return ResponseEntity.status(HttpStatus.OK).body("Profile Berhasil Diperbarui");
+		return ResponseEntity.status(HttpStatus.OK).body(profile);
 	}
 	
 //	@DeleteMapping("/{id}")
@@ -56,7 +56,6 @@ public class ProfileController {
 	@GetMapping("/id/{id}")
 	public ResponseEntity<?> getById(@PathVariable String id) throws ErrorException {
 		try {
-			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
 			return ResponseEntity.ok(profileService.findById(id));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
@@ -66,7 +65,6 @@ public class ProfileController {
 	@GetMapping("/search/name/{name}")
 	public ResponseEntity<?> getByName(@PathVariable String name) throws ErrorException {
 		try {
-			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
 			return ResponseEntity.ok(profileService.findByName(name));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
@@ -77,7 +75,6 @@ public class ProfileController {
 	@GetMapping("/search/email/{email}")
 	public ResponseEntity<?> getByEmail(@PathVariable String email) throws ErrorException {
 		try {
-			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
 			return ResponseEntity.ok(profileService.findByEmail(email));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
@@ -87,7 +84,6 @@ public class ProfileController {
 	@GetMapping("/search/phone/{phone}")
 	public ResponseEntity<?> getByPhone(@PathVariable String phone) throws ErrorException {
 		try {
-			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
 			return ResponseEntity.ok(profileService.findByPhone(phone));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
@@ -97,7 +93,6 @@ public class ProfileController {
 	@GetMapping("")
 	public ResponseEntity<?> getAllProfile() throws ErrorException {
 		try {
-			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
 			return ResponseEntity.ok(profileService.getAllProfile());
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
