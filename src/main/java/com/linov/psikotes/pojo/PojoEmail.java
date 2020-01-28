@@ -2,13 +2,11 @@ package com.linov.psikotes.pojo;
 
 import java.util.Map;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.ToString;
 
 @Data
 @ToString
-@AllArgsConstructor
 public class PojoEmail {
 	
 	private String subject;
