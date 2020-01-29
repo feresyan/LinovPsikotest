@@ -31,21 +31,29 @@ public class AssignQuestionService {
 	
 	public AssignQuestion insertAq(AssignQuestion aq) throws Exception{
 		try {
-			//Check if id is null
-			valIdNull(aq);
+			AssignQuestion newAq = aqDao.findBK(aq.getUser().getUserId(), aq.getPack().getPackageId());
+			if(newAq.getAssignQuestionId() != null) {
+				newAq.setActiveState("active");
+				updateAq(newAq);
+				return newAq;
+			} else {
+				//Check if id is null
+				valIdNull(aq);
+				
+				//Check if user id and package question id not null
+				valBkNotNull(aq);
+				
+				//Check if user id and package question are not exist in DB
+				AssignQuestion resultAq = findBK(aq);
+				valBkNotExist(resultAq);
+				
+				//Check if nonBK not null
+				valNonBk(aq);
+				
+				//Save
+				return aqDao.save(aq);
+			}
 			
-			//Check if user id and package question id not null
-			valBkNotNull(aq);
-			
-			//Check if user id and package question are not exist in DB
-			AssignQuestion resultAq = findBK(aq);
-			valBkNotExist(resultAq);
-			
-			//Check if nonBK not null
-			valNonBk(aq);
-			
-			//Save
-			return aqDao.save(aq);
 		} catch (Exception e) {
 			// TODO: handle exception
 			throw new Exception(e.getMessage());
