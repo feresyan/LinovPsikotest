@@ -50,6 +50,19 @@ public class QuestionTypeDao extends CommonDao{
 	
 	@SuppressWarnings("unchecked")
 	@Transactional
+	public QuestionType findByName(String title) {
+		List<QuestionType> list = super.entityManager
+				.createQuery("from QuestionType where question_type_title= :field1")
+				.setParameter("field1", title)
+				.getResultList();
+		if(list.size()==0)
+			return new QuestionType();
+		else
+			return (QuestionType)list.get(0);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Transactional
 	public QuestionType findByTitle(String title) {
 		List<QuestionType> list = super.entityManager
 				.createQuery("from QuestionType where question_type_title=:title")

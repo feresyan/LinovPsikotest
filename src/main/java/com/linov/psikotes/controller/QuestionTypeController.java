@@ -65,6 +65,16 @@ public class QuestionTypeController {
 		}		
 	}
 	
+	@GetMapping("/title/{title}")
+	public ResponseEntity<?> getByTitle(@PathVariable String title) throws ErrorException {
+		try {
+			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
+			return ResponseEntity.ok(questionTypeService.findByName(title));
+		}catch(Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+		}		
+	}
+	
 	@GetMapping("")
 	public ResponseEntity<?> getAllQuestionType() throws ErrorException {
 		try {

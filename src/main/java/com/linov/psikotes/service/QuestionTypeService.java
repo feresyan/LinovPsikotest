@@ -20,8 +20,13 @@ public class QuestionTypeService {
 	}
 	
 	public QuestionType findById(String id) {
-		QuestionType profile = questionTypeDao.findById(id);
-		return profile;
+		QuestionType qt = questionTypeDao.findById(id);
+		return qt;
+	}
+	
+	public QuestionType findByName(String title) {
+		QuestionType qt = questionTypeDao.findByName(title);
+		return qt;
 	}
 	
 	public QuestionType insertQuestionType(QuestionType questionType) throws Exception{
