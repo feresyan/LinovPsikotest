@@ -86,7 +86,7 @@ public class ReportService {
 			JasperExportManager.exportReportToPdfFile(jasperPrint,path+"Candidate.pdf");
 		}
 		
-		return "Report Generated in path : " + path;
+		return new File(path+"Candidate.pdf").toURI().toString();
 
 	}
 	
