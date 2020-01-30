@@ -20,7 +20,7 @@ public class ReportController {
 	
 	@Autowired
 	private ReportService reportService;
-	
+		
 	@GetMapping("/candidate/{id}/{format}")
 	public ResponseEntity<?> getReportByHeaderId(@PathVariable String id, @PathVariable String format) throws ErrorException {
 		

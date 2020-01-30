@@ -1,12 +1,17 @@
 package com.linov.psikotes.service;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 
@@ -33,8 +38,10 @@ public class ReportService {
 	@Autowired
 	private ReportDao reportDao;
 	
+	@Value("${report.folder}")
+	private String path;
+	
 	public String candidateReport(String reportFormat, String id) throws Exception{
-		String path = "D:\\";
 		
 		List<DetailApplicantAnswer> listDetail = detailAppAnsDao.getAllByAppAnsId(id);
 		
@@ -51,6 +58,16 @@ public class ReportService {
 			prc.setPoint(data.getPoint());
 			prc.setTotalPoints(data.getHeaderAppAnswer().getTotalPoints());
 			listReport.add(prc);
+		}
+		
+		//create directory
+		Path p = Paths.get(path);
+		if(!Files.exists(p)) {
+			try {
+				Files.createDirectories(p);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		//Load file and compile it
