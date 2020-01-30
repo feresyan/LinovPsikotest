@@ -62,33 +62,33 @@ public class ProfileController {
 		}
 	}
 	
-	@GetMapping("/search/name/{name}")
-	public ResponseEntity<?> getByName(@PathVariable String name) throws ErrorException {
-		try {
-			return ResponseEntity.ok(profileService.findByName(name));
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-		}
-		
-	}
-	
-	@GetMapping("/search/email/{email}")
-	public ResponseEntity<?> getByEmail(@PathVariable String email) throws ErrorException {
-		try {
-			return ResponseEntity.ok(profileService.findByEmail(email));
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-		}
-	}
-	
-	@GetMapping("/search/phone/{phone}")
-	public ResponseEntity<?> getByPhone(@PathVariable String phone) throws ErrorException {
-		try {
-			return ResponseEntity.ok(profileService.findByPhone(phone));
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-		}
-	}
+//	@GetMapping("/search/name/{name}")
+//	public ResponseEntity<?> getByName(@PathVariable String name) throws ErrorException {
+//		try {
+//			return ResponseEntity.ok(profileService.findByName(name));
+//		} catch (Exception e) {
+//			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+//		}
+//		
+//	}
+//	
+//	@GetMapping("/search/email/{email}")
+//	public ResponseEntity<?> getByEmail(@PathVariable String email) throws ErrorException {
+//		try {
+//			return ResponseEntity.ok(profileService.findByEmail(email));
+//		} catch (Exception e) {
+//			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+//		}
+//	}
+//	
+//	@GetMapping("/search/phone/{phone}")
+//	public ResponseEntity<?> getByPhone(@PathVariable String phone) throws ErrorException {
+//		try {
+//			return ResponseEntity.ok(profileService.findByPhone(phone));
+//		} catch (Exception e) {
+//			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+//		}
+//	}
 	
 	@GetMapping("")
 	public ResponseEntity<?> getAllProfile() throws ErrorException {

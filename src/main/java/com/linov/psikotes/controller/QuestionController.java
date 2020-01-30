@@ -131,8 +131,8 @@ public class QuestionController {
 		}
 	}
 	
-	@GetMapping("/choice")
-	public ResponseEntity<?> getAllChoice() throws ErrorException {
+	@GetMapping("/psikotest")
+	public ResponseEntity<?> getAllQuestionForPsikotest() throws ErrorException {
 		try {
 			 return ResponseEntity.ok(questionService.getChoice());
 		} catch (Exception e) {

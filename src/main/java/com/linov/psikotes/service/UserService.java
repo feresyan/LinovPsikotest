@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 
@@ -144,6 +146,9 @@ public class UserService {
 			//Check if nonBK null or not
 			valNonBk(user);
 			
+			//Encrypt password
+			user.setPassword(passwordEncoder().encode(user.getPassword()));
+			
 			//save
 			userDao.save(user);
 		} catch (Exception e) {
@@ -201,7 +206,7 @@ public class UserService {
 		return userDao.findBK(user.getPassword(),user.getProfile().getProfileId());
 	}
 	
-	 // function to generate a random string of length n 
+	// function to generate a random string of length n 
     public String getRandomPassword(int n) 
     { 
   
@@ -229,16 +234,12 @@ public class UserService {
         return sb.toString(); 
     }
     
-//    public void sendEmail(String setTo,String password) {
-//		SimpleMailMessage msg = new SimpleMailMessage();
-//		msg.setTo(setTo);
-//		msg.setSubject("Linov Psikotest");
-//		msg.setText("Your Password is : " + password + 
-//				"\n\n Your password is your responsibility" 
-//				+"\n\n Best Regards \n\n\n Linov HR");
-//		javaMailSender.send(msg);
-//	}
+    //Encrypt password
+    public PasswordEncoder passwordEncoder() {
+    	return new BCryptPasswordEncoder();
+    }
     
+    //send email
     public void sendEmail(PojoEmail pojoEmail) throws MessagingException, IOException, TemplateException {
 
         Map<String, String> model = new HashMap<String, String>();
@@ -269,6 +270,8 @@ public class UserService {
         javaMailSender.send(message);
 
     }
+    
+
     
  // VALIDASI POST
 	

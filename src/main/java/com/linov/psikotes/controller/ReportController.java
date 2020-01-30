@@ -44,7 +44,7 @@ public class ReportController {
 	}
 	
 	@GetMapping("/question/wrong/{format}")
-	public ResponseEntity<?> getReportFalseAnswer(@PathVariable String format) throws ErrorException {
+	public ResponseEntity<?> getReportWrongAnswer(@PathVariable String format) throws ErrorException {
 		
 		try {
 			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");

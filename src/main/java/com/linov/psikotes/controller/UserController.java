@@ -66,7 +66,7 @@ public class UserController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 		}
 	}
-	
+		
 	@GetMapping("/username/{username}")
 	public ResponseEntity<?> getByUsername(@PathVariable String username) throws ErrorException {
 		try {

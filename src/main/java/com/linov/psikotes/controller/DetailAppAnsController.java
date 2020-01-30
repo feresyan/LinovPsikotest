@@ -23,15 +23,9 @@ import com.linov.psikotes.service.DetailAppAnsService;
 @RequestMapping("/applicant-answer/detail")
 @CrossOrigin("*")
 public class DetailAppAnsController {
-
-//	@Autowired
-//	private HeaderAppAnsService hAppAnsService;
 	
 	@Autowired
 	private DetailAppAnsService dAppAnsService;
-	
-//	@Autowired
-//	private PackageQuestionService pqService;
 	
 	@PostMapping("")
 	public ResponseEntity<?> insert(@RequestBody List<DetailApplicantAnswer> dAppAns) throws ErrorException{
@@ -80,7 +74,7 @@ public class DetailAppAnsController {
 //	}
 	
 	@GetMapping("")
-	public ResponseEntity<?> getAllUser() throws ErrorException {
+	public ResponseEntity<?> getAllDetail() throws ErrorException {
 		return ResponseEntity.ok(dAppAnsService.getAllDetail());
 	}
 	

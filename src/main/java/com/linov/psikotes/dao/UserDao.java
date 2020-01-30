@@ -99,6 +99,22 @@ public class UserDao extends CommonDao {
 	
 	@SuppressWarnings("unchecked")
 	@Transactional
+	public User loadUserByUsername(String username) {
+		List<User> list = super.entityManager
+				.createQuery("from User where username = :field1 and role_id = :field2")
+				.setParameter("field1", username)
+				.setParameter("field2", "role2")
+				.getResultList();
+		if(list.size()==0)
+			return new User();
+		else
+		{
+			return list.get(0);
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Transactional
 	public PojoUser findByProfileName(String name) {
 		List<User> list = super.entityManager
 				.createQuery("from User where lower(profile.profileName) = :field1 and role_id = :field2")

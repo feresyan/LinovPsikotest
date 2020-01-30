@@ -1,5 +1,6 @@
 package com.linov.psikotes.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -219,7 +220,8 @@ public class DetailAppAnsService {
 		} else {
 			headerAppAns.setStatus("Tidak lulus");
 		}
-		
+		Date date =new Date(); 
+		headerAppAns.setTimestamp(date);
 		hAppAnsService.updateHeaderApplicantAnswer(headerAppAns);
 	}
 	

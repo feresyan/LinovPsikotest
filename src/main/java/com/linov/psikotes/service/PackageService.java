@@ -67,7 +67,7 @@ public class PackageService {
 			valBkNotNull(pack);
 			
 			//Check if package name not getting replaced
-			valBkNotChange(oldPack, pack);
+//			valBkNotChange(oldPack, pack);
 			
 			//Check if nonBK not null
 			valNonBk(pack);
@@ -146,12 +146,12 @@ public class PackageService {
  		return null;
  	}
  	
- 	private static Exception valBkNotChange(Package oldP, Package newP) throws Exception{
- 		if( !oldP.getPackageName().equalsIgnoreCase(newP.getPackageName())) {
- 			throw new Exception("UC tidak dapat diubah!");
- 		}
- 		return null;
- 	}
+// 	private static Exception valBkNotChange(Package oldP, Package newP) throws Exception{
+// 		if( !oldP.getPackageName().equalsIgnoreCase(newP.getPackageName())) {
+// 			throw new Exception("UC tidak dapat diubah!");
+// 		}
+// 		return null;
+// 	}
  	
  	// VALIDASI DELETE ( valIdExist )
 

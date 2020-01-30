@@ -63,18 +63,17 @@ public class QuestionDao extends CommonDao {
 			return (Question)list.get(0);
 	}
 	
-	@SuppressWarnings("unchecked")
-	@Transactional
-	public List<Question> findFileName() {
-		List<Question> list = super.entityManager
-				.createQuery("select choice from Question ")
-//				.setParameter("title", title)
-				.getResultList();
-		if(list.size()==0)
-			return null;
-		else
-			return list;
-	}
+//	@SuppressWarnings("unchecked")
+//	@Transactional
+//	public List<Question> getAllQuestionForPsikotest() {
+//		List<Question> list = super.entityManager
+//				.createQuery("from Question")
+//				.getResultList();
+//		if(list.size()==0)
+//			return null;
+//		else
+//			return list;
+//	}
 	
 	@SuppressWarnings("unchecked")
 	@Transactional

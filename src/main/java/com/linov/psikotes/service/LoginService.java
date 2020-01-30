@@ -1,6 +1,11 @@
 package com.linov.psikotes.service;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.linov.psikotes.dao.UserDao;
@@ -8,7 +13,7 @@ import com.linov.psikotes.entity.PojoUser;
 import com.linov.psikotes.entity.User;
 
 @Service("loginService")
-public class LoginService {
+public class LoginService implements UserDetailsService{
 
 	@Autowired
 	private UserDao userDao;
@@ -33,4 +38,14 @@ public class LoginService {
 			throw new Exception("Status: 400 Bad Request username not found");
 		}
 	}
+	
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    	User theUser = userDao.loadUserByUsername(username);
+    	if(theUser.getUserId() == null) {
+    		throw new UsernameNotFoundException("User not found with username: " + username);
+    	}
+    	return new org.springframework.security.core.userdetails.User(theUser.getUsername(), theUser.getPassword(),
+				new ArrayList<>());
+    }
 }

@@ -26,20 +26,28 @@ public class QuestionTypeService {
 	
 	public QuestionType insertQuestionType(QuestionType questionType) throws Exception{
 		try {
-			//Check if questionTypeId is null
-			valIdNull(questionType);
 			
-			//Check if question type title is not null
-			valBkNotNull(questionType);
-			
-			//Check if question type title is not exist in DB
-			valBkNotExist(questionType);
-			
-			//Check if nonBk not null
-			valNonBk(questionType);
-			
-			//Save
-			return questionTypeDao.save(questionType);
+			QuestionType qt = questionTypeDao.findByTitle(questionType.getQuestionTypeTitle());
+			if(qt.getQuestionTypeTitle() != null) {
+				qt.setActiveState("active");
+				updateQuestionType(qt);
+				return qt;
+			} else {
+				//Check if questionTypeId is null
+				valIdNull(questionType);
+				
+				//Check if question type title is not null
+				valBkNotNull(questionType);
+				
+				//Check if question type title is not exist in DB
+				valBkNotExist(questionType);
+				
+				//Check if nonBk not null
+				valNonBk(questionType);
+				
+				//Save
+				return questionTypeDao.save(questionType);
+			}
 		} catch (Exception e) {
 			throw new Exception(e.getMessage());
 		}
@@ -60,7 +68,7 @@ public class QuestionTypeService {
 			valBkNotNull(questionType);
 			
 			//Check if question title not being replaced
-			valBkNotChange(oldQt, questionType);
+//			valBkNotChange(oldQt, questionType);
 			
 			//Check if nonBK not null
 			valNonBk(questionType);
@@ -138,12 +146,12 @@ public class QuestionTypeService {
 	 		return null;
 	 	}
 	 	
-	 	private static Exception valBkNotChange(QuestionType oldQt, QuestionType newQt) throws Exception{
-	 		if( !oldQt.getQuestionTypeTitle().equalsIgnoreCase(newQt.getQuestionTypeTitle())) {
-	 			throw new Exception("UC tidak dapat diubah!");
-	 		}
-	 		return null;
-	 	}
+//	 	private static Exception valBkNotChange(QuestionType oldQt, QuestionType newQt) throws Exception{
+//	 		if( !oldQt.getQuestionTypeTitle().equalsIgnoreCase(newQt.getQuestionTypeTitle())) {
+//	 			throw new Exception("UC tidak dapat diubah!");
+//	 		}
+//	 		return null;
+//	 	}
 	 	
 	 	// VALIDASI DELETE ( valIdExist )
 }

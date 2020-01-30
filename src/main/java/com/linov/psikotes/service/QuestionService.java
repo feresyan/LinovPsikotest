@@ -3,6 +3,7 @@ package com.linov.psikotes.service;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,6 +20,7 @@ import com.linov.psikotes.entity.ListImg;
 import com.linov.psikotes.entity.Question;
 import com.linov.psikotes.entity.QuestionType;
 import com.linov.psikotes.entity.SearchQuestion;
+import com.linov.psikotes.pojo.PojoQuestion;
 
 @Service("questionService")
 public class QuestionService {
@@ -34,9 +36,23 @@ public class QuestionService {
 		return list;
 	}
 	
-	public List<Question> getChoice(){
-		List<Question> list = questionDao.findFileName();
-		return list;
+	public List<PojoQuestion> getChoice(){
+		List<Question> list = questionDao.getAll();
+		List<PojoQuestion> listQuest = new ArrayList<PojoQuestion>();
+		
+		for (Question pq : list) {
+			PojoQuestion pojoPq = new PojoQuestion();
+			pojoPq.setQuestionId(pq.getQuestionId());
+			pojoPq.setQuestionTitle(pq.getQuestionTitle());
+			pojoPq.setQuestionType(pq.getQuestionType());
+			pojoPq.setQuestionDesc(pq.getQuestionDesc());
+			pojoPq.setListImg(pq.getListImg());
+			pojoPq.setChoice(pq.getChoice());
+			pojoPq.setTimestamp(pq.getTimestamp());
+			pojoPq.setActiveState(pq.getActiveState());
+			listQuest.add(pojoPq);
+		}
+		return listQuest;
 	}
 	
 	public List<Question> search(SearchQuestion searchQuest){
