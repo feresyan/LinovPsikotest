@@ -2,6 +2,7 @@ package com.linov.psikotes.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -12,12 +13,15 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 
 import com.linov.psikotes.dao.DetailAppAnsDao;
 import com.linov.psikotes.dao.ReportDao;
 import com.linov.psikotes.entity.DetailApplicantAnswer;
+import com.linov.psikotes.exception.MyFileNotFoundException;
 import com.linov.psikotes.pojo.PojoPackReport;
 import com.linov.psikotes.pojo.PojoQuestReport;
 import com.linov.psikotes.pojo.PojoReportCandidate;
@@ -39,9 +43,25 @@ public class ReportService {
 	private ReportDao reportDao;
 	
 	@Value("${report.folder}")
-	private String path;
+	private Path fileStorageLocation;
+	
+	 public Resource loadFileAsResource(String fileName) {
+	        try {
+	            Path filePath = this.fileStorageLocation.resolve(fileName).normalize();
+	            Resource resource = new UrlResource(filePath.toUri());
+	            if(resource.exists()) {
+	                return resource;
+	            } else {
+	                throw new MyFileNotFoundException("File not found " + fileName);
+	            }
+	        } catch (MalformedURLException ex) {
+	            throw new MyFileNotFoundException("File not found " + fileName, ex);
+	        }
+    }
 	
 	public String candidateReport(String reportFormat, String id) throws Exception{
+		
+		String fileName = "";
 		
 		List<DetailApplicantAnswer> listDetail = detailAppAnsDao.getAllByAppAnsId(id);
 		
@@ -61,14 +81,14 @@ public class ReportService {
 		}
 		
 		//create directory
-		Path p = Paths.get(path);
-		if(!Files.exists(p)) {
-			try {
-				Files.createDirectories(p);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+//		Path p = Paths.get(fileStorageLocation.toString());
+//		if(!Files.exists(p)) {
+//			try {
+//				Files.createDirectories(p);
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+//		}
 		
 		//Load file and compile it
 		File file = ResourceUtils.getFile("classpath:report/candidate.jrxml");
@@ -79,14 +99,17 @@ public class ReportService {
 		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,parameter,dataSource);
 		
 		if(reportFormat.equalsIgnoreCase("html")) {
-			JasperExportManager.exportReportToHtmlFile(jasperPrint,path+"Candidate.html");
+			JasperExportManager.exportReportToHtmlFile(jasperPrint,fileStorageLocation.toString()+"Candidate.html");
+			fileName = "Candidate.html";
 		}
 		
 		if(reportFormat.equalsIgnoreCase("pdf")) {
-			JasperExportManager.exportReportToPdfFile(jasperPrint,path+"Candidate.pdf");
+			JasperExportManager.exportReportToPdfFile(jasperPrint,fileStorageLocation.toString()+"Candidate.pdf");
+			fileName = "Candidate.pdf";
 		}
 		
-		return new File(path+"Candidate.pdf").toURI().toString();
+		Resource res = loadFileAsResource(fileName);
+		return res.getURL().toString();
 
 	}
 	
