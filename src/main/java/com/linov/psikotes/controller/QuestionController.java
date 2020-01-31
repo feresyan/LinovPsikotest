@@ -3,7 +3,6 @@ package com.linov.psikotes.controller;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -31,9 +30,7 @@ public class QuestionController {
 	@Autowired
 	private QuestionService questionService;
 	
-	@Value("${uploaded.folder}")
-	private String path;
-	 
+ 
 	@PostMapping("/img")
 	public ResponseEntity<?> insertImg(
 			@RequestPart String questionTypeId,
@@ -45,7 +42,7 @@ public class QuestionController {
 			@RequestPart String activeState) throws ErrorException{
 		try {
 			//set all images and insert to DB
-			Question question = questionService.insertQuestionImg(path, questionTypeId, questionTitle, questionDesc, listImage, choice, correctAnswer, activeState);
+			Question question = questionService.insertQuestionImg(questionTypeId, questionTitle, questionDesc, listImage, choice, correctAnswer, activeState);
 			return ResponseEntity.status(HttpStatus.CREATED).body(question);
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
@@ -76,7 +73,7 @@ public class QuestionController {
 			@RequestPart String activeState) throws ErrorException{
 		try {
 			//update images question and update to DB
-			Question question = questionService.updateQuestionImg(path, questionId, questionTypeId, questionTitle, questionDesc, listImage, choice, correctAnswer, activeState);
+			Question question = questionService.updateQuestionImg(questionId, questionTypeId, questionTitle, questionDesc, listImage, choice, correctAnswer, activeState);
 			return ResponseEntity.status(HttpStatus.OK).body(question);
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());

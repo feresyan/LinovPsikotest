@@ -9,8 +9,10 @@ import java.util.List;
 
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.linov.psikotes.dao.QuestionDao;
 import com.linov.psikotes.dao.QuestionTypeDao;
@@ -25,6 +27,9 @@ import com.linov.psikotes.pojo.PojoQuestion;
 @Service("questionService")
 public class QuestionService {
 
+	@Value("${uploaded.folder}")
+	private String UPLOADED_FOLDER;
+	
 	@Autowired
 	private QuestionDao questionDao;
 	
@@ -64,6 +69,7 @@ public class QuestionService {
 		Question question = questionDao.findById(id);
 		return question;
 	}
+	
 	
 	public Question insertQuestion(Question question) throws Exception{
 		try {
@@ -134,7 +140,6 @@ public class QuestionService {
 	}
 	
 	public Question insertQuestionImg(
-				 String UPLOADED_FOLDER,
 				 String questionTypeId,
 				 String questionTitle,
 				 String questionDesc,
@@ -170,33 +175,28 @@ public class QuestionService {
 				//Check file size
 				valFileSize(listImage[i].getSize());
 				
-//				//Stringbuilder
-//				StringBuilder newFileName = new StringBuilder();
-//				
-//				//Make random String for fileName
-//				newFileName.append(getRandomPassword(20));
-//				
-//				//Get Extension File
-//				String ext = FilenameUtils.getExtension(listImage[i].getOriginalFilename());
-//				newFileName.append(ext.toString());
-				
 				byte[] byteQuestion2 = listImage[i].getBytes();
 				Path path = Paths.get(UPLOADED_FOLDER + listImage[i].getOriginalFilename());
 								
 				Files.write(path, byteQuestion2);
 				
+				String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+		                .path(UPLOADED_FOLDER)
+		                .path(listImage[i].getOriginalFilename())
+		                .toUriString();
+				
 				if(l.getImgA()==null) {
-					l.setImgA(path.toString());
+					l.setImgA(fileDownloadUri);	
 				}else if (l.getImgB()==null) {
-					l.setImgB(path.toString());
+					l.setImgB(fileDownloadUri);
 				}else if (l.getImgC()==null) {
-					l.setImgC(path.toString());
+					l.setImgC(fileDownloadUri);
 				}else if (l.getImgD()==null) {
-					l.setImgD(path.toString());
+					l.setImgD(fileDownloadUri);
 				}else if(l.getImgE()==null) {
-					l.setImgE(path.toString());
+					l.setImgE(fileDownloadUri);
 				}else if(l.getImgF()==null) {
-					l.setImgF(path.toString());
+					l.setImgF(fileDownloadUri);
 				}
 			}
 		}
@@ -212,31 +212,26 @@ public class QuestionService {
 				
 				//Check file size
 				valFileSize(choice[i].getSize());
-				
-//				//Stringbuilder
-//				StringBuilder newFileName = new StringBuilder();
-//				
-//				//Make random String for fileName
-//				newFileName.append(getRandomPassword(20));
-//				
-//				//Get Extension File
-//				String ext = FilenameUtils.getExtension(listImage[i].getOriginalFilename());
-//				newFileName.append(ext.toString());
-				
+								
 				byte[] byteQuestion2 = choice[i].getBytes();
 				Path path2 = Paths.get(UPLOADED_FOLDER + choice[i].getOriginalFilename());
 				Files.write(path2, byteQuestion2);
 				
+				String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+		                .path(UPLOADED_FOLDER)
+		                .path(listImage[i].getOriginalFilename())
+		                .toUriString();
+				
 				if(c.getChoiceA()==null) {
-					c.setChoiceA(path2.toString());
+					c.setChoiceA(fileDownloadUri);
 				}else if (c.getChoiceB()==null) {
-					c.setChoiceB(path2.toString());
+					c.setChoiceB(fileDownloadUri);
 				}else if (c.getChoiceC()==null) {
-					c.setChoiceC(path2.toString());
+					c.setChoiceC(fileDownloadUri);
 				}else if (c.getChoiceD()==null) {
-					c.setChoiceD(path2.toString());
+					c.setChoiceD(fileDownloadUri);
 				}else if(c.getChoiceE()==null) {
-					c.setChoiceE(path2.toString());
+					c.setChoiceE(fileDownloadUri);
 				}
 			}
 			else
@@ -255,24 +250,19 @@ public class QuestionService {
 				//Check file size
 				valFileSize(correctAnswer[i].getSize());
 				
-//				//Stringbuilder
-//				StringBuilder newFileName = new StringBuilder();
-//				
-//				//Make random String for fileName
-//				newFileName.append(getRandomPassword(20));
-//				
-//				//Get Extension File
-//				String ext = FilenameUtils.getExtension(listImage[i].getOriginalFilename());
-//				newFileName.append(ext.toString());
-				
 				byte[] byteQuestion = correctAnswer[i].getBytes();
 				Path path = Paths.get(UPLOADED_FOLDER + correctAnswer[i].getOriginalFilename());
 				Files.write(path, byteQuestion);
 				
+				String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+		                .path(UPLOADED_FOLDER)
+		                .path(listImage[i].getOriginalFilename())
+		                .toUriString();
+				
 				if(a.getAnswer1()==null) {
-					a.setAnswer1(path.toString());
+					a.setAnswer1(fileDownloadUri);
 				}else if (a.getAnswer2()==null) {
-					a.setAnswer2(path.toString());
+					a.setAnswer2(fileDownloadUri);
 				}
 			}
 			else
@@ -298,7 +288,6 @@ public class QuestionService {
 	}
 	
 	public Question updateQuestionImg(
-				 String UPLOADED_FOLDER,
 				 String questionId,
 				 String questionTypeId,
 				 String questionTitle,
@@ -329,18 +318,23 @@ public class QuestionService {
 				Path path3 = Paths.get(UPLOADED_FOLDER + listImage[i].getOriginalFilename());
 				Files.write(path3, byteQuestion2);
 				
+				String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+		                .path(UPLOADED_FOLDER)
+		                .path(listImage[i].getOriginalFilename())
+		                .toUriString();
+				
 				if(l.getImgA()==null) {
-					l.setImgA(path3.toString());
+					l.setImgA(fileDownloadUri);
 				}else if (l.getImgB()==null) {
-					l.setImgB(path3.toString());
+					l.setImgB(fileDownloadUri);
 				}else if (l.getImgC()==null) {
-					l.setImgC(path3.toString());
+					l.setImgC(fileDownloadUri);
 				}else if (l.getImgD()==null) {
-					l.setImgD(path3.toString());
+					l.setImgD(fileDownloadUri);
 				}else if(l.getImgE()==null) {
-					l.setImgE(path3.toString());
+					l.setImgE(fileDownloadUri);
 				}else if(l.getImgF()==null) {
-					l.setImgF(path3.toString());
+					l.setImgF(fileDownloadUri);
 				}
 			}
 			
@@ -361,16 +355,21 @@ public class QuestionService {
 				Path path2 = Paths.get(UPLOADED_FOLDER + choice[i].getOriginalFilename());
 				Files.write(path2, byteQuestion2);
 				
+				String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+		                .path(UPLOADED_FOLDER)
+		                .path(listImage[i].getOriginalFilename())
+		                .toUriString();
+				
 				if(c.getChoiceA()==null) {
-					c.setChoiceA(path2.toString());
+					c.setChoiceA(fileDownloadUri);
 				}else if (c.getChoiceB()==null) {
-					c.setChoiceB(path2.toString());
+					c.setChoiceB(fileDownloadUri);
 				}else if (c.getChoiceC()==null) {
-					c.setChoiceC(path2.toString());
+					c.setChoiceC(fileDownloadUri);
 				}else if (c.getChoiceD()==null) {
-					c.setChoiceD(path2.toString());
+					c.setChoiceD(fileDownloadUri);
 				}else if(c.getChoiceE()==null) {
-					c.setChoiceE(path2.toString());
+					c.setChoiceE(fileDownloadUri);
 				}
 			}
 			else
@@ -393,10 +392,15 @@ public class QuestionService {
 				Path path = Paths.get(UPLOADED_FOLDER + correctAnswer[i].getOriginalFilename());
 				Files.write(path, byteQuestion);
 				
+				String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
+		                .path(UPLOADED_FOLDER)
+		                .path(listImage[i].getOriginalFilename())
+		                .toUriString();
+				
 				if(a.getAnswer1()==null) {
-					a.setAnswer1(path.toString());
+					a.setAnswer1(fileDownloadUri);
 				}else if (a.getAnswer2()==null) {
-					a.setAnswer2(path.toString());
+					a.setAnswer2(fileDownloadUri);
 				}
 			} else {
 				throw new Exception("Jawaban harus diisi");
@@ -443,7 +447,7 @@ public class QuestionService {
   
         return sb.toString(); 
     }
-	
+		
 	// VALIDASI POST
 	
 	private static Exception valFileExt(String fileName) throws Exception {
@@ -461,20 +465,6 @@ public class QuestionService {
 		throw new Exception("Maksimal besar file hanya 500 KB!");
 	}
 	
-//	private static  String valFileName(Question question,String oriFileName) {
-//		if(
-//				question.getChoice().getChoiceA().equalsIgnoreCase(oriFileName) || 
-//				question.getChoice().getChoiceB().equalsIgnoreCase(oriFileName) || 
-//				question.getChoice().getChoiceC().equalsIgnoreCase(oriFileName) ||
-//				question.getChoice().getChoiceD().equalsIgnoreCase(oriFileName) ||
-//				question.getCorrectAnswer().getAnswer1().equalsIgnoreCase(oriFileName) ||
-//				question.getCorrectAnswer().getAnswer2().equalsIgnoreCase(oriFileName)
-//				) 
-//		{
-//			return getRandomPassword(12);
-//		}
-//		return oriFileName;
-//	}
 	
  	private static Exception valIdNull(Question q) throws Exception{
  		if(q.getQuestionId() !=null ) {
