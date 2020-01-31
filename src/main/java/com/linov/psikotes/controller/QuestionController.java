@@ -45,6 +45,7 @@ public class QuestionController {
 			Question question = questionService.insertQuestionImg(questionTypeId, questionTitle, questionDesc, listImage, choice, correctAnswer, activeState);
 			return ResponseEntity.status(HttpStatus.CREATED).body(question);
 		}catch(Exception e) {
+			e.printStackTrace();
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
 	}

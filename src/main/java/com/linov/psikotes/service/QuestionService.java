@@ -219,7 +219,7 @@ public class QuestionService {
 				
 				String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
 		                .path(UPLOADED_FOLDER)
-		                .path(listImage[i].getOriginalFilename())
+		                .path(choice[i].getOriginalFilename())
 		                .toUriString();
 				
 				if(c.getChoiceA()==null) {
@@ -256,7 +256,7 @@ public class QuestionService {
 				
 				String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
 		                .path(UPLOADED_FOLDER)
-		                .path(listImage[i].getOriginalFilename())
+		                .path(correctAnswer[i].getOriginalFilename())
 		                .toUriString();
 				
 				if(a.getAnswer1()==null) {
@@ -357,7 +357,7 @@ public class QuestionService {
 				
 				String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
 		                .path(UPLOADED_FOLDER)
-		                .path(listImage[i].getOriginalFilename())
+		                .path(choice[i].getOriginalFilename())
 		                .toUriString();
 				
 				if(c.getChoiceA()==null) {
@@ -394,7 +394,7 @@ public class QuestionService {
 				
 				String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
 		                .path(UPLOADED_FOLDER)
-		                .path(listImage[i].getOriginalFilename())
+		                .path(correctAnswer[i].getOriginalFilename())
 		                .toUriString();
 				
 				if(a.getAnswer1()==null) {
