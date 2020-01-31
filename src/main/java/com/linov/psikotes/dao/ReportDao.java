@@ -26,9 +26,9 @@ public class ReportDao extends CommonDao{
 	public List<PojoQuestReport> getTheMostTrueAnsQuest() {
 		Query query  = super.entityManager
 				.createNativeQuery("select tmq.question_title\r\n" + 
-						"from tbl_detail_applicant_answer tdaa\r\n" + 
-						"join tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id\r\n" + 
-						"join tbl_m_question tmq on tpq.question_id = tmq.question_id\r\n" + 
+						"from group1.tbl_detail_applicant_answer tdaa\r\n" + 
+						"join group1.tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id\r\n" + 
+						"join group1.tbl_m_question tmq on tpq.question_id = tmq.question_id\r\n" + 
 						"where tdaa.point <> 0 \r\n" + 
 						"group by tmq.question_title\r\n" + 
 						"order by count(tmq.question_title) desc limit 10");
@@ -37,9 +37,9 @@ public class ReportDao extends CommonDao{
 		
 			  query  = super.entityManager
 				.createNativeQuery("select count(tmq.question_title)\r\n" + 
-						"from tbl_detail_applicant_answer tdaa\r\n" + 
-						"join tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id\r\n" + 
-						"join tbl_m_question tmq on tpq.question_id = tmq.question_id\r\n" + 
+						"from group1.tbl_detail_applicant_answer tdaa\r\n" + 
+						"join group1.tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id\r\n" + 
+						"join group1.tbl_m_question tmq on tpq.question_id = tmq.question_id\r\n" + 
 						"where tdaa.point <> 0\r\n" + 
 						"group by tmq.question_title\r\n" + 
 						"order by count(tmq.question_title) desc limit 10");
@@ -48,9 +48,9 @@ public class ReportDao extends CommonDao{
 		
 		  query  = super.entityManager
 					.createNativeQuery("select count(tmq.question_title) \r\n" + 
-							"from tbl_detail_applicant_answer tdaa\r\n" + 
-							"join tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id\r\n" + 
-							"join tbl_m_question tmq on tpq.question_id = tmq.question_id\r\n" + 
+							"from group1.tbl_detail_applicant_answer tdaa\r\n" + 
+							"join group1.tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id\r\n" + 
+							"join group1.tbl_m_question tmq on tpq.question_id = tmq.question_id\r\n" + 
 							"group by tmq.question_title\r\n" + 
 							"order by count(tmq.question_title) desc");
 
@@ -83,9 +83,9 @@ public class ReportDao extends CommonDao{
 	public List<PojoQuestReport> getTheMostFalseAnsQuest() {
 		Query query  = super.entityManager
 				.createNativeQuery("select tmq.question_title\r\n" + 
-						"from tbl_detail_applicant_answer tdaa\r\n" + 
-						"join tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id\r\n" + 
-						"join tbl_m_question tmq on tpq.question_id = tmq.question_id\r\n" + 
+						"from group1.tbl_detail_applicant_answer tdaa\r\n" + 
+						"join group1.tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id\r\n" + 
+						"join group1.tbl_m_question tmq on tpq.question_id = tmq.question_id\r\n" + 
 						"where tdaa.point = 0\r\n" + 
 						"group by tmq.question_title\r\n" + 
 						"order by count(tmq.question_title) desc\r\n" + 
@@ -95,9 +95,9 @@ public class ReportDao extends CommonDao{
 		
 			  query  = super.entityManager
 				.createNativeQuery("select count(tmq.question_title)\r\n" + 
-						"from tbl_detail_applicant_answer tdaa\r\n" + 
-						"join tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id\r\n" + 
-						"join tbl_m_question tmq on tpq.question_id = tmq.question_id\r\n" + 
+						"from group1.tbl_detail_applicant_answer tdaa\r\n" + 
+						"join group1.tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id\r\n" + 
+						"join group1.tbl_m_question tmq on tpq.question_id = tmq.question_id\r\n" + 
 						"where tdaa.point = 0\r\n" + 
 						"group by tmq.question_title\r\n" + 
 						"order by count(tmq.question_title) desc\r\n" + 
@@ -107,9 +107,9 @@ public class ReportDao extends CommonDao{
 		
 		 query  = super.entityManager
 					.createNativeQuery("select count(tmq.question_title) as total\r\n" + 
-							"from tbl_detail_applicant_answer tdaa\r\n" + 
-							"join tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id\r\n" + 
-							"join tbl_m_question tmq on tpq.question_id = tmq.question_id\r\n" + 
+							"from group1.tbl_detail_applicant_answer tdaa\r\n" + 
+							"join group1.tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id\r\n" + 
+							"join group1.tbl_m_question tmq on tpq.question_id = tmq.question_id\r\n" + 
 							"group by tmq.question_title\r\n" + 
 							"order by total desc");
 
@@ -148,10 +148,10 @@ public class ReportDao extends CommonDao{
 		for (int i = 0; i < listPack.size(); i++) {
 			Query query  = super.entityManager
 					.createNativeQuery("select tbp.package_name \r\n" + 
-							"from tbl_detail_applicant_answer tdaa \r\n" + 
-							"join tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id \r\n" + 
-							"join tbl_m_question tmq on tpq.question_id = tmq.question_id \r\n" + 
-							"join tbl_m_package tbp on tpq.package_id = tbp.package_id \r\n" + 
+							"from group1.tbl_detail_applicant_answer tdaa \r\n" + 
+							"join group1.tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id \r\n" + 
+							"join group1.tbl_m_question tmq on tpq.question_id = tmq.question_id \r\n" + 
+							"join group1.tbl_m_package tbp on tpq.package_id = tbp.package_id \r\n" + 
 							"where tdaa.point <> 0 and lower(tbp.package_name) = '"+ listPack.get(i).getPackageName().toLowerCase() +"' and lower(tbp.active_state) = 'active' \r\n" + 
 							"group by tbp.package_name,tmq.question_title \r\n" + 
 							"order by count(tmq.question_title) desc \r\n" + 
@@ -161,10 +161,10 @@ public class ReportDao extends CommonDao{
 			
 				  query  = super.entityManager
 					.createNativeQuery("select tmq.question_title \r\n" + 
-							"from tbl_detail_applicant_answer tdaa\r\n" + 
-							"join tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id\r\n" + 
-							"join tbl_m_question tmq on tpq.question_id = tmq.question_id\r\n" + 
-							"join tbl_m_package tbp on tpq.package_id = tbp.package_id\r\n" + 
+							"from group1.tbl_detail_applicant_answer tdaa\r\n" + 
+							"join group1.tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id\r\n" + 
+							"join group1.tbl_m_question tmq on tpq.question_id = tmq.question_id\r\n" + 
+							"join group1.tbl_m_package tbp on tpq.package_id = tbp.package_id\r\n" + 
 							"where tdaa.point <> 0 and lower(tbp.package_name) = '"+ listPack.get(i).getPackageName().toLowerCase() +"' and lower(tbp.active_state) = 'active' \r\n" + 
 							"group by tbp.package_name,tmq.question_title\r\n" + 
 							"order by count(tmq.question_title) desc\r\n" + 
@@ -174,10 +174,10 @@ public class ReportDao extends CommonDao{
 			
 				  query  = super.entityManager
 					.createNativeQuery("select count(tmq.question_title) \r\n" + 
-							"from tbl_detail_applicant_answer tdaa\r\n" + 
-							"join tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id\r\n" + 
-							"join tbl_m_question tmq on tpq.question_id = tmq.question_id\r\n" + 
-							"join tbl_m_package tbp on tpq.package_id = tbp.package_id\r\n" + 
+							"from group1.tbl_detail_applicant_answer tdaa\r\n" + 
+							"join group1.tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id\r\n" + 
+							"join group1.tbl_m_question tmq on tpq.question_id = tmq.question_id\r\n" + 
+							"join group1.tbl_m_package tbp on tpq.package_id = tbp.package_id\r\n" + 
 							"where tdaa.point <> 0 and lower(tbp.package_name) = '"+ listPack.get(i).getPackageName().toLowerCase() +"' and lower(tbp.active_state) = 'active' \r\n" + 
 							"group by tbp.package_name,tmq.question_title\r\n" + 
 							"order by count(tmq.question_title) desc\r\n" + 
@@ -187,10 +187,10 @@ public class ReportDao extends CommonDao{
 			
 			 query  = super.entityManager
 					.createNativeQuery("select count(tmq.question_title)\r\n" + 
-							"from tbl_detail_applicant_answer tdaa\r\n" + 
-							"join tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id\r\n" + 
-							"join tbl_m_question tmq on tpq.question_id = tmq.question_id\r\n" + 
-							"join tbl_m_package tbp on tpq.package_id = tbp.package_id\r\n" + 
+							"from group1.tbl_detail_applicant_answer tdaa\r\n" + 
+							"join group1.tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id\r\n" + 
+							"join group1.tbl_m_question tmq on tpq.question_id = tmq.question_id\r\n" + 
+							"join group1.tbl_m_package tbp on tpq.package_id = tbp.package_id\r\n" + 
 							"where lower(tbp.package_name) ='" + listPack.get(i).getPackageName().toLowerCase() + "'\r\n" + 
 							"group by tmq.question_title, tbp.package_name\r\n" + 
 							"order by count(tmq.question_title) desc limit 10");
@@ -230,10 +230,10 @@ public class ReportDao extends CommonDao{
 		for (int i = 0; i < listPack.size(); i++) {
 			Query query  = super.entityManager
 					.createNativeQuery("select tbp.package_name \r\n" + 
-							"from tbl_detail_applicant_answer tdaa \r\n" + 
-							"join tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id \r\n" + 
-							"join tbl_m_question tmq on tpq.question_id = tmq.question_id \r\n" + 
-							"join tbl_m_package tbp on tpq.package_id = tbp.package_id \r\n" + 
+							"from group1.tbl_detail_applicant_answer tdaa \r\n" + 
+							"join group1.tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id \r\n" + 
+							"join group1.tbl_m_question tmq on tpq.question_id = tmq.question_id \r\n" + 
+							"join group1.tbl_m_package tbp on tpq.package_id = tbp.package_id \r\n" + 
 							"where tdaa.point = 0 and lower(tbp.package_name) = '"+ listPack.get(i).getPackageName().toLowerCase() +"' and lower(tbp.active_state) = 'active' \r\n" + 
 							"group by tbp.package_name,tmq.question_title \r\n" + 
 							"order by count(tmq.question_title) desc \r\n" + 
@@ -243,10 +243,10 @@ public class ReportDao extends CommonDao{
 			
 				  query  = super.entityManager
 					.createNativeQuery("select tmq.question_title \r\n" + 
-							"from tbl_detail_applicant_answer tdaa\r\n" + 
-							"join tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id\r\n" + 
-							"join tbl_m_question tmq on tpq.question_id = tmq.question_id\r\n" + 
-							"join tbl_m_package tbp on tpq.package_id = tbp.package_id\r\n" + 
+							"from group1.tbl_detail_applicant_answer tdaa\r\n" + 
+							"join group1.tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id\r\n" + 
+							"join group1.tbl_m_question tmq on tpq.question_id = tmq.question_id\r\n" + 
+							"join group1.tbl_m_package tbp on tpq.package_id = tbp.package_id\r\n" + 
 							"where tdaa.point = 0 and lower(tbp.package_name) = '"+ listPack.get(i).getPackageName().toLowerCase() +"' and lower(tbp.active_state) = 'active' \r\n" + 
 							"group by tbp.package_name,tmq.question_title\r\n" + 
 							"order by count(tmq.question_title) desc\r\n" + 
@@ -256,10 +256,10 @@ public class ReportDao extends CommonDao{
 			
 				  query  = super.entityManager
 					.createNativeQuery("select count(tmq.question_title) \r\n" + 
-							"from tbl_detail_applicant_answer tdaa\r\n" + 
-							"join tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id\r\n" + 
-							"join tbl_m_question tmq on tpq.question_id = tmq.question_id\r\n" + 
-							"join tbl_m_package tbp on tpq.package_id = tbp.package_id\r\n" + 
+							"from group1.tbl_detail_applicant_answer tdaa\r\n" + 
+							"join group1.tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id\r\n" + 
+							"join group1.tbl_m_question tmq on tpq.question_id = tmq.question_id\r\n" + 
+							"join group1.tbl_m_package tbp on tpq.package_id = tbp.package_id\r\n" + 
 							"where tdaa.point = 0 and lower(tbp.package_name) = '"+ listPack.get(i).getPackageName().toLowerCase() +"' and lower(tbp.active_state) = 'active' \r\n" + 
 							"group by tbp.package_name,tmq.question_title\r\n" + 
 							"order by count(tmq.question_title) desc\r\n" + 
@@ -269,10 +269,10 @@ public class ReportDao extends CommonDao{
 			
 			 query  = super.entityManager
 				.createNativeQuery("select count(tmq.question_title)\r\n" + 
-						"from tbl_detail_applicant_answer tdaa\r\n" + 
-						"join tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id\r\n" + 
-						"join tbl_m_question tmq on tpq.question_id = tmq.question_id\r\n" + 
-						"join tbl_m_package tbp on tpq.package_id = tbp.package_id\r\n" + 
+						"from group1.tbl_detail_applicant_answer tdaa\r\n" + 
+						"join group1.tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id\r\n" + 
+						"join group1.tbl_m_question tmq on tpq.question_id = tmq.question_id\r\n" + 
+						"join group1.tbl_m_package tbp on tpq.package_id = tbp.package_id\r\n" + 
 						"where lower(tbp.package_name) ='" + listPack.get(i).getPackageName().toLowerCase() + "'\r\n" + 
 						"group by tmq.question_title, tbp.package_name\r\n" + 
 						"order by count(tmq.question_title) desc limit 10");
@@ -310,10 +310,10 @@ public class ReportDao extends CommonDao{
 		for (int i = 0; i < listPack.size(); i++) {
 			Query query  = super.entityManager
 					.createNativeQuery("select tbp.package_name \r\n" + 
-							"from tbl_detail_applicant_answer tdaa \r\n" + 
-							"join tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id \r\n" + 
-							"join tbl_m_question tmq on tpq.question_id = tmq.question_id \r\n" + 
-							"join tbl_m_package tbp on tpq.package_id = tbp.package_id \r\n" + 
+							"from group1.tbl_detail_applicant_answer tdaa \r\n" + 
+							"join group1.tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id \r\n" + 
+							"join group1.tbl_m_question tmq on tpq.question_id = tmq.question_id \r\n" + 
+							"join group1.tbl_m_package tbp on tpq.package_id = tbp.package_id \r\n" + 
 							"where tdaa.point <> 0 and lower(tbp.active_state) = 'active'and lower(tbp.package_name) ='"+ listPack.get(i).getPackageName().toLowerCase() +"' \r\n" + 
 							"group by tbp.package_name \r\n" + 
 							"order by count(tmq.question_title) desc \r\n" + 
@@ -323,10 +323,10 @@ public class ReportDao extends CommonDao{
 						
 				  query  = super.entityManager
 					.createNativeQuery("select count(tbp.package_name) \r\n" + 
-							"from tbl_detail_applicant_answer tdaa\r\n" + 
-							"join tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id\r\n" + 
-							"join tbl_m_question tmq on tpq.question_id = tmq.question_id\r\n" + 
-							"join tbl_m_package tbp on tpq.package_id = tbp.package_id\r\n" + 
+							"from group1.tbl_detail_applicant_answer tdaa\r\n" + 
+							"join group1.tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id\r\n" + 
+							"join group1.tbl_m_question tmq on tpq.question_id = tmq.question_id\r\n" + 
+							"join group1.tbl_m_package tbp on tpq.package_id = tbp.package_id\r\n" + 
 							"where tdaa.point <> 0 and lower(tbp.active_state) = 'active' and lower(tbp.package_name) ='"+ listPack.get(i).getPackageName().toLowerCase() +"' \r\n" + 
 							"group by tbp.package_name\r\n" + 
 							"order by count(tmq.question_title) desc\r\n" + 
@@ -336,10 +336,10 @@ public class ReportDao extends CommonDao{
 			
 				query  = super.entityManager
 						.createNativeQuery("select count(tmq.question_title)\r\n" + 
-								"from tbl_detail_applicant_answer tdaa\r\n" + 
-								"join tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id\r\n" + 
-								"join tbl_m_question tmq on tpq.question_id = tmq.question_id\r\n" + 
-								"join tbl_m_package tbp on tpq.package_id = tbp.package_id\r\n" + 
+								"from group1.tbl_detail_applicant_answer tdaa\r\n" + 
+								"join group1.tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id\r\n" + 
+								"join group1.tbl_m_question tmq on tpq.question_id = tmq.question_id\r\n" + 
+								"join group1.tbl_m_package tbp on tpq.package_id = tbp.package_id\r\n" + 
 								"where lower(tbp.package_name) ='"+ listPack.get(i).getPackageName().toLowerCase() +"' and lower(tbp.active_state) = 'active' \r\n" + 
 								"group by tbp.package_name\r\n" + 
 								"order by count(tmq.question_title) desc");
@@ -378,10 +378,10 @@ public class ReportDao extends CommonDao{
 		for (int i = 0; i < listPack.size(); i++) {
 			Query query  = super.entityManager
 					.createNativeQuery("select tbp.package_name \r\n" + 
-							"from tbl_detail_applicant_answer tdaa \r\n" + 
-							"join tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id \r\n" + 
-							"join tbl_m_question tmq on tpq.question_id = tmq.question_id \r\n" + 
-							"join tbl_m_package tbp on tpq.package_id = tbp.package_id \r\n" + 
+							"from group1.tbl_detail_applicant_answer tdaa \r\n" + 
+							"join group1.tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id \r\n" + 
+							"join group1.tbl_m_question tmq on tpq.question_id = tmq.question_id \r\n" + 
+							"join group1.tbl_m_package tbp on tpq.package_id = tbp.package_id \r\n" + 
 							"where tdaa.point = 0 and lower(tbp.active_state) = 'active'and lower(tbp.package_name) ='"+ listPack.get(i).getPackageName().toLowerCase() +"' \r\n" + 
 							"group by tbp.package_name \r\n" + 
 							"order by count(tmq.question_title) desc \r\n" + 
@@ -391,10 +391,10 @@ public class ReportDao extends CommonDao{
 						
 				  query  = super.entityManager
 					.createNativeQuery("select count(tbp.package_name) \r\n" + 
-							"from tbl_detail_applicant_answer tdaa\r\n" + 
-							"join tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id\r\n" + 
-							"join tbl_m_question tmq on tpq.question_id = tmq.question_id\r\n" + 
-							"join tbl_m_package tbp on tpq.package_id = tbp.package_id\r\n" + 
+							"from group1.tbl_detail_applicant_answer tdaa\r\n" + 
+							"join group1.tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id\r\n" + 
+							"join group1.tbl_m_question tmq on tpq.question_id = tmq.question_id\r\n" + 
+							"join group1.tbl_m_package tbp on tpq.package_id = tbp.package_id\r\n" + 
 							"where tdaa.point = 0 and lower(tbp.active_state) = 'active' and lower(tbp.package_name) ='"+ listPack.get(i).getPackageName().toLowerCase() +"' \r\n" + 
 							"group by tbp.package_name\r\n" + 
 							"order by count(tmq.question_title) desc\r\n" + 
@@ -404,10 +404,10 @@ public class ReportDao extends CommonDao{
 			
 				query  = super.entityManager
 						.createNativeQuery("select count(tmq.question_title)\r\n" + 
-								"from tbl_detail_applicant_answer tdaa\r\n" + 
-								"join tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id\r\n" + 
-								"join tbl_m_question tmq on tpq.question_id = tmq.question_id\r\n" + 
-								"join tbl_m_package tbp on tpq.package_id = tbp.package_id\r\n" + 
+								"from group1.tbl_detail_applicant_answer tdaa\r\n" + 
+								"join group1.tbl_package_question tpq on tdaa.package_question_id = tpq.package_question_id\r\n" + 
+								"join group1.tbl_m_question tmq on tpq.question_id = tmq.question_id\r\n" + 
+								"join group1.tbl_m_package tbp on tpq.package_id = tbp.package_id\r\n" + 
 								"where lower(tbp.package_name) ='"+ listPack.get(i).getPackageName().toLowerCase() +"' and lower(tbp.active_state) = 'active' \r\n" + 
 								"group by tbp.package_name\r\n" + 
 								"order by count(tmq.question_title) desc");

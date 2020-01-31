@@ -122,10 +122,13 @@ public class PackageService {
  	}
  	
  	private static Exception valNonBk(Package p) throws Exception{
- 		if( p.getActiveState() == null || p.getActiveState().trim().equals("") 
- 				|| p.getTime() == null) 
+ 		if( p.getActiveState() == null || p.getActiveState().trim().equals(""))
  		{
- 			throw new Exception("field tidak boleh ada yang kosong");
+ 			throw new Exception("Active state tidak boleh ada yang kosong");
+ 		}
+ 		else if ( p.getTime() == null)
+ 		{
+ 			throw new Exception("amount of time tidak boleh ada yang kosong");
  		}
  		return null;
  	}
