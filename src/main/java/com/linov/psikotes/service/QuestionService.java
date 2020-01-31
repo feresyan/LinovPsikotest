@@ -1,8 +1,10 @@
 package com.linov.psikotes.service;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,6 +13,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -22,13 +25,14 @@ import com.linov.psikotes.entity.ListImg;
 import com.linov.psikotes.entity.Question;
 import com.linov.psikotes.entity.QuestionType;
 import com.linov.psikotes.entity.SearchQuestion;
+import com.linov.psikotes.exception.FileStorageException;
 import com.linov.psikotes.pojo.PojoQuestion;
 
 @Service("questionService")
 public class QuestionService {
 
 	@Value("${uploaded.folder}")
-	private String UPLOADED_FOLDER;
+	private Path UPLOADED_FOLDER;
 	
 	@Autowired
 	private QuestionDao questionDao;
@@ -175,14 +179,16 @@ public class QuestionService {
 				//Check file size
 				valFileSize(listImage[i].getSize());
 				
-				byte[] byteQuestion2 = listImage[i].getBytes();
-				Path path = Paths.get(UPLOADED_FOLDER + listImage[i].getOriginalFilename());
-								
-				Files.write(path, byteQuestion2);
+//				byte[] byteQuestion2 = listImage[i].getBytes();
+//				Path path = Paths.get(UPLOADED_FOLDER + listImage[i].getOriginalFilename());
+//								
+//				Files.write(path, byteQuestion2);
+
+				String fileName = storeFile(listImage[i]);
 				
 				String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
 		                .path("/coba/")
-		                .path(listImage[i].getOriginalFilename())
+		                .path(fileName)
 		                .toUriString();
 				
 				if(l.getImgA()==null) {
@@ -218,7 +224,7 @@ public class QuestionService {
 				Files.write(path2, byteQuestion2);
 				
 				String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-		                .path(UPLOADED_FOLDER)
+		                .path(UPLOADED_FOLDER.toString())
 		                .path(choice[i].getOriginalFilename())
 		                .toUriString();
 				
@@ -255,7 +261,7 @@ public class QuestionService {
 				Files.write(path, byteQuestion);
 				
 				String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-		                .path(UPLOADED_FOLDER)
+		                .path(UPLOADED_FOLDER.toString())
 		                .path(correctAnswer[i].getOriginalFilename())
 		                .toUriString();
 				
@@ -319,7 +325,7 @@ public class QuestionService {
 				Files.write(path3, byteQuestion2);
 				
 				String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-		                .path(UPLOADED_FOLDER)
+		                .path(UPLOADED_FOLDER.toString())
 		                .path(listImage[i].getOriginalFilename())
 		                .toUriString();
 				
@@ -356,7 +362,7 @@ public class QuestionService {
 				Files.write(path2, byteQuestion2);
 				
 				String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-		                .path(UPLOADED_FOLDER)
+		                .path(UPLOADED_FOLDER.toString())
 		                .path(choice[i].getOriginalFilename())
 		                .toUriString();
 				
@@ -393,7 +399,7 @@ public class QuestionService {
 				Files.write(path, byteQuestion);
 				
 				String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-		                .path(UPLOADED_FOLDER)
+		                .path(UPLOADED_FOLDER.toString())
 		                .path(correctAnswer[i].getOriginalFilename())
 		                .toUriString();
 				
@@ -446,6 +452,26 @@ public class QuestionService {
         } 
   
         return sb.toString(); 
+    }
+	
+	public String storeFile(MultipartFile file) {
+        // Normalize file name
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+
+        try {
+            // Check if the file's name contains invalid characters
+            if(fileName.contains("..")) {
+                throw new FileStorageException("Sorry! Filename contains invalid path sequence " + fileName);
+            }
+
+            // Copy file to the target location (Replacing existing file with the same name)
+            Path targetLocation = this.UPLOADED_FOLDER.resolve(fileName);
+            Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
+
+            return fileName;
+        } catch (IOException ex) {
+            throw new FileStorageException("Could not store file " + fileName + ". Please try again!", ex);
+        }
     }
 		
 	// VALIDASI POST
