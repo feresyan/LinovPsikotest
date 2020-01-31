@@ -109,7 +109,7 @@ public class ReportService {
 		}
 		
 		Resource res = loadFileAsResource(fileName);
-		return res.getURL().toString();
+		return "haha";
 
 	}
 	
