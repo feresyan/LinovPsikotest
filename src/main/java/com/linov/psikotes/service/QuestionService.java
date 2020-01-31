@@ -181,7 +181,7 @@ public class QuestionService {
 				Files.write(path, byteQuestion2);
 				
 				String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-		                .path(UPLOADED_FOLDER)
+		                .path("/coba/")
 		                .path(listImage[i].getOriginalFilename())
 		                .toUriString();
 				
