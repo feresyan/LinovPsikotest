@@ -1,15 +1,14 @@
 package com.linov.psikotes.service;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.MalformedURLException;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -59,7 +58,7 @@ public class ReportService {
 	        }
     }
 	
-	public String candidateReport(String reportFormat, String id) throws Exception{
+	public String candidateReport(String reportFormat, String id, HttpServletRequest request) throws Exception{
 		
 		String fileName = "";
 		
@@ -108,9 +107,7 @@ public class ReportService {
 			fileName = "Candidate.pdf";
 		}
 		
-		Resource res = loadFileAsResource(fileName);
-		return res.getURI().toString();
-
+		return fileName;
 	}
 	
 	public String reportCorrectQuestion(String reportFormat) throws Exception{
