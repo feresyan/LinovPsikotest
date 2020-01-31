@@ -98,12 +98,12 @@ public class ReportService {
 		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,parameter,dataSource);
 		
 		if(reportFormat.equalsIgnoreCase("html")) {
-			JasperExportManager.exportReportToHtmlFile(jasperPrint,fileStorageLocation.toString()+"Candidate.html");
+			JasperExportManager.exportReportToHtmlFile(jasperPrint,fileStorageLocation.toString()+File.separator+"Candidate.html");
 			fileName = "Candidate.html";
 		}
 		
 		if(reportFormat.equalsIgnoreCase("pdf")) {
-			JasperExportManager.exportReportToPdfFile(jasperPrint,fileStorageLocation.toString()+"Candidate.pdf");
+			JasperExportManager.exportReportToPdfFile(jasperPrint,fileStorageLocation.toString()+File.separator+"Candidate.pdf");
 			fileName = "Candidate.pdf";
 		}
 		
@@ -126,12 +126,12 @@ public class ReportService {
 		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,parameter,dataSource);
 		
 		if(reportFormat.equalsIgnoreCase("html")) {
-			JasperExportManager.exportReportToHtmlFile(jasperPrint,fileStorageLocation+"MostCorrectAnswer.html");
+			JasperExportManager.exportReportToHtmlFile(jasperPrint,fileStorageLocation+File.separator+"MostCorrectAnswer.html");
 			fileName = "MostCorrectAnswer.html";
 		}
 		
 		if(reportFormat.equalsIgnoreCase("pdf")) {
-			JasperExportManager.exportReportToPdfFile(jasperPrint,fileStorageLocation+"MostCorrectAnswer.pdf");
+			JasperExportManager.exportReportToPdfFile(jasperPrint,fileStorageLocation+File.separator+"MostCorrectAnswer.pdf");
 			fileName = "MostCorrectAnswer.pdf";
 		}
 		
@@ -155,12 +155,12 @@ public class ReportService {
 		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,parameter,dataSource);
 		
 		if(reportFormat.equalsIgnoreCase("html")) {
-			JasperExportManager.exportReportToHtmlFile(jasperPrint,fileStorageLocation+"MostWrongAnswer.html");
+			JasperExportManager.exportReportToHtmlFile(jasperPrint,fileStorageLocation+File.separator+"MostWrongAnswer.html");
 			fileName = "MostWrongAnswer.html";
 		}
 		
 		if(reportFormat.equalsIgnoreCase("pdf")) {
-			JasperExportManager.exportReportToPdfFile(jasperPrint,fileStorageLocation+"MostWrongAnswer.pdf");
+			JasperExportManager.exportReportToPdfFile(jasperPrint,fileStorageLocation+File.separator+"MostWrongAnswer.pdf");
 			fileName = "MostWrongAnswer.pdf";
 		}
 		
@@ -184,12 +184,12 @@ public class ReportService {
 		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,parameter,dataSource);
 		
 		if(reportFormat.equalsIgnoreCase("html")) {
-			JasperExportManager.exportReportToHtmlFile(jasperPrint,fileStorageLocation+"MostCorrectAnsBaseOnPack.html");
+			JasperExportManager.exportReportToHtmlFile(jasperPrint,fileStorageLocation+File.separator+"MostCorrectAnsBaseOnPack.html");
 			fileName = "MostCorrectAnsBaseOnPack.html";
 		}
 		
 		if(reportFormat.equalsIgnoreCase("pdf")) {
-			JasperExportManager.exportReportToPdfFile(jasperPrint,fileStorageLocation+"MostCorrectAnsBaseOnPack.pdf");
+			JasperExportManager.exportReportToPdfFile(jasperPrint,fileStorageLocation+File.separator+"MostCorrectAnsBaseOnPack.pdf");
 			fileName = "MostCorrectAnsBaseOnPack.pdf";
 		}
 		
@@ -213,12 +213,12 @@ public class ReportService {
 		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,parameter,dataSource);
 		
 		if(reportFormat.equalsIgnoreCase("html")) {
-			JasperExportManager.exportReportToHtmlFile(jasperPrint,fileStorageLocation+"MostWrongAnsBaseOnPack.html");
+			JasperExportManager.exportReportToHtmlFile(jasperPrint,fileStorageLocation+File.separator+"MostWrongAnsBaseOnPack.html");
 			fileName = "MostWrongAnsBaseOnPack.html";
 		}
 		
 		if(reportFormat.equalsIgnoreCase("pdf")) {
-			JasperExportManager.exportReportToPdfFile(jasperPrint,fileStorageLocation+"MostWrongAnsBaseOnPack.pdf");
+			JasperExportManager.exportReportToPdfFile(jasperPrint,fileStorageLocation+File.separator+"MostWrongAnsBaseOnPack.pdf");
 			fileName = "MostWrongAnsBaseOnPack.pdf";
 		}
 		
@@ -242,12 +242,12 @@ public class ReportService {
 		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,parameter,dataSource);
 		
 		if(reportFormat.equalsIgnoreCase("html")) {
-			JasperExportManager.exportReportToHtmlFile(jasperPrint,fileStorageLocation+"MostCorrectPackage.html");
+			JasperExportManager.exportReportToHtmlFile(jasperPrint,fileStorageLocation+File.separator+"MostCorrectPackage.html");
 			fileName = "MostCorrectPackage.html";
 		}
 		
 		if(reportFormat.equalsIgnoreCase("pdf")) {
-			JasperExportManager.exportReportToPdfFile(jasperPrint,fileStorageLocation+"MostCorrectPackage.pdf");
+			JasperExportManager.exportReportToPdfFile(jasperPrint,fileStorageLocation+File.separator+"MostCorrectPackage.pdf");
 			fileName = "MostCorrectPackage.pdf";
 		}
 		
@@ -270,12 +270,12 @@ public class ReportService {
 		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,parameter,dataSource);
 		
 		if(reportFormat.equalsIgnoreCase("html")) {
-			JasperExportManager.exportReportToHtmlFile(jasperPrint,fileStorageLocation+"MostWrongPackage.html");
+			JasperExportManager.exportReportToHtmlFile(jasperPrint,fileStorageLocation+File.separator+"MostWrongPackage.html");
 			fileName = "MostWrongPackage.html";
 		}
 		
 		if(reportFormat.equalsIgnoreCase("pdf")) {
-			JasperExportManager.exportReportToPdfFile(jasperPrint,fileStorageLocation+"MostWrongPackage.pdf");
+			JasperExportManager.exportReportToPdfFile(jasperPrint,fileStorageLocation+File.separator+"MostWrongPackage.pdf");
 			fileName = "MostWrongPackage.pdf";
 		}
 		
