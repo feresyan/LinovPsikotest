@@ -126,7 +126,7 @@ public class PackageService {
  		{
  			throw new Exception("Active state tidak boleh ada yang kosong");
  		}
- 		else if ( p.getTime() == null)
+ 		else if ( p.getAmountOfTime()== null)
  		{
  			throw new Exception("amount of time tidak boleh ada yang kosong");
  		}

@@ -58,7 +58,7 @@ public class PackageDao extends CommonDao{
 								
 				pjPack.setPackageId(list.get(i).getPackageId());
 				pjPack.setPackageName(list.get(i).getPackageName());
-				pjPack.setAmountOfTime(list.get(0).getTime());
+				pjPack.setAmountOfTime(list.get(0).getAmountOfTime());
 				listPojoPackage.add(pjPack);
 			}
 			

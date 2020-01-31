@@ -22,8 +22,8 @@ public class Package {
 	@Column(name="package_name")
 	private String packageName;
 	
-	@Column(name="time")
-	private Integer time;
+	@Column(name="amountOfTime")
+	private Integer amountOfTime;
 	
 	@Column(name="active_state")
 	private String activeState;
@@ -52,12 +52,12 @@ public class Package {
 		this.activeState = activeState;
 	}
 
-	public Integer getTime() {
-		return time;
+	public Integer getAmountOfTime() {
+		return amountOfTime;
 	}
 
-	public void setTime(Integer time) {
-		this.time = time;
+	public void setAmountOfTime(Integer amountOfTime) {
+		this.amountOfTime = amountOfTime;
 	}
 
 }
