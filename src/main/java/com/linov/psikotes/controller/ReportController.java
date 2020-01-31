@@ -58,66 +58,172 @@ public class ReportController {
 	}
 	
 	@GetMapping("/question/correct/{format}")
-	public ResponseEntity<?> getReportCorrectAnswer(@PathVariable String format) throws ErrorException {
+	public ResponseEntity<?> getReportCorrectAnswer(@PathVariable String format, HttpServletRequest request) throws ErrorException {
 		
 		try {
-			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
-			return ResponseEntity.ok(reportService.reportCorrectQuestion(format));
+			
+			String fileName = reportService.reportCorrectQuestion(format);
+			
+			// Load file as Resource
+	        Resource resource = reportService.loadFileAsResource(fileName);
+
+	        // Try to determine file's content type
+	        String contentType = null;
+	        contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+
+	        // Fallback to the default content type if type could not be determined
+	        if(contentType == null) {
+	            contentType = "application/octet-stream";
+	        }
+
+	        return ResponseEntity.ok()
+	                .contentType(MediaType.parseMediaType(contentType))
+	                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+	                .body(resource);
+			
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
 	}
 	
 	@GetMapping("/question/wrong/{format}")
-	public ResponseEntity<?> getReportWrongAnswer(@PathVariable String format) throws ErrorException {
+	public ResponseEntity<?> getReportWrongAnswer(@PathVariable String format, HttpServletRequest request) throws ErrorException {
 		
 		try {
-			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
-			return ResponseEntity.ok(reportService.reportFalseQuestion(format));
+			
+			String fileName = reportService.reportFalseQuestion(format);
+			
+			// Load file as Resource
+	        Resource resource = reportService.loadFileAsResource(fileName);
+
+	        // Try to determine file's content type
+	        String contentType = null;
+	        contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+
+	        // Fallback to the default content type if type could not be determined
+	        if(contentType == null) {
+	            contentType = "application/octet-stream";
+	        }
+
+	        return ResponseEntity.ok()
+	                .contentType(MediaType.parseMediaType(contentType))
+	                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+	                .body(resource);
+			
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
 	}
 	
 	@GetMapping("/package-question/correct/{format}")
-	public ResponseEntity<?> getReportCorrectAnsAtPack(@PathVariable String format) throws ErrorException {
+	public ResponseEntity<?> getReportCorrectAnsAtPack(@PathVariable String format, HttpServletRequest request) throws ErrorException {
 		
 		try {
-			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
-			return ResponseEntity.ok(reportService.reportCorrectAnsAtPack(format));
+			String fileName =  reportService.reportCorrectAnsAtPack(format);
+			
+			// Load file as Resource
+	        Resource resource = reportService.loadFileAsResource(fileName);
+
+	        // Try to determine file's content type
+	        String contentType = null;
+	        contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+
+	        // Fallback to the default content type if type could not be determined
+	        if(contentType == null) {
+	            contentType = "application/octet-stream";
+	        }
+
+	        return ResponseEntity.ok()
+	                .contentType(MediaType.parseMediaType(contentType))
+	                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+	                .body(resource);
+			
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
 	}
 	
 	@GetMapping("/package-question/wrong/{format}")
-	public ResponseEntity<?> getReportWrongAnsAtPack(@PathVariable String format) throws ErrorException {
+	public ResponseEntity<?> getReportWrongAnsAtPack(@PathVariable String format, HttpServletRequest request) throws ErrorException {
 		
 		try {
-			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
-			return ResponseEntity.ok(reportService.reportWrongAnsAtPack(format));
+			 
+			String fileName =  reportService.reportWrongAnsAtPack(format);
+			
+			// Load file as Resource
+	        Resource resource = reportService.loadFileAsResource(fileName);
+
+	        // Try to determine file's content type
+	        String contentType = null;
+	        contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+
+	        // Fallback to the default content type if type could not be determined
+	        if(contentType == null) {
+	            contentType = "application/octet-stream";
+	        }
+
+	        return ResponseEntity.ok()
+	                .contentType(MediaType.parseMediaType(contentType))
+	                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+	                .body(resource);
+			 
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
 	}
 	
 	@GetMapping("/package/correct/{format}")
-	public ResponseEntity<?> getPackageByTheMostCorrectAnswer(@PathVariable String format) throws ErrorException {
+	public ResponseEntity<?> getPackageByTheMostCorrectAnswer(@PathVariable String format, HttpServletRequest request) throws ErrorException {
 		
 		try {
-			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
-			return ResponseEntity.ok(reportService.reportGetPackageByTheMostCorrectAnswer(format));
+			
+			String fileName = reportService.reportGetPackageByTheMostCorrectAnswer(format);
+			
+			// Load file as Resource
+	        Resource resource = reportService.loadFileAsResource(fileName);
+
+	        // Try to determine file's content type
+	        String contentType = null;
+	        contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+
+	        // Fallback to the default content type if type could not be determined
+	        if(contentType == null) {
+	            contentType = "application/octet-stream";
+	        }
+
+	        return ResponseEntity.ok()
+	                .contentType(MediaType.parseMediaType(contentType))
+	                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+	                .body(resource);
+			
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}
 	}
 	
 	@GetMapping("/package/wrong/{format}")
-	public ResponseEntity<?> getPackageByTheMostWrongAnswer(@PathVariable String format) throws ErrorException {
+	public ResponseEntity<?> getPackageByTheMostWrongAnswer(@PathVariable String format, HttpServletRequest request) throws ErrorException {
 		
 		try {
-			ResponseEntity.status(HttpStatus.OK).body("Status: 200 OK");
-			return ResponseEntity.ok(reportService.reportGetPackageByTheMostWrongAnswer(format));
+			String fileName = reportService.reportGetPackageByTheMostWrongAnswer(format);
+			
+			// Load file as Resource
+	        Resource resource = reportService.loadFileAsResource(fileName);
+
+	        // Try to determine file's content type
+	        String contentType = null;
+	        contentType = request.getServletContext().getMimeType(resource.getFile().getAbsolutePath());
+
+	        // Fallback to the default content type if type could not be determined
+	        if(contentType == null) {
+	            contentType = "application/octet-stream";
+	        }
+
+	        return ResponseEntity.ok()
+	                .contentType(MediaType.parseMediaType(contentType))
+	                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + resource.getFilename() + "\"")
+	                .body(resource);
+			
 		}catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
 		}

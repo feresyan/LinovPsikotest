@@ -112,8 +112,7 @@ public class ReportService {
 	
 	public String reportCorrectQuestion(String reportFormat) throws Exception{
 		
-		//Path for store the jasper
-		String path = "D:\\";
+		String fileName = "";
 		
 		//Get the list from dao
 		List<PojoQuestReport> list = reportDao.getTheMostTrueAnsQuest();
@@ -127,21 +126,22 @@ public class ReportService {
 		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,parameter,dataSource);
 		
 		if(reportFormat.equalsIgnoreCase("html")) {
-			JasperExportManager.exportReportToHtmlFile(jasperPrint,path+"\\MostCorrectAnswer.html");
+			JasperExportManager.exportReportToHtmlFile(jasperPrint,fileStorageLocation+"\\MostCorrectAnswer.html");
+			fileName = "MostCorrectAnswer.html";
 		}
 		
 		if(reportFormat.equalsIgnoreCase("pdf")) {
-			JasperExportManager.exportReportToPdfFile(jasperPrint,path+"\\MostCorrectAnswer.pdf");
+			JasperExportManager.exportReportToPdfFile(jasperPrint,fileStorageLocation+"\\MostCorrectAnswer.pdf");
+			fileName = "MostCorrectAnswer.pdf";
 		}
 		
-		return "Report Generated in path : " + path;
+		return fileName;
 		
 	}
 	
 	public String reportFalseQuestion(String reportFormat) throws Exception{
 		
-		//Path for store the jasper
-		String path = "D:\\";
+		String fileName = "";
 		
 		//Get the list from dao
 		List<PojoQuestReport> list = reportDao.getTheMostFalseAnsQuest();
@@ -155,21 +155,22 @@ public class ReportService {
 		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,parameter,dataSource);
 		
 		if(reportFormat.equalsIgnoreCase("html")) {
-			JasperExportManager.exportReportToHtmlFile(jasperPrint,path+"\\MostWrongAnswer.html");
+			JasperExportManager.exportReportToHtmlFile(jasperPrint,fileStorageLocation+"\\MostWrongAnswer.html");
+			fileName = "MostWrongAnswer.html";
 		}
 		
 		if(reportFormat.equalsIgnoreCase("pdf")) {
-			JasperExportManager.exportReportToPdfFile(jasperPrint,path+"\\MostWrongAnswer.pdf");
+			JasperExportManager.exportReportToPdfFile(jasperPrint,fileStorageLocation+"\\MostWrongAnswer.pdf");
+			fileName = "MostWrongAnswer.pdf";
 		}
 		
-		return "Report Generated in path : " + path;
+		return fileName;
 		
 	}
 	
 	public String reportCorrectAnsAtPack(String reportFormat) throws Exception{
 		
-		//Path for store the jasper
-		String path = "D:\\";
+		String fileName = "";
 		
 		//Get the list from dao
 		List<PojoPackReport> list = reportDao.getTheMostCorrectAnsPack();
@@ -183,21 +184,22 @@ public class ReportService {
 		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,parameter,dataSource);
 		
 		if(reportFormat.equalsIgnoreCase("html")) {
-			JasperExportManager.exportReportToHtmlFile(jasperPrint,path+"\\MostCorrectAnsBaseOnPack.html");
+			JasperExportManager.exportReportToHtmlFile(jasperPrint,fileStorageLocation+"\\MostCorrectAnsBaseOnPack.html");
+			fileName = "MostCorrectAnsBaseOnPack.html";
 		}
 		
 		if(reportFormat.equalsIgnoreCase("pdf")) {
-			JasperExportManager.exportReportToPdfFile(jasperPrint,path+"\\MostCorrectAnsBaseOnPack.pdf");
+			JasperExportManager.exportReportToPdfFile(jasperPrint,fileStorageLocation+"\\MostCorrectAnsBaseOnPack.pdf");
+			fileName = "MostCorrectAnsBaseOnPack.pdf";
 		}
 		
-		return "Report Generated in path : " + path;
+		return fileName;
 
 	}
 	
 	public String reportWrongAnsAtPack(String reportFormat) throws Exception{
 		
-		//Path for store the jasper
-		String path = "D:\\";
+		String fileName = "";
 		
 		//Get the list from dao
 		List<PojoPackReport> list = reportDao.getTheMostWrongAnsPack();
@@ -211,21 +213,22 @@ public class ReportService {
 		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,parameter,dataSource);
 		
 		if(reportFormat.equalsIgnoreCase("html")) {
-			JasperExportManager.exportReportToHtmlFile(jasperPrint,path+"\\MostWrongAnsBaseOnPack.html");
+			JasperExportManager.exportReportToHtmlFile(jasperPrint,fileStorageLocation+"\\MostWrongAnsBaseOnPack.html");
+			fileName = "MostWrongAnsBaseOnPack.html";
 		}
 		
 		if(reportFormat.equalsIgnoreCase("pdf")) {
-			JasperExportManager.exportReportToPdfFile(jasperPrint,path+"\\MostWrongAnsBaseOnPack.pdf");
+			JasperExportManager.exportReportToPdfFile(jasperPrint,fileStorageLocation+"\\MostWrongAnsBaseOnPack.pdf");
+			fileName = "MostWrongAnsBaseOnPack.pdf";
 		}
 		
-		return "Report Generated in path : " + path;
+		return fileName;
 
 	}
 	
 	public String reportGetPackageByTheMostCorrectAnswer(String reportFormat) throws Exception{
 		
-		//Path for store the jasper
-		String path = "D:\\";
+		String fileName = "";
 		
 		//Get the list from dao
 		List<PojoPackReport> list = reportDao.getPackageByTheMostCorrectAnswer();
@@ -239,20 +242,21 @@ public class ReportService {
 		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,parameter,dataSource);
 		
 		if(reportFormat.equalsIgnoreCase("html")) {
-			JasperExportManager.exportReportToHtmlFile(jasperPrint,path+"\\MostCorrectPackage.html");
+			JasperExportManager.exportReportToHtmlFile(jasperPrint,fileStorageLocation+"\\MostCorrectPackage.html");
+			fileName = "MostCorrectPackage.html";
 		}
 		
 		if(reportFormat.equalsIgnoreCase("pdf")) {
-			JasperExportManager.exportReportToPdfFile(jasperPrint,path+"\\MostCorrectPackage.pdf");
+			JasperExportManager.exportReportToPdfFile(jasperPrint,fileStorageLocation+"\\MostCorrectPackage.pdf");
+			fileName = "MostCorrectPackage.pdf";
 		}
 		
-		return "Report Generated in path : " + path;
+		return fileName;
 	}
 	
 	public String reportGetPackageByTheMostWrongAnswer(String reportFormat) throws Exception{
 		
-		//Path for store the jasper
-		String path = "D:\\";
+		String fileName = "";
 		
 		//Get the list from dao
 		List<PojoPackReport> list = reportDao.getPackageByTheMostWrongAnswer();
@@ -266,14 +270,16 @@ public class ReportService {
 		JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,parameter,dataSource);
 		
 		if(reportFormat.equalsIgnoreCase("html")) {
-			JasperExportManager.exportReportToHtmlFile(jasperPrint,path+"\\MostWrongPackage.html");
+			JasperExportManager.exportReportToHtmlFile(jasperPrint,fileStorageLocation+"\\MostWrongPackage.html");
+			fileName = "MostWrongPackage.html";
 		}
 		
 		if(reportFormat.equalsIgnoreCase("pdf")) {
-			JasperExportManager.exportReportToPdfFile(jasperPrint,path+"\\MostWrongPackage.pdf");
+			JasperExportManager.exportReportToPdfFile(jasperPrint,fileStorageLocation+"\\MostWrongPackage.pdf");
+			fileName = "MostWrongPackage.pdf";
 		}
 		
-		return "Report Generated in path : " + path;
+		return fileName;
 	}
 	
 }
