@@ -181,7 +181,7 @@ public class QuestionService {
 				Files.write(path, byteQuestion2);
 				
 				String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-		                .path("/coba/")
+		                .path("/download/file/")
 		                .path(listImage[i].getOriginalFilename())
 		                .toUriString();
 				
@@ -218,7 +218,7 @@ public class QuestionService {
 				Files.write(path2, byteQuestion2);
 				
 				String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-		                .path(UPLOADED_FOLDER)
+		                .path("/download/file/")
 		                .path(choice[i].getOriginalFilename())
 		                .toUriString();
 				
@@ -255,7 +255,7 @@ public class QuestionService {
 				Files.write(path, byteQuestion);
 				
 				String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-		                .path(UPLOADED_FOLDER)
+		                .path("/download/file/")
 		                .path(correctAnswer[i].getOriginalFilename())
 		                .toUriString();
 				
@@ -319,7 +319,7 @@ public class QuestionService {
 				Files.write(path3, byteQuestion2);
 				
 				String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-		                .path(UPLOADED_FOLDER)
+		                .path("/download/file/")
 		                .path(listImage[i].getOriginalFilename())
 		                .toUriString();
 				
@@ -356,7 +356,7 @@ public class QuestionService {
 				Files.write(path2, byteQuestion2);
 				
 				String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-		                .path(UPLOADED_FOLDER)
+		                .path("/download/file/")
 		                .path(choice[i].getOriginalFilename())
 		                .toUriString();
 				
@@ -393,7 +393,7 @@ public class QuestionService {
 				Files.write(path, byteQuestion);
 				
 				String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-		                .path(UPLOADED_FOLDER)
+		                .path("/download/file/")
 		                .path(correctAnswer[i].getOriginalFilename())
 		                .toUriString();
 				
