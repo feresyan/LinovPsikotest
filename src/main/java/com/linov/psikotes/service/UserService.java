@@ -67,6 +67,7 @@ public class UserService {
 		return user;
 	}
 	
+	
 	public PojoUser findByUsername(String username) {
 		PojoUser user = userDao.findByUsername(username);
 		return user;

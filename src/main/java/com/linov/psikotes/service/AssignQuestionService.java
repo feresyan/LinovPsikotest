@@ -1,10 +1,12 @@
 package com.linov.psikotes.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.linov.psikotes.entity.Package;
 import com.linov.psikotes.dao.AssignQuestionDao;
 import com.linov.psikotes.entity.AssignQuestion;
 import com.linov.psikotes.entity.PackageQuestion;
@@ -22,6 +24,21 @@ public class AssignQuestionService {
 	
 	public List<PackageQuestion> getAllQuestByUserId(String userId){
 		return aqDao.getAllQuestByUserId(userId);
+	}
+	
+	public List<Package> getAllPackageByUserId(String userId){
+		List<AssignQuestion> list =  aqDao.getAllPackageByUserId(userId);
+		List<Package> listPack = new ArrayList<Package>();
+		
+		for (AssignQuestion aq : list) {
+			Package p = new Package();
+			p.setPackageId(aq.getPack().getPackageId());
+			p.setPackageName(aq.getPack().getPackageName());
+			p.setAmountOfTime(aq.getPack().getAmountOfTime());
+			p.setActiveState(aq.getPack().getActiveState());
+			listPack.add(p);
+		}
+		return listPack;
 	}
 	
 	public AssignQuestion findById(String id) {

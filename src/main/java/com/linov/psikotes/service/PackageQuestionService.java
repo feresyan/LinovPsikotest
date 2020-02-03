@@ -1,5 +1,6 @@
 package com.linov.psikotes.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import com.linov.psikotes.dao.PackageQuestionDao;
 import com.linov.psikotes.dao.QuestionDao;
 import com.linov.psikotes.entity.PackageQuestion;
 import com.linov.psikotes.entity.Question;
+import com.linov.psikotes.pojo.PojoPackQuestion;
+import com.linov.psikotes.pojo.PojoQuestion;
 
 @Service("packageQuestionService")
 public class PackageQuestionService {
@@ -27,15 +30,36 @@ public class PackageQuestionService {
 		List<PackageQuestion> list = pqDao.getAll();
 		return list;
 	}
-	
+		
 	public PackageQuestion findById(String id) {
 		PackageQuestion pq = pqDao.findById(id);
 		return pq;
 	}
 	
-	public List<PackageQuestion> findByPackageId(String id) {
+	public List<PojoPackQuestion> findByPackageId(String id) {
 		List<PackageQuestion> pq = pqDao.findByPackageId(id);
-		return pq;
+		
+		List<PojoPackQuestion> list = new ArrayList<PojoPackQuestion>();
+		
+		for (PackageQuestion data : pq) {
+			PojoPackQuestion ppq = new PojoPackQuestion();
+			PojoQuestion pojoQ = new PojoQuestion();
+			
+			//set question without corect answer
+			pojoQ.setActiveState(data.getQuestion().getActiveState());
+			pojoQ.setChoice(data.getQuestion().getChoice());
+			pojoQ.setListImg(data.getQuestion().getListImg());
+			pojoQ.setQuestionDesc(data.getQuestion().getQuestionDesc());
+			pojoQ.setQuestionId(data.getQuestion().getQuestionId());
+			pojoQ.setQuestionTitle(data.getQuestion().getQuestionTitle());
+			pojoQ.setQuestionType(data.getQuestion().getQuestionType());
+			pojoQ.setTimestamp(data.getQuestion().getTimestamp());
+			
+			ppq.setPackageQuestionId(data.getPackageQuestionId());
+			ppq.setQuestion(pojoQ);
+			list.add(ppq);
+		}
+		return list;
 	}
 	
 	public PackageQuestion insertPq(PackageQuestion pq) throws Exception{

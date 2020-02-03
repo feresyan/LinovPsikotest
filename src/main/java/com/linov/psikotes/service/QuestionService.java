@@ -19,6 +19,7 @@ import com.linov.psikotes.dao.QuestionTypeDao;
 import com.linov.psikotes.entity.Answer;
 import com.linov.psikotes.entity.Choice;
 import com.linov.psikotes.entity.ListImg;
+import com.linov.psikotes.entity.PackageQuestion;
 import com.linov.psikotes.entity.Question;
 import com.linov.psikotes.entity.QuestionType;
 import com.linov.psikotes.entity.SearchQuestion;
@@ -39,6 +40,26 @@ public class QuestionService {
 	public List<Question> getAllQuestion(){
 		List<Question> list = questionDao.getAll();
 		return list;
+	}
+	
+	public List<PojoQuestion> getAllQuestByPackage(String packageName){
+		List<PackageQuestion> list = questionDao.getAllQuestByPackage(packageName);
+
+		List<PojoQuestion> listQuest = new ArrayList<PojoQuestion>();
+		
+		for (PackageQuestion listPq : list) {
+			PojoQuestion pojoPq = new PojoQuestion();
+			pojoPq.setQuestionId(listPq.getQuestion().getQuestionId());
+			pojoPq.setQuestionTitle(listPq.getQuestion().getQuestionTitle());
+			pojoPq.setQuestionType(listPq.getQuestion().getQuestionType());
+			pojoPq.setQuestionDesc(listPq.getQuestion().getQuestionDesc());
+			pojoPq.setListImg(listPq.getQuestion().getListImg());
+			pojoPq.setChoice(listPq.getQuestion().getChoice());
+			pojoPq.setTimestamp(listPq.getQuestion().getTimestamp());
+			pojoPq.setActiveState(listPq.getQuestion().getActiveState());
+			listQuest.add(pojoPq);
+		}
+		return listQuest;
 	}
 	
 	public List<PojoQuestion> getChoice(){

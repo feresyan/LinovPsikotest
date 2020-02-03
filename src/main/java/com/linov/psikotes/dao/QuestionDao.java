@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
+import com.linov.psikotes.entity.PackageQuestion;
 import com.linov.psikotes.entity.Question;
 import com.linov.psikotes.entity.SearchQuestion;
 
@@ -35,6 +36,17 @@ public class QuestionDao extends CommonDao {
 				.getResultList();
 		if(list.size()==0) return null;
 		else return (List<Question>)list;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<PackageQuestion> getAllQuestByPackage(String packageName) {
+		List<PackageQuestion> list = super.entityManager
+				.createQuery("from PackageQuestion jp where lower(jp.pack.packageName) =:field1")
+				.setParameter("field1", packageName)
+				.getResultList();
+		if(list.size()==0) return list;
+		else return (List<PackageQuestion>)list;
 	}
 	
 	@SuppressWarnings("unchecked")

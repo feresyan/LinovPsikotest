@@ -78,6 +78,15 @@ public class AssignQuestionController {
 		}
 	}
 	
+	@GetMapping("/user/{userId}/package")
+	public ResponseEntity<?> getAllpackageByUserId(@PathVariable String userId) throws ErrorException {
+		try {
+			return ResponseEntity.ok(aqService.getAllPackageByUserId(userId));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+		}
+	}
+	
 	@GetMapping("")
 	public ResponseEntity<?> getAllUser() throws ErrorException {
 		try {

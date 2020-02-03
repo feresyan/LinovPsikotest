@@ -56,6 +56,21 @@ public class AssignQuestionDao extends CommonDao{
 	
 	@SuppressWarnings("unchecked")
 	@Transactional
+	public List<AssignQuestion> getAllPackageByUserId(String userId) {
+		List<AssignQuestion> list = super.entityManager
+				.createQuery("from AssignQuestion where user_id=:field1")
+				.setParameter("field1", userId)
+				.getResultList();
+
+		if(list.size()==0)
+			return list;
+		else
+			return list;
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	@Transactional
 	public AssignQuestion findById(String id) {
 		List<AssignQuestion> list = super.entityManager
 				.createQuery("from AssignQuestion where assign_question_id=:id")
