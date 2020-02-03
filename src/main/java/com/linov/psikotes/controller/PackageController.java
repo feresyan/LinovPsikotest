@@ -60,7 +60,7 @@ public class PackageController {
 		try {
 			Object obj = "Status: 200 OK";
 			ResponseEntity.status(HttpStatus.OK).body(obj);
-			return ResponseEntity.ok(packageService.findById(id));
+			return ResponseEntity.ok(packageService.findByIdToPojo(id));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 		}

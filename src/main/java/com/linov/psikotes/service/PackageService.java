@@ -24,9 +24,19 @@ public class PackageService {
 		return list;
 	}
 	
+	public PojoPackage findByIdToPojo(String id) {
+		Package pack = packageDao.findById(id);
+		PojoPackage pp = new PojoPackage();
+		pp.setPackageId(pack.getPackageId());
+		pp.setPackageName(pack.getPackageName());
+		pp.setAmountOfTime(pack.getAmountOfTime());
+		pp.setAmountOfQuestion(packageDao.getTotalQuestion(pack.getPackageId()).intValue());
+		return pp;
+	}
+	
 	public Package findById(String id) {
-		Package profile = packageDao.findById(id);
-		return profile;
+		Package pack = packageDao.findById(id);
+		return pack;
 	}
 	
 	public Package insertPackage(Package pack) throws Exception{
