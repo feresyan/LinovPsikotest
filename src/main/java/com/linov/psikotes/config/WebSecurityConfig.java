@@ -67,7 +67,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				"/package","/package/*","/package/*/*",
 				"/question-pack","/question-pack/*","/question-pack/*/*","/question-pack/*/*/*",
 				"/assign-question","/assign-question/*","/assign-question/*/*","/assign-question/*/*/*",
-				"/applicant-answer","/applicant-answer/*",
+				"/applicant-answer","/applicant-answer/*","/applicant-answer/*/*","/applicant-answer/*/*/*",
 				"/applicant-answer/detail","/applicant-answer/detail/*","/applicant-answer/detail/*/*","/applicant-answer/detail/*/*/*",
 				"/report/*/*/*",
 				"/download/file/*").permitAll().

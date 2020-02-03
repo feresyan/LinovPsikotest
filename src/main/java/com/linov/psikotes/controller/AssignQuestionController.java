@@ -88,7 +88,7 @@ public class AssignQuestionController {
 	}
 	
 	@GetMapping("")
-	public ResponseEntity<?> getAllUser() throws ErrorException {
+	public ResponseEntity<?> getAllAssignQuestion() throws ErrorException {
 		try {
 			return ResponseEntity.ok(aqService.getAllAq());
 		} catch (Exception e) {
