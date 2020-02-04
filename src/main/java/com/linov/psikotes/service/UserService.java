@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 
 import com.linov.psikotes.dao.UserDao;
+import com.linov.psikotes.entity.HeaderApplicantAnswer;
 import com.linov.psikotes.entity.PojoSignUp;
 import com.linov.psikotes.entity.PojoUser;
 import com.linov.psikotes.entity.Profile;
@@ -37,6 +38,9 @@ public class UserService {
 
 	@Autowired
 	private UserDao userDao;
+	
+	@Autowired
+	private HeaderAppAnsService headerService;
 	
 	@Autowired
 	private ProfileService ps;
@@ -152,6 +156,12 @@ public class UserService {
 			
 			//save
 			userDao.save(user);
+			
+			//Make header answer
+			HeaderApplicantAnswer head = new HeaderApplicantAnswer();
+			head.setUser(user);
+			headerService.insertHeaderApplicantAnswer(head);
+			
 		} catch (Exception e) {
 			// TODO: handle exception
 			throw new Exception(e.getMessage());

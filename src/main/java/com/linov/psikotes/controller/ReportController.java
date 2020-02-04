@@ -34,6 +34,7 @@ public class ReportController {
 		try {
 			
 			String fileName = reportService.candidateReport(format, id,request);
+			System.out.println(fileName);
 			
 			// Load file as Resource
 	        Resource resource = reportService.loadFileAsResource(fileName);

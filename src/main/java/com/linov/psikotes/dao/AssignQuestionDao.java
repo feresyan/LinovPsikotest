@@ -29,7 +29,7 @@ public class AssignQuestionDao extends CommonDao{
 	@Transactional
 	public List<AssignQuestion> getAll() {
 		List<AssignQuestion> list = super.entityManager
-				.createQuery("from AssignQuestion where active_state=:status")
+				.createQuery("from AssignQuestion where active_state = :status")
 				.setParameter("status", "active")
 				.getResultList();
 		if(list.size()==0) return null;
