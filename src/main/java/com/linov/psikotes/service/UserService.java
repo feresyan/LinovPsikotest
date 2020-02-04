@@ -159,7 +159,9 @@ public class UserService {
 			
 			//Make header answer
 			HeaderApplicantAnswer head = new HeaderApplicantAnswer();
-			head.setUser(user);
+			PojoUser result = userDao.findByUsername(user.getUsername());
+			User theUser = userDao.findById(result.getUserId());
+			head.setUser(theUser);
 			headerService.insertHeaderApplicantAnswer(head);
 			
 		} catch (Exception e) {
