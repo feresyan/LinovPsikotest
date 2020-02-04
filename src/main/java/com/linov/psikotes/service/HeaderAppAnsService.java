@@ -44,6 +44,7 @@ public class HeaderAppAnsService {
 			appAns.setTimestamp(date);
 			appAns.setTotalPoints(0);
 			appAns.setStatus("Belum Mengerjakan");
+			appAns.setActiveState("active");
 			
 			//Check if id null 
 			valIdNull(appAns);
