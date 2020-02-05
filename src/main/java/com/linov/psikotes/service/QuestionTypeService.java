@@ -127,8 +127,7 @@ public class QuestionTypeService {
 	 	}
 	 	
 	 	private static Exception valNonBk(QuestionType qt) throws Exception{
-	 		if( qt.getActiveState() == null || qt.getActiveState().trim().equals("")
-	 				|| qt.getAnswerType() == null || qt.getAnswerType().trim().contentEquals("")) 
+	 		if( qt.getActiveState() == null || qt.getActiveState().trim().equals("")) 
 	 		{
 	 			throw new Exception("Tidak boleh ada field yang kosong");
 	 		}
