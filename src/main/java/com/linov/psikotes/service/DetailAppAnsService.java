@@ -6,14 +6,19 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.linov.psikotes.dao.AssignQuestionDao;
 import com.linov.psikotes.dao.DetailAppAnsDao;
 import com.linov.psikotes.dao.HeaderAppAnsDao;
+import com.linov.psikotes.entity.AssignQuestion;
 import com.linov.psikotes.entity.DetailApplicantAnswer;
 import com.linov.psikotes.entity.HeaderApplicantAnswer;
 import com.linov.psikotes.entity.PackageQuestion;
 
 @Service("detailAppAnsService")
 public class DetailAppAnsService {
+	
+	@Autowired
+	private AssignQuestionDao assignDao;
 	
 	@Autowired
 	private DetailAppAnsDao dAppAnsDao;
@@ -79,8 +84,17 @@ public class DetailAppAnsService {
 			//Check if nonBK null or not
 //			valNonBk(detailAns);
 			
+			//Update package in tbl_assign_question that already answered to inactive
+			String packId = detailAns.getPackQuestion().getPack().getPackageId();
+			String userId = detailAns.getHeaderAppAnswer().getUser().getUserId();
+			
+			AssignQuestion aq = assignDao.findBK(userId, packId);
+			aq.setActiveState("inactive");
+			assignDao.save(aq);
+			
 			//Save
 			return dAppAnsDao.save(detailAns);
+			
 			
 		} catch (Exception e) {
 			// TODO: handle exception
