@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.linov.psikotes.dao.AssignQuestionDao;
 import com.linov.psikotes.dao.DetailAppAnsDao;
 import com.linov.psikotes.dao.HeaderAppAnsDao;
+import com.linov.psikotes.dao.PackageQuestionDao;
 import com.linov.psikotes.entity.AssignQuestion;
 import com.linov.psikotes.entity.DetailApplicantAnswer;
 import com.linov.psikotes.entity.HeaderApplicantAnswer;
@@ -16,6 +17,9 @@ import com.linov.psikotes.entity.PackageQuestion;
 
 @Service("detailAppAnsService")
 public class DetailAppAnsService {
+	
+	@Autowired
+	private PackageQuestionDao pqDao;
 	
 	@Autowired
 	private AssignQuestionDao assignDao;
@@ -28,10 +32,7 @@ public class DetailAppAnsService {
 	
 	@Autowired
 	private HeaderAppAnsService hAppAnsService;
-	
-	@Autowired
-	private PackageQuestionService pqDao;
-	
+
 	@Autowired
 	private PackageQuestionService pqService;
 	
@@ -231,12 +232,18 @@ public class DetailAppAnsService {
 		hAppAnsService.updateHeaderApplicantAnswer(headerAppAns);
 		
 		//Update package in tbl_assign_question that already answered to inactive
-		String packId = dAppAns.get(0).getPackQuestion().getPack().getPackageId();
-		String userId = dAppAns.get(0).getHeaderAppAnswer().getUser().getUserId();
+		//Cari userId
+		String applicantUserId = dAppAns.get(0).getHeaderAppAnswer().getApplicantAnswerId();
+		HeaderApplicantAnswer resultHA = appAnsDao.findById(applicantUserId);
+		String userId = resultHA.getUser().getUserId();
+		
+		//Cari packId
+		String packQuestId = dAppAns.get(0).getPackQuestion().getPackageQuestionId();
+		PackageQuestion resultPQ = pqDao.findById(packQuestId);
+		String packId = resultPQ.getPack().getPackageId();
 		
 		AssignQuestion aq = assignDao.findBK(userId, packId);
-		aq.setActiveState("inactive");
-		assignDao.save(aq);
+		assignDao.delete(aq.getAssignQuestionId());
 	}
 	
 	// VALIDASI POST
