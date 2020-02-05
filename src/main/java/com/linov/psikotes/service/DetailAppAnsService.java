@@ -166,7 +166,7 @@ public class DetailAppAnsService {
 			//make temporary var for total points
 			Integer tempPoints = 0;
 			
-			if(pq.getQuestion().getQuestionType().getQuestionTypeTitle().equalsIgnoreCase("Pilihan ganda")) {
+			if(pq.getQuestion().getQuestionType().getQuestionTypeTitle().equalsIgnoreCase("Pilihan Ganda Teks") || pq.getQuestion().getQuestionType().getQuestionTypeTitle().equalsIgnoreCase("Pilihan Ganda Gambar")) {
 				if(pq.getQuestion().getCorrectAnswer().getAnswer1() != null && pq.getQuestion().getCorrectAnswer().getAnswer2() != null) {
 										
 					if(pq.getQuestion().getCorrectAnswer().getAnswer1().equalsIgnoreCase(data.getAppAnswer().getAnswer1()) && pq.getQuestion().getCorrectAnswer().getAnswer2().equalsIgnoreCase(data.getAppAnswer().getAnswer2())) {
