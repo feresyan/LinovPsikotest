@@ -83,15 +83,7 @@ public class DetailAppAnsService {
 			
 			//Check if nonBK null or not
 //			valNonBk(detailAns);
-			
-			//Update package in tbl_assign_question that already answered to inactive
-			String packId = detailAns.getPackQuestion().getPack().getPackageId();
-			String userId = detailAns.getHeaderAppAnswer().getUser().getUserId();
-			
-			AssignQuestion aq = assignDao.findBK(userId, packId);
-			aq.setActiveState("inactive");
-			assignDao.save(aq);
-			
+						
 			//Save
 			return dAppAnsDao.save(detailAns);
 			
@@ -237,6 +229,14 @@ public class DetailAppAnsService {
 		Date date =new Date(); 
 		headerAppAns.setTimestamp(date);
 		hAppAnsService.updateHeaderApplicantAnswer(headerAppAns);
+		
+		//Update package in tbl_assign_question that already answered to inactive
+		String packId = dAppAns.get(0).getPackQuestion().getPack().getPackageId();
+		String userId = dAppAns.get(0).getHeaderAppAnswer().getUser().getUserId();
+		
+		AssignQuestion aq = assignDao.findBK(userId, packId);
+		aq.setActiveState("inactive");
+		assignDao.save(aq);
 	}
 	
 	// VALIDASI POST
