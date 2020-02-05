@@ -58,8 +58,9 @@ public class AssignQuestionDao extends CommonDao{
 	@Transactional
 	public List<AssignQuestion> getAllPackageByUserId(String userId) {
 		List<AssignQuestion> list = super.entityManager
-				.createQuery("from AssignQuestion where user_id=:field1")
+				.createQuery("from AssignQuestion where user_id=:field1 and active_state = :field2")
 				.setParameter("field1", userId)
+				.setParameter("field2", "active")
 				.getResultList();
 
 		if(list.size()==0)
