@@ -80,9 +80,8 @@ public class UserDao extends CommonDao {
 	@Transactional
 	public PojoUser findByUsername(String username) {
 		List<User> list = super.entityManager
-				.createQuery("from User where username = :field1 and role_id = :field2")
+				.createQuery("from User where username = :field1")
 				.setParameter("field1", username)
-				.setParameter("field2", "role2")
 				.getResultList();
 		if(list.size()==0)
 			return new PojoUser();
