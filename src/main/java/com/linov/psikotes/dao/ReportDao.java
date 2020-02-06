@@ -77,15 +77,15 @@ public class ReportDao extends CommonDao{
 		
 		//sorting by percentage using bubble sort
 		
-//		for (int i = 0; i < listPqr.size()-1; i++) {
-//			for (int j = 0; j < listPqr.size()-i-1; j++) {
-//				if(Double.parseDouble(listPqr.get(j).getPercentation()) < Double.parseDouble(listPqr.get(j+1).getPercentation())) {
-//					PojoQuestReport temp = listPqr.get(j);
-//					listPqr.set(j, listPqr.get(j+1)); 
-//					listPqr.set(j+1, temp);
-//				}
-//			}
-//		}
+		for (int i = 0; i < listPqr.size()-1; i++) {
+			for (int j = 0; j < listPqr.size()-i-1; j++) {
+				if(Double.parseDouble(listPqr.get(j).getPercentation()) < Double.parseDouble(listPqr.get(j+1).getPercentation())) {
+					PojoQuestReport temp = listPqr.get(j);
+					listPqr.set(j, listPqr.get(j+1)); 
+					listPqr.set(j+1, temp);
+				}
+			}
+		}
 		
 		return listPqr;
 	}
@@ -146,15 +146,15 @@ public class ReportDao extends CommonDao{
 		
 		//sorting by percentage using bubble sort
 		
-//		for (int i = 0; i < listPqr.size()-1; i++) {
-//			for (int j = 0; j < listPqr.size()-i-1; j++) {
-//				if(Double.parseDouble(listPqr.get(j).getPercentation()) < Double.parseDouble(listPqr.get(j+1).getPercentation())) {
-//					PojoQuestReport temp = listPqr.get(j);
-//					listPqr.set(j, listPqr.get(j+1)); 
-//					listPqr.set(j+1, temp);
-//				}
-//			}
-//		}
+		for (int i = 0; i < listPqr.size()-1; i++) {
+			for (int j = 0; j < listPqr.size()-i-1; j++) {
+				if(Double.parseDouble(listPqr.get(j).getPercentation()) < Double.parseDouble(listPqr.get(j+1).getPercentation())) {
+					PojoQuestReport temp = listPqr.get(j);
+					listPqr.set(j, listPqr.get(j+1)); 
+					listPqr.set(j+1, temp);
+				}
+			}
+		}
 		
 		return listPqr;
 	}
@@ -240,15 +240,15 @@ public class ReportDao extends CommonDao{
 		
 		//sorting by percentage using bubble sort
 		
-//		for (int i = 0; i < listPackReport.size()-1; i++) {
-//			for (int j = 0; j < listPackReport.size()-i-1; j++) {
-//				if(Double.parseDouble(listPackReport.get(j).getPercentation()) < Double.parseDouble(listPackReport.get(j+1).getPercentation())) {
-//					PojoPackReport temp = listPackReport.get(j);
-//					listPackReport.set(j, listPackReport.get(j+1)); 
-//					listPackReport.set(j+1, temp);
-//				}
-//			}
-//		}
+		for (int i = 0; i < listPackReport.size()-1; i++) {
+			for (int j = 0; j < listPackReport.size()-i-1; j++) {
+				if(Double.parseDouble(listPackReport.get(j).getPercentation()) < Double.parseDouble(listPackReport.get(j+1).getPercentation())) {
+					PojoPackReport temp = listPackReport.get(j);
+					listPackReport.set(j, listPackReport.get(j+1)); 
+					listPackReport.set(j+1, temp);
+				}
+			}
+		}
 		
 		return listPackReport;
 	}
@@ -332,15 +332,15 @@ public class ReportDao extends CommonDao{
 		
 		//sorting by percentage using bubble sort
 		
-//		for (int i = 0; i < listPackReport.size()-1; i++) {
-//			for (int j = 0; j < listPackReport.size()-i-1; j++) {
-//				if(Double.parseDouble(listPackReport.get(j).getPercentation()) < Double.parseDouble(listPackReport.get(j+1).getPercentation())) {
-//					PojoPackReport temp = listPackReport.get(j);
-//					listPackReport.set(j, listPackReport.get(j+1)); 
-//					listPackReport.set(j+1, temp);
-//				}
-//			}
-//		}
+		for (int i = 0; i < listPackReport.size()-1; i++) {
+			for (int j = 0; j < listPackReport.size()-i-1; j++) {
+				if(Double.parseDouble(listPackReport.get(j).getPercentation()) < Double.parseDouble(listPackReport.get(j+1).getPercentation())) {
+					PojoPackReport temp = listPackReport.get(j);
+					listPackReport.set(j, listPackReport.get(j+1)); 
+					listPackReport.set(j+1, temp);
+				}
+			}
+		}
 		
 		return listPackReport;
 	}
@@ -411,15 +411,15 @@ public class ReportDao extends CommonDao{
 		
 		//sorting by percentage using bubble sort
 		
-//		for (int i = 0; i < listPackReport.size()-1; i++) {
-//			for (int j = 0; j < listPackReport.size()-i-1; j++) {
-//				if(Double.parseDouble(listPackReport.get(j).getPercentation()) < Double.parseDouble(listPackReport.get(j+1).getPercentation())) {
-//					PojoPackReport temp = listPackReport.get(j);
-//					listPackReport.set(j, listPackReport.get(j+1)); 
-//					listPackReport.set(j+1, temp);
-//				}
-//			}
-//		}
+		for (int i = 0; i < listPackReport.size()-1; i++) {
+			for (int j = 0; j < listPackReport.size()-i-1; j++) {
+				if(Double.parseDouble(listPackReport.get(j).getPercentation()) < Double.parseDouble(listPackReport.get(j+1).getPercentation())) {
+					PojoPackReport temp = listPackReport.get(j);
+					listPackReport.set(j, listPackReport.get(j+1)); 
+					listPackReport.set(j+1, temp);
+				}
+			}
+		}
 		
 		return listPackReport;
 	}
@@ -490,15 +490,15 @@ public class ReportDao extends CommonDao{
 		
 		//sorting by percentage using bubble sort
 		
-//		for (int i = 0; i < listPackReport.size()-1; i++) {
-//			for (int j = 0; j < listPackReport.size()-i-1; j++) {
-//				if(Double.parseDouble(listPackReport.get(j).getPercentation()) < Double.parseDouble(listPackReport.get(j+1).getPercentation())) {
-//					PojoPackReport temp = listPackReport.get(j);
-//					listPackReport.set(j, listPackReport.get(j+1)); 
-//					listPackReport.set(j+1, temp);
-//				}
-//			}
-//		}
+		for (int i = 0; i < listPackReport.size()-1; i++) {
+			for (int j = 0; j < listPackReport.size()-i-1; j++) {
+				if(Double.parseDouble(listPackReport.get(j).getPercentation()) < Double.parseDouble(listPackReport.get(j+1).getPercentation())) {
+					PojoPackReport temp = listPackReport.get(j);
+					listPackReport.set(j, listPackReport.get(j+1)); 
+					listPackReport.set(j+1, temp);
+				}
+			}
+		}
 		
 		return listPackReport;
 	}
