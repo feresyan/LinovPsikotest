@@ -99,9 +99,9 @@ public class QuestionDao extends CommonDao {
 		if(searchQuest.getTitle() != null ) {
 			query.append(" and lower(question_title) like :field2 ");
 		}
-		if(searchQuest.getDescription() != null ) {
-			query.append(" and lower(question_desc) like :field3 ");
-		}
+//		if(searchQuest.getDescription() != null ) {
+//			query.append(" and lower(question_desc) like :field3 ");
+//		}
 		
 		Query queryExecuted = super.entityManager.createQuery(query.toString());
 		
@@ -111,9 +111,9 @@ public class QuestionDao extends CommonDao {
 		if (searchQuest.getTitle() != null ) {
 			queryExecuted.setParameter("field2", "%" + searchQuest.getTitle().toLowerCase() + "%");
 		}
-		if (searchQuest.getDescription() != null ) {
-			queryExecuted.setParameter("field3", "%" + searchQuest.getDescription().toLowerCase() + "%");
-		}
+//		if (searchQuest.getDescription() != null ) {
+//			queryExecuted.setParameter("field3", "%" + searchQuest.getDescription().toLowerCase() + "%");
+//		}
 		
 		List<Question> list = queryExecuted.getResultList();
 		if(list.size()==0) {
