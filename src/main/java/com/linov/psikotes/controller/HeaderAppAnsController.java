@@ -74,7 +74,7 @@ public class HeaderAppAnsController {
 		}
 	}
 	
-	@GetMapping("/search")
+	@PostMapping("/search")
 	public ResponseEntity<?> search(@RequestBody PojoSearchHeaderAppAns head) throws ErrorException {
 		try {
 			return ResponseEntity.ok(appAnsService.search(head));			
@@ -83,7 +83,7 @@ public class HeaderAppAnsController {
 		}
 	}
 	
-	@PostMapping("")
+	@GetMapping("")
 	public ResponseEntity<?> getAllHeader() throws ErrorException {
 		try {
 			return ResponseEntity.ok(appAnsService.getAllHeaderApplicantAnswer());
