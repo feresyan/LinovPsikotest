@@ -83,7 +83,7 @@ public class PackageQuestionDao extends CommonDao {
 	@Transactional
 	public List<PackageQuestion> search(PojoSearchPackageQuestion pq) {
 		StringBuilder query = new StringBuilder();
-		query.append("from PackageQuestion where 1=1 and packageQuestionId = '"+ pq.getId() +"'");
+		query.append("from PackageQuestion where 1=1 and package.packageId = '"+ pq.getId() +"'");
 		if( pq.getName() != null) {
 			query.append(" and lower(question.questionTitle) like :field1");
 		}
