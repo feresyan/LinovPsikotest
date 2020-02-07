@@ -77,18 +77,18 @@ public class UserService {
 		return user;
 	}
 	
-	public PojoUser findByName(String name) {
-		PojoUser user = userDao.findByProfileName(name);
+	public List<PojoUser> findByName(String name) {
+		List<PojoUser> list = userDao.findByProfileName(name);
+		return list;
+	}
+	
+	public List<PojoUser> findByEmail(String email) {
+		List<PojoUser> user = userDao.findByEmail(email);
 		return user;
 	}
 	
-	public PojoUser findByEmail(String email) {
-		PojoUser user = userDao.findByEmail(email);
-		return user;
-	}
-	
-	public PojoUser findByPhone(String phone) {
-		PojoUser user = userDao.findByPhone(phone);
+	public List<PojoUser> findByPhone(String phone) {
+		List<PojoUser> user = userDao.findByPhone(phone);
 		return user;
 	}
 	

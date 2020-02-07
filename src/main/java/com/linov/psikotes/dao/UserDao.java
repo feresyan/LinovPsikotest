@@ -113,62 +113,80 @@ public class UserDao extends CommonDao {
 	
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public PojoUser findByProfileName(String name) {
+	public List<PojoUser> findByProfileName(String name) {
 		List<User> list = super.entityManager
 				.createQuery("from User where lower(profile.profileName)  like concat('%', :field1, '%') and role_id = :field2")
 				.setParameter("field1", name)
 				.setParameter("field2", "role2")
 				.getResultList();
 		if(list.size()==0)
-			return new PojoUser();
+			return new ArrayList<PojoUser>();
 		else
 		{
-			PojoUser pu = new PojoUser();
-			pu.setUserId(list.get(0).getUserId());
-			pu.setUsername(list.get(0).getUsername());
-			pu.setRole(list.get(0).getRole());
-			pu.setProfile(list.get(0).getProfile());
-			return pu;
+			List<PojoUser> listPojoUser = new ArrayList<PojoUser>();
+			
+			for (int i = 0; i < list.size(); i++) {
+				PojoUser pu = new PojoUser();
+				pu.setUserId(list.get(0).getUserId());
+				pu.setUsername(list.get(0).getUsername());
+				pu.setRole(list.get(0).getRole());
+				pu.setProfile(list.get(0).getProfile());
+				listPojoUser.add(pu);
+			}
+			
+			return listPojoUser;
 		}
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public PojoUser findByEmail(String email) {
+	public List<PojoUser> findByEmail(String email) {
 		List<User> list = super.entityManager
 				.createQuery("from User where lower(profile.email) like concat('%', :nameEmail, '%')")
 				.setParameter("nameEmail", email.toLowerCase())
 				.getResultList();
 		if(list.size()==0)
-			return new PojoUser();
+			return new ArrayList<PojoUser>();
 		else
 		{
-			PojoUser pu = new PojoUser();
-			pu.setUserId(list.get(0).getUserId());
-			pu.setUsername(list.get(0).getUsername());
-			pu.setRole(list.get(0).getRole());
-			pu.setProfile(list.get(0).getProfile());
-			return pu;
+			List<PojoUser> listPojoUser = new ArrayList<PojoUser>();
+			
+			for (int i = 0; i < list.size(); i++) {
+				PojoUser pu = new PojoUser();
+				pu.setUserId(list.get(0).getUserId());
+				pu.setUsername(list.get(0).getUsername());
+				pu.setRole(list.get(0).getRole());
+				pu.setProfile(list.get(0).getProfile());
+				listPojoUser.add(pu);
+			}
+			
+			return listPojoUser;
 		}
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public PojoUser findByPhone(String phone) {
+	public List<PojoUser> findByPhone(String phone) {
 		List<User> list = super.entityManager
 				.createQuery("from User where profile.phone like concat('%', :phone, '%')")
 				.setParameter("phone", phone)
 				.getResultList();
 		if(list.size()==0)
-			return new PojoUser();
+			return new ArrayList<PojoUser>();
 		else
 		{
-			PojoUser pu = new PojoUser();
-			pu.setUserId(list.get(0).getUserId());
-			pu.setUsername(list.get(0).getUsername());
-			pu.setRole(list.get(0).getRole());
-			pu.setProfile(list.get(0).getProfile());
-			return pu;
+			List<PojoUser> listPojoUser = new ArrayList<PojoUser>();
+			
+			for (int i = 0; i < list.size(); i++) {
+				PojoUser pu = new PojoUser();
+				pu.setUserId(list.get(0).getUserId());
+				pu.setUsername(list.get(0).getUsername());
+				pu.setRole(list.get(0).getRole());
+				pu.setProfile(list.get(0).getProfile());
+				listPojoUser.add(pu);
+			}
+			
+			return listPojoUser;
 		}
 	}
 	
