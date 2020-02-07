@@ -1,5 +1,6 @@
 package com.linov.psikotes.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -116,7 +117,7 @@ public class QuestionDao extends CommonDao {
 		
 		List<Question> list = queryExecuted.getResultList();
 		if(list.size()==0) {
-			return null;
+			return new ArrayList<Question>();
 		}else {
 			return list;
 		}
