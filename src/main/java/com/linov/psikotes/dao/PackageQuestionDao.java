@@ -1,12 +1,15 @@
 package com.linov.psikotes.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
 import com.linov.psikotes.entity.PackageQuestion;
+import com.linov.psikotes.pojo.PojoSearchPackageQuestion;
 
 @Repository("packageQuestionDao")
 public class PackageQuestionDao extends CommonDao {
@@ -74,6 +77,36 @@ public class PackageQuestionDao extends CommonDao {
 			return new PackageQuestion();
 		else
 			return (PackageQuestion)list.get(0);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<PackageQuestion> search(PojoSearchPackageQuestion pq) {
+		StringBuilder query = new StringBuilder();
+		query.append("from PackageQuestion where 1=1");
+		if( pq.getName() != null) {
+			query.append(" and lower(question.questionTitle) like :field1");
+		}
+		if( pq.getType() != null) {
+			query.append(" and lower(question.questionType.questionTypeTitle) like :field1");
+		}
+		
+		Query queryExecuted = super.entityManager.createQuery(query.toString());
+		
+		if (pq.getName()!= null  ) {
+			queryExecuted.setParameter("field1", "%" + pq.getName().toLowerCase() + "%");
+		}
+		
+		if (pq.getType()!= null  ) {
+			queryExecuted.setParameter("field1", "%" + pq.getType().toLowerCase() + "%");
+		}
+		
+		List<PackageQuestion> list = queryExecuted.getResultList();
+		if(list.size()==0) {
+			return new ArrayList<PackageQuestion>();
+		}else {
+			return list;
+		}
 	}
 	
 }

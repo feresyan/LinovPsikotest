@@ -13,6 +13,7 @@ import com.linov.psikotes.entity.PackageQuestion;
 import com.linov.psikotes.entity.Question;
 import com.linov.psikotes.pojo.PojoPackQuestion;
 import com.linov.psikotes.pojo.PojoQuestion;
+import com.linov.psikotes.pojo.PojoSearchPackageQuestion;
 
 @Service("packageQuestionService")
 public class PackageQuestionService {
@@ -34,6 +35,11 @@ public class PackageQuestionService {
 	public PackageQuestion findById(String id) {
 		PackageQuestion pq = pqDao.findById(id);
 		return pq;
+	}
+	
+	public List<PackageQuestion> search(PojoSearchPackageQuestion pq) {
+		List<PackageQuestion> list = pqDao.search(pq);
+		return list;
 	}
 	
 	public List<PojoPackQuestion> findByPackageId(String id) {
