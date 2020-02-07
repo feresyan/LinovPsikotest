@@ -71,7 +71,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				"/applicant-answer/detail","/applicant-answer/detail/*","/applicant-answer/detail/*/*","/applicant-answer/detail/*/*/*",
 				"/report/*/*/*",
 				"/download/file/*",
-				"/login","/login/*").permitAll().
+				"/login","/login/*",
+				"/dashboard","/dashboard/*","/dashboard/*/*").permitAll().
 		
 		// all other requests need to be authenticated
 		anyRequest().authenticated().and().
