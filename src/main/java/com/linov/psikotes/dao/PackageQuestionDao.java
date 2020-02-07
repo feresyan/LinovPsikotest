@@ -84,20 +84,20 @@ public class PackageQuestionDao extends CommonDao {
 	public List<PackageQuestion> search(PojoSearchPackageQuestion pq) {
 		StringBuilder query = new StringBuilder();
 		query.append("from PackageQuestion where 1=1 and pack.packageId = '"+ pq.getId() +"'");
-		if( pq.getName() != null) {
+		if( pq.getName() != null || !pq.getName().trim().equalsIgnoreCase("")) {
 			query.append(" and lower(question.questionTitle) like :field1");
 		}
-		if( pq.getType() != null) {
+		if( pq.getType() != null || !pq.getName().trim().equalsIgnoreCase("")) {
 			query.append(" and lower(question.questionType.questionTypeTitle) like :field1");
 		}
 		
 		Query queryExecuted = super.entityManager.createQuery(query.toString());
 		
-		if (pq.getName()!= null  ) {
+		if (pq.getName()!= null || !pq.getName().trim().equalsIgnoreCase("") ) {
 			queryExecuted.setParameter("field1", "%" + pq.getName().toLowerCase() + "%");
 		}
 		
-		if (pq.getType()!= null  ) {
+		if (pq.getType()!= null || !pq.getName().trim().equalsIgnoreCase("") ) {
 			queryExecuted.setParameter("field1", "%" + pq.getType().toLowerCase() + "%");
 		}
 		
