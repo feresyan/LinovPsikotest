@@ -194,6 +194,9 @@ public class UserService {
 			//Check if nonBK null or not
 			valNonBk(user);
 			
+			//Encrypt password
+			user.setPassword(passwordEncoder().encode(user.getPassword()));
+			
 			//save
 			userDao.save(user);
 		} catch (Exception e) {
