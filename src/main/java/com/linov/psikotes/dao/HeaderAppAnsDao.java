@@ -1,12 +1,15 @@
 package com.linov.psikotes.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
 import com.linov.psikotes.entity.HeaderApplicantAnswer;
+import com.linov.psikotes.pojo.PojoSearchHeaderAppAns;
 
 @Repository("headerAppAnsDao")
 public class HeaderAppAnsDao extends CommonDao {
@@ -59,6 +62,29 @@ public class HeaderAppAnsDao extends CommonDao {
 			return new HeaderApplicantAnswer();
 		else
 			return (HeaderApplicantAnswer)list.get(0);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<HeaderApplicantAnswer> search(PojoSearchHeaderAppAns head) {
+		StringBuilder query = new StringBuilder();
+		query.append("from HeaderApplicantAnswer where 1=1");
+		if( head.getName() != null) {
+			query.append(" and lower(user.profile.profileName) like :field1");
+		}
+		
+		Query queryExecuted = super.entityManager.createQuery(query.toString());
+		
+		if (head.getName()!= null  ) {
+			queryExecuted.setParameter("field1", "%" + head.getName().toLowerCase() + "%");
+		}
+		
+		List<HeaderApplicantAnswer> list = queryExecuted.getResultList();
+		if(list.size()==0) {
+			return new ArrayList<HeaderApplicantAnswer>();
+		}else {
+			return list;
+		}
 	}
 	
 }

@@ -11,6 +11,7 @@ import com.linov.psikotes.dao.UserDao;
 import com.linov.psikotes.entity.HeaderApplicantAnswer;
 import com.linov.psikotes.entity.User;
 import com.linov.psikotes.exception.ErrorException;
+import com.linov.psikotes.pojo.PojoSearchHeaderAppAns;
 
 @Service("headerAppAnsService")
 public class HeaderAppAnsService {
@@ -33,6 +34,11 @@ public class HeaderAppAnsService {
 	
 	public HeaderApplicantAnswer findByUser(String id) {
 		HeaderApplicantAnswer appAns = appAnsDao.findByUser(id);
+		return appAns;
+	}
+	
+	public List<HeaderApplicantAnswer> search(PojoSearchHeaderAppAns head) {
+		List<HeaderApplicantAnswer> appAns = appAnsDao.search(head);
 		return appAns;
 	}
 	

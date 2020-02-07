@@ -10,6 +10,7 @@ import com.linov.psikotes.entity.Package;
 import com.linov.psikotes.dao.AssignQuestionDao;
 import com.linov.psikotes.entity.AssignQuestion;
 import com.linov.psikotes.entity.PackageQuestion;
+import com.linov.psikotes.entity.PojoSearchAssignQuest;
 
 @Service("assignQuestionService")
 public class AssignQuestionService {
@@ -24,6 +25,10 @@ public class AssignQuestionService {
 	
 	public List<PackageQuestion> getAllQuestByUserId(String userId){
 		return aqDao.getAllQuestByUserId(userId);
+	}
+	
+	public List<AssignQuestion> search(PojoSearchAssignQuest aq){
+		return aqDao.search(aq);
 	}
 	
 	public List<Package> getAllPackageByUserId(String userId){

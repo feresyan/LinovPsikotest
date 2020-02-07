@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.linov.psikotes.entity.AssignQuestion;
+import com.linov.psikotes.entity.PojoSearchAssignQuest;
 import com.linov.psikotes.exception.ErrorException;
 import com.linov.psikotes.service.AssignQuestionService;
 
@@ -91,6 +92,15 @@ public class AssignQuestionController {
 	public ResponseEntity<?> getAllAssignQuestion() throws ErrorException {
 		try {
 			return ResponseEntity.ok(aqService.getAllAq());
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+		}
+	}
+	
+	@GetMapping("/search")
+	public ResponseEntity<?> search(@RequestBody PojoSearchAssignQuest aq) throws ErrorException {
+		try {
+			return ResponseEntity.ok(aqService.search(aq));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 		}

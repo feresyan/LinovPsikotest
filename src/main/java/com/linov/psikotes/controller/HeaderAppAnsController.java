@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.linov.psikotes.entity.HeaderApplicantAnswer;
 import com.linov.psikotes.exception.ErrorException;
+import com.linov.psikotes.pojo.PojoSearchHeaderAppAns;
 import com.linov.psikotes.service.HeaderAppAnsService;
 
 @RestController
@@ -58,8 +59,6 @@ public class HeaderAppAnsController {
 	@GetMapping("/id/{id}")
 	public ResponseEntity<?> getById(@PathVariable String id) throws ErrorException {
 		try {
-			Object obj = "Status: 200 OK";
-			ResponseEntity.status(HttpStatus.OK).body(obj);
 			return ResponseEntity.ok(appAnsService.findById(id));			
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
@@ -69,19 +68,24 @@ public class HeaderAppAnsController {
 	@GetMapping("/user/id/{id}")
 	public ResponseEntity<?> getByUserId(@PathVariable String id) throws ErrorException {
 		try {
-			Object obj = "Status: 200 OK";
-			ResponseEntity.status(HttpStatus.OK).body(obj);
 			return ResponseEntity.ok(appAnsService.findByUser(id));			
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 		}
 	}
 	
-	@GetMapping("")
+	@GetMapping("/search")
+	public ResponseEntity<?> search(@RequestBody PojoSearchHeaderAppAns head) throws ErrorException {
+		try {
+			return ResponseEntity.ok(appAnsService.search(head));			
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+		}
+	}
+	
+	@PostMapping("")
 	public ResponseEntity<?> getAllHeader() throws ErrorException {
 		try {
-			Object obj = "Status: 200 OK";
-			ResponseEntity.status(HttpStatus.OK).body(obj);
 			return ResponseEntity.ok(appAnsService.getAllHeaderApplicantAnswer());
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
