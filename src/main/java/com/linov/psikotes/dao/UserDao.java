@@ -142,8 +142,9 @@ public class UserDao extends CommonDao {
 	@Transactional
 	public List<PojoUser> findByEmail(String email) {
 		List<User> list = super.entityManager
-				.createQuery("from User where lower(profile.email) like concat('%', :nameEmail, '%')")
+				.createQuery("from User where lower(profile.email) like concat('%', :nameEmail, '%') and role_id = :field2")
 				.setParameter("nameEmail", email.toLowerCase())
+				.setParameter("field2", "role2")
 				.getResultList();
 		if(list.size()==0)
 			return new ArrayList<PojoUser>();
@@ -168,8 +169,9 @@ public class UserDao extends CommonDao {
 	@Transactional
 	public List<PojoUser> findByPhone(String phone) {
 		List<User> list = super.entityManager
-				.createQuery("from User where profile.phone like concat('%', :phone, '%')")
+				.createQuery("from User where profile.phone like concat('%', :phone, '%') and role_id = :field2")
 				.setParameter("phone", phone)
+				.setParameter("field2", "role2")
 				.getResultList();
 		if(list.size()==0)
 			return new ArrayList<PojoUser>();

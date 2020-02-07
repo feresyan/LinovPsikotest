@@ -359,10 +359,10 @@
                         <p>Hi there,</p>
                         <p>This candidate already completed psychological test from linov psikotest,</p>
                         <br>
-                        <p><b>Name</b> &emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;:${candidateName}</p>
-                        <p><b>Email</b> &emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;:${email}</p>
-                        <p><b>Phone</b> &emsp;&emsp;&emsp;&emsp;&emsp;:${phone}</p>
-                        <p><b>Finished Time</b> &emsp;&nbsp;&nbsp;:${time}</p>
+                        <p><b>Name</b> &emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;: ${candidateName}</p>
+                        <p><b>Email</b> &emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;: ${email}</p>
+                        <p><b>Phone</b> &emsp;&emsp;&emsp;&emsp;&emsp;: ${phone}</p>
+                        <p><b>Finished Time</b> &emsp;&nbsp;&nbsp;: ${time}</p>
                         <br>
                         <p> Please Check His/Her answer in Linov Psikotest website for further information.</p>
                         <p>Thank you!</p>
