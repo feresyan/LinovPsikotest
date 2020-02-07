@@ -65,7 +65,7 @@ public class PackageController {
 		}
 	}
 	
-	@GetMapping("/search")
+	@PostMapping("/search")
 	public ResponseEntity<?> search(@RequestBody PojoSearchPackage pack) throws ErrorException {		
 		try {
 			return ResponseEntity.ok(packageService.search(pack));
