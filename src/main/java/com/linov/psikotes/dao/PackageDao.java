@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.linov.psikotes.entity.Package;
 import com.linov.psikotes.pojo.PojoPackage;
+import com.linov.psikotes.pojo.PojoSearchPackage;
 
 @Repository("packageDao")
 public class PackageDao extends CommonDao{
@@ -94,4 +95,26 @@ public class PackageDao extends CommonDao{
 			return (Package)list.get(0);
 	}
 	
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public List<Package> search(PojoSearchPackage pack) {
+		StringBuilder query = new StringBuilder();
+		query.append("from Package where 1=1");
+		if( pack.getPackageName() != null) {
+			query.append(" and lower(package_name) like :field1");
+		}
+		
+		Query queryExecuted = super.entityManager.createQuery(query.toString());
+		
+		if (pack.getPackageName()!= null  ) {
+			queryExecuted.setParameter("field1", "%" + pack.getPackageName().toLowerCase() + "%");
+		}
+		
+		List<Package> list = queryExecuted.getResultList();
+		if(list.size()==0) {
+			return new ArrayList<Package>();
+		}else {
+			return list;
+		}
+	}
 }

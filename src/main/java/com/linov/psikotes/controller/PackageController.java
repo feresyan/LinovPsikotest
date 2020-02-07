@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.linov.psikotes.entity.Package;
 import com.linov.psikotes.exception.ErrorException;
+import com.linov.psikotes.pojo.PojoSearchPackage;
 import com.linov.psikotes.service.PackageService;
 
 @RestController
@@ -58,9 +59,16 @@ public class PackageController {
 	@GetMapping("/id/{id}")
 	public ResponseEntity<?> getById(@PathVariable String id) throws ErrorException {		
 		try {
-			Object obj = "Status: 200 OK";
-			ResponseEntity.status(HttpStatus.OK).body(obj);
 			return ResponseEntity.ok(packageService.findByIdToPojo(id));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+		}
+	}
+	
+	@GetMapping("/search")
+	public ResponseEntity<?> search(@RequestBody PojoSearchPackage pack) throws ErrorException {		
+		try {
+			return ResponseEntity.ok(packageService.search(pack));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 		}
@@ -69,8 +77,6 @@ public class PackageController {
 	@GetMapping("")
 	public ResponseEntity<?> getAllPackage() throws ErrorException {
 		try {
-			Object obj = "Status: 200 OK";
-			ResponseEntity.status(HttpStatus.OK).body(obj);
 			return ResponseEntity.ok(packageService.getAllPackage());
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());

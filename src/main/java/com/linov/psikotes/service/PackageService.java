@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.linov.psikotes.entity.Package;
 import com.linov.psikotes.pojo.PojoPackage;
+import com.linov.psikotes.pojo.PojoSearchPackage;
 import com.linov.psikotes.dao.PackageDao;
 
 @Service("packageService")
@@ -37,6 +38,11 @@ public class PackageService {
 	public Package findById(String id) {
 		Package pack = packageDao.findById(id);
 		return pack;
+	}
+	
+	public List<Package> search(PojoSearchPackage pack) {
+		List<Package> list = packageDao.search(pack);
+		return list;
 	}
 	
 	public Package insertPackage(Package pack) throws Exception{
