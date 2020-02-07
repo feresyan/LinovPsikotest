@@ -97,7 +97,7 @@ public class AssignQuestionController {
 		}
 	}
 	
-	@GetMapping("/search")
+	@PostMapping("/search")
 	public ResponseEntity<?> search(@RequestBody PojoSearchAssignQuest aq) throws ErrorException {
 		try {
 			return ResponseEntity.ok(aqService.search(aq));
