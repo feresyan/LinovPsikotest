@@ -112,7 +112,7 @@ public class DetailAppAnsDao extends CommonDao{
 	@Transactional
 	public Integer getTotalAssignQuestion(String id) {
 		Query query  = super.entityManager
-				.createNativeQuery("Select count(*) FROM group1.tbl_detail_applicant_answer WHERE user_id = '" + id +"'");
+				.createNativeQuery("Select count(*) FROM group1.tbl_assign_question WHERE user_id = '" + id +"'");
 		BigInteger total =  (BigInteger) query.getSingleResult(); 
 		if(total.intValue() == 0 || total == null)
 			return 0;
@@ -123,7 +123,7 @@ public class DetailAppAnsDao extends CommonDao{
 	@Transactional
 	public Integer getTotalAssignQuestionThatInactive(String id) {
 		Query query  = super.entityManager
-				.createNativeQuery("Select count(*) FROM group1.tbl_detail_applicant_answer WHERE user_id = '" + id +"' and lower(active_state) = 'inactive'");
+				.createNativeQuery("Select count(*) FROM group1.tbl_assign_question WHERE user_id = '" + id +"' and lower(active_state) = 'inactive'");
 		BigInteger total =  (BigInteger) query.getSingleResult(); 
 		if(total.intValue() == 0 || total == null)
 			return 0;
