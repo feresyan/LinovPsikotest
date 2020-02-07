@@ -1,10 +1,21 @@
 package com.linov.psikotes.service;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 
 import com.linov.psikotes.dao.AssignQuestionDao;
 import com.linov.psikotes.dao.DetailAppAnsDao;
@@ -14,6 +25,11 @@ import com.linov.psikotes.entity.AssignQuestion;
 import com.linov.psikotes.entity.DetailApplicantAnswer;
 import com.linov.psikotes.entity.HeaderApplicantAnswer;
 import com.linov.psikotes.entity.PackageQuestion;
+import com.linov.psikotes.pojo.PojoEmailForAdmin;
+
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+import freemarker.template.TemplateException;
 
 @Service("detailAppAnsService")
 public class DetailAppAnsService {
@@ -35,6 +51,13 @@ public class DetailAppAnsService {
 
 	@Autowired
 	private PackageQuestionService pqService;
+	
+	@Autowired
+	private JavaMailSender javaMailSender;
+	
+	@Autowired
+	@Qualifier("emailConfigBean")
+	private Configuration emailConfig;
 	
 
 	public List<DetailApplicantAnswer> getAllDetail(){
@@ -173,7 +196,10 @@ public class DetailAppAnsService {
 			//make temporary var for total points
 			Integer tempPoints = 0;
 			
-			if(pq.getQuestion().getQuestionType().getQuestionTypeTitle().equalsIgnoreCase("Pilihan Ganda Teks") || pq.getQuestion().getQuestionType().getQuestionTypeTitle().equalsIgnoreCase("Pilihan Ganda Gambar")) {
+			if(pq.getQuestion().getQuestionType().getQuestionTypeTitle().equalsIgnoreCase("Pilihan Ganda Teks") || 
+					pq.getQuestion().getQuestionType().getQuestionTypeTitle().equalsIgnoreCase("Pilihan Ganda Teks 2") ||
+					pq.getQuestion().getQuestionType().getQuestionTypeTitle().equalsIgnoreCase("Pilihan Ganda Gambar") || 
+					pq.getQuestion().getQuestionType().getQuestionTypeTitle().equalsIgnoreCase("Pilihan Ganda Gambar 2")) {
 				if(pq.getQuestion().getCorrectAnswer().getAnswer1() != null && pq.getQuestion().getCorrectAnswer().getAnswer2() != null) {
 										
 					if( ( pq.getQuestion().getCorrectAnswer().getAnswer1().equalsIgnoreCase(data.getAppAnswer().getAnswer1()) || pq.getQuestion().getCorrectAnswer().getAnswer1().equalsIgnoreCase(data.getAppAnswer().getAnswer2())) 
@@ -245,7 +271,66 @@ public class DetailAppAnsService {
 		
 		AssignQuestion aq = assignDao.findBK(userId, packId);
 		assignDao.delete(aq.getAssignQuestionId());
+		
+		//Send email notification to admin if candidate already completed all assign question
+		sendEmailToAdmin(headerAppAns);
 	}
+	
+	public void sendEmailToAdmin(HeaderApplicantAnswer headerAppAns) throws Exception{
+		Integer totalQuestion = dAppAnsDao.getTotalAssignQuestion(headerAppAns.getUser().getUserId());
+		Integer totalInactive = dAppAnsDao.getTotalAssignQuestionThatInactive(headerAppAns.getUser().getUserId());
+		
+		//check if totalQuestion and totalInactive not 0 , coz if 0 then the candidate do not have assign question
+		if((totalQuestion != 0 || totalQuestion != null) || (totalInactive != 0 || totalInactive != null)) {
+			
+			
+			//Sending candidate info via email to admin
+			PojoEmailForAdmin pojoEmailForAdmin = new PojoEmailForAdmin();
+			pojoEmailForAdmin.setCandidateName(headerAppAns.getUser().getProfile().getProfileName());
+			pojoEmailForAdmin.setEmail(headerAppAns.getUser().getProfile().getEmail());
+			pojoEmailForAdmin.setPhone(headerAppAns.getUser().getProfile().getPhone());
+			pojoEmailForAdmin.setTimestamp(headerAppAns.getTimestamp());
+			pojoEmailForAdmin.setSendTo("feresyan@gmail.com");
+			pojoEmailForAdmin.setSubject("Linov Psikotest - Lawencon International");
+			sendEmail(pojoEmailForAdmin);
+		}
+		
+	}
+	
+	//send email
+    public void sendEmail(PojoEmailForAdmin pojoEmailForAdmin) throws MessagingException, IOException, TemplateException {
+
+        Map<String, String> model = new HashMap<String, String>();
+        model.put("candidateName", pojoEmailForAdmin.getCandidateName());
+        model.put("email",pojoEmailForAdmin.getEmail());
+        model.put("phone",pojoEmailForAdmin.getPhone());
+        model.put("time", pojoEmailForAdmin.getTimestamp().toString());
+        /**
+         * Add below line if you need to create a token to verification emails and uncomment line:32 in "email.ftl"
+         * model.put("token",UUID.randomUUID().toString());
+         */
+
+        pojoEmailForAdmin.setModel(model);
+
+
+        //log.info("Sending Email to: " + mailModel.getTo());
+
+
+        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, StandardCharsets.UTF_8.name());
+
+        Template template = emailConfig.getTemplate("emailAdmin.ftl");
+        String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, pojoEmailForAdmin.getModel());
+
+        mimeMessageHelper.setTo(pojoEmailForAdmin.getSendTo());
+        mimeMessageHelper.setText(html, true);
+        mimeMessageHelper.setSubject(pojoEmailForAdmin.getSubject());
+        mimeMessageHelper.setFrom("no-reply@gmail.com");
+
+
+        javaMailSender.send(message);
+
+    }
 	
 	// VALIDASI POST
 	

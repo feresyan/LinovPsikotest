@@ -3,7 +3,7 @@
   <head>
     <meta name="viewport" content="width=device-width" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Simple Transactional Email</title>
+    <title>Linov Psikotest</title>
     <style>
       /* -------------------------------------
           GLOBAL RESETS
@@ -333,7 +333,7 @@
     </style>
   </head>
   <body class="">
-    <span class="preheader">Your password for log in in Linov Psikotes Website.</span>
+    <span class="preheader">Candidate completed psychological test.</span>
     <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
       <tr>
         <td>&nbsp;</td>
@@ -355,12 +355,17 @@
                     </tr>
                     <tr>
                       <td>
-                        <p>Hi there,</p>
-                        <p>This is your password for login on LinovPsikotest website. Please do not share your password to anyone. Lawencon never ask for your password. Your password is :</p>
                         <br>
-                        <h1>${password}</h1>
-                        <p>Please Change your password immediately after your first login in our website. Thank you.</p>
-                        <p>Good luck for your test!</p>
+                        <p>Hi there,</p>
+                        <p>This candidate already completed psychological test from linov psikotest,</p>
+                        <br>
+                        <p><b>Name</b> &emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;:${nameCandidate}</p>
+                        <p><b>Email</b> &emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;:${email}</p>
+                        <p><b>Phone</b> &emsp;&emsp;&emsp;&emsp;&emsp;:${phone}</p>
+                        <p><b>Finished</b> Time &emsp;&nbsp;&nbsp;:${timestamp}</p>
+                        <br>
+                        <p> Please Check His/Her answer in Linov Psikotest website for further information.</p>
+                        <p>Thank you!</p>
                         <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                           <tbody>
                             <tr>
