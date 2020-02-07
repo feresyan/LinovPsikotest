@@ -362,7 +362,7 @@
                         <p><b>Name</b> &emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;:${candidateName}</p>
                         <p><b>Email</b> &emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;:${email}</p>
                         <p><b>Phone</b> &emsp;&emsp;&emsp;&emsp;&emsp;:${phone}</p>
-                        <p><b>Finished</b> Time &emsp;&nbsp;&nbsp;:${timestamp}</p>
+                        <p><b>Finished</b> Time &emsp;&nbsp;&nbsp;:${time}</p>
                         <br>
                         <p> Please Check His/Her answer in Linov Psikotest website for further information.</p>
                         <p>Thank you!</p>

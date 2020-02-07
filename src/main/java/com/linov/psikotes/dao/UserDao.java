@@ -115,7 +115,7 @@ public class UserDao extends CommonDao {
 	@Transactional
 	public PojoUser findByProfileName(String name) {
 		List<User> list = super.entityManager
-				.createQuery("from User where lower(profile.profileName) = :field1 and role_id = :field2")
+				.createQuery("from User where lower(profile.profileName)  like concat('%', :field1, '%') and role_id = :field2")
 				.setParameter("field1", name)
 				.setParameter("field2", "role2")
 				.getResultList();
