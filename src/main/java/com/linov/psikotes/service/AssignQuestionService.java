@@ -145,7 +145,7 @@ public class AssignQuestionService {
 	 	
 	 	private static Exception valBkNotExist(AssignQuestion aq) throws Exception{		
 	 		if(aq.getAssignQuestionId() != null) {
-	 			throw new Exception("Question sudah di assign ke user");
+	 			throw new Exception("Package "+ aq.getPack().getPackageName() +" sudah di assign ke user");
 	 		}
 	 		return null;
 	 	}
