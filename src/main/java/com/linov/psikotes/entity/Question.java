@@ -15,6 +15,9 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 
+import com.linov.psikotes.pojo.PojoChoice;
+import com.linov.psikotes.pojo.PojoListImg;
+import com.linov.psikotes.pojo.PojoAnswer;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 
 @Entity
@@ -40,15 +43,15 @@ public class Question {
 	
 	@Type(type = "jsonb")
 	@Column(name="list_img")
-	private ListImg listImg;
+	private PojoListImg listImg;
 	
 	@Type(type = "jsonb")
 	@Column(columnDefinition ="data")
-	private Choice choice;
+	private PojoChoice choice;
 	
 	@Type(type = "jsonb")
 	@Column(columnDefinition ="correct_answer")
-	private Answer correctAnswer;
+	private PojoAnswer correctAnswer;
 	
 	@Column(name="timestamp")
 	private Date timestamp;
@@ -88,19 +91,19 @@ public class Question {
 		this.questionDesc = questionDesc;
 	}
 
-	public Choice getChoice() {
+	public PojoChoice getChoice() {
 		return choice;
 	}
 
-	public void setChoice(Choice choice) {
+	public void setChoice(PojoChoice choice) {
 		this.choice = choice;
 	}
 
-	public Answer getCorrectAnswer() {
+	public PojoAnswer getCorrectAnswer() {
 		return correctAnswer;
 	}
 
-	public void setCorrectAnswer(Answer correctAnswer) {
+	public void setCorrectAnswer(PojoAnswer correctAnswer) {
 		this.correctAnswer = correctAnswer;
 	}
 
@@ -120,11 +123,11 @@ public class Question {
 		this.activeState = activeState;
 	}
 
-	public ListImg getListImg() {
+	public PojoListImg getListImg() {
 		return listImg;
 	}
 
-	public void setListImg(ListImg listImg) {
+	public void setListImg(PojoListImg listImg) {
 		this.listImg = listImg;
 	}
 

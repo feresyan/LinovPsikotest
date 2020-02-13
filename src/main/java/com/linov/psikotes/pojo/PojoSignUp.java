@@ -1,4 +1,6 @@
-package com.linov.psikotes.entity;
+package com.linov.psikotes.pojo;
+
+import com.linov.psikotes.entity.Profile;
 
 public class PojoSignUp {
 	

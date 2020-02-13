@@ -9,8 +9,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.linov.psikotes.dao.UserDao;
-import com.linov.psikotes.entity.PojoUser;
 import com.linov.psikotes.entity.User;
+import com.linov.psikotes.pojo.PojoUser;
 
 @Service("loginService")
 public class LoginService implements UserDetailsService{

@@ -1,7 +1,7 @@
-package com.linov.psikotes.entity;
+package com.linov.psikotes.pojo;
 
 
-public class Answer {
+public class PojoAnswer {
 
 	private String answer1;
 	private String answer2;

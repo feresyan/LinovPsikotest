@@ -1,6 +1,9 @@
-package com.linov.psikotes.entity;
+package com.linov.psikotes.pojo;
 
 import java.util.Date;
+
+import com.linov.psikotes.entity.Profile;
+import com.linov.psikotes.entity.Role;
 
 public class PojoUser {
 

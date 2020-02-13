@@ -1,4 +1,4 @@
-package com.linov.psikotes.entity;
+package com.linov.psikotes.pojo;
 
 public class PojoSearchAssignQuest {
 

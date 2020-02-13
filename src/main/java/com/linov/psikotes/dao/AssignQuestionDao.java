@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.linov.psikotes.entity.AssignQuestion;
 import com.linov.psikotes.entity.PackageQuestion;
-import com.linov.psikotes.entity.PojoSearchAssignQuest;
+import com.linov.psikotes.pojo.PojoSearchAssignQuest;
 
 @Repository("assignQuestionDao")
 public class AssignQuestionDao extends CommonDao{

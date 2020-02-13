@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.linov.psikotes.entity.AssignQuestion;
-import com.linov.psikotes.entity.PojoSearchAssignQuest;
 import com.linov.psikotes.exception.ErrorException;
+import com.linov.psikotes.pojo.PojoSearchAssignQuest;
 import com.linov.psikotes.service.AssignQuestionService;
 
 @RestController

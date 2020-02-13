@@ -16,14 +16,14 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.linov.psikotes.dao.QuestionDao;
 import com.linov.psikotes.dao.QuestionTypeDao;
-import com.linov.psikotes.entity.Answer;
-import com.linov.psikotes.entity.Choice;
-import com.linov.psikotes.entity.ListImg;
 import com.linov.psikotes.entity.PackageQuestion;
 import com.linov.psikotes.entity.Question;
 import com.linov.psikotes.entity.QuestionType;
-import com.linov.psikotes.entity.SearchQuestion;
+import com.linov.psikotes.pojo.PojoChoice;
+import com.linov.psikotes.pojo.PojoListImg;
+import com.linov.psikotes.pojo.PojoAnswer;
 import com.linov.psikotes.pojo.PojoQuestion;
+import com.linov.psikotes.pojo.PojoSearchQuestion;
 
 @Service("questionService")
 public class QuestionService {
@@ -81,7 +81,7 @@ public class QuestionService {
 		return listQuest;
 	}
 	
-	public List<Question> search(SearchQuestion searchQuest){
+	public List<Question> search(PojoSearchQuestion searchQuest){
 		List<Question> list = questionDao.search(searchQuest);
 		return list;
 	}
@@ -172,9 +172,9 @@ public class QuestionService {
 	{
 		Question question = new Question();
 		QuestionType qt = new QuestionType();
-		Choice c = new Choice();
-		Answer a = new Answer();
-		ListImg l = new ListImg();
+		PojoChoice c = new PojoChoice();
+		PojoAnswer a = new PojoAnswer();
+		PojoListImg l = new PojoListImg();
 		
 //		//create directory
 //		Path p = Paths.get(UPLOADED_FOLDER);
@@ -321,9 +321,9 @@ public class QuestionService {
 	{
 		Question question = findById(questionId);
 		QuestionType qt = new QuestionType();
-		Choice c = new Choice();
-		Answer a = new Answer();
-		ListImg l = new ListImg();
+		PojoChoice c = new PojoChoice();
+		PojoAnswer a = new PojoAnswer();
+		PojoListImg l = new PojoListImg();
 
 		//ListImage
 		for (int i = 0; i < listImage.length; i++) {

@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.linov.psikotes.entity.PojoSignUp;
 import com.linov.psikotes.entity.User;
 import com.linov.psikotes.exception.ErrorException;
+import com.linov.psikotes.pojo.PojoSignUp;
 import com.linov.psikotes.service.UserService;
 
 @RestController

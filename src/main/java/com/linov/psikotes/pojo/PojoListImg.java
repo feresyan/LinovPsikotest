@@ -1,6 +1,6 @@
-package com.linov.psikotes.entity;
+package com.linov.psikotes.pojo;
 
-public class ListImg {
+public class PojoListImg {
 	
 	private String imgA;
 	private String imgB;

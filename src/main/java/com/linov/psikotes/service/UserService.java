@@ -21,12 +21,12 @@ import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 
 import com.linov.psikotes.dao.UserDao;
 import com.linov.psikotes.entity.HeaderApplicantAnswer;
-import com.linov.psikotes.entity.PojoSignUp;
-import com.linov.psikotes.entity.PojoUser;
 import com.linov.psikotes.entity.Profile;
 import com.linov.psikotes.entity.Role;
 import com.linov.psikotes.entity.User;
 import com.linov.psikotes.pojo.PojoEmail;
+import com.linov.psikotes.pojo.PojoSignUp;
+import com.linov.psikotes.pojo.PojoUser;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;

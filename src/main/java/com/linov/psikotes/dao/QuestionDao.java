@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.linov.psikotes.entity.PackageQuestion;
 import com.linov.psikotes.entity.Question;
-import com.linov.psikotes.entity.SearchQuestion;
+import com.linov.psikotes.pojo.PojoSearchQuestion;
 
 @Repository("questionDao")
 public class QuestionDao extends CommonDao {
@@ -32,7 +32,7 @@ public class QuestionDao extends CommonDao {
 	@Transactional
 	public List<Question> getAll() {
 		List<Question> list = super.entityManager
-				.createQuery("from Question where active_state=:status")
+				.createQuery("from Question where active_state=:status order by timestamp desc")
 				.setParameter("status", "active")
 				.getResultList();
 		if(list.size()==0) return null;
@@ -90,7 +90,7 @@ public class QuestionDao extends CommonDao {
 	
 	@SuppressWarnings("unchecked")
 	@Transactional
-	public List<Question> search(SearchQuestion searchQuest) {
+	public List<Question> search(PojoSearchQuestion searchQuest) {
 		StringBuilder query = new StringBuilder();
 		query.append("from Question where 1=1");
 		if( searchQuest.getType() != null) {

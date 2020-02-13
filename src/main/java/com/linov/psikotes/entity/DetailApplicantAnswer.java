@@ -17,6 +17,7 @@ import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.linov.psikotes.pojo.PojoAnswer;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 
 @Entity
@@ -44,7 +45,7 @@ public class DetailApplicantAnswer {
 	
 	@Type(type = "jsonb")
 	@Column(columnDefinition ="applicant_answer", name = "applicant_answer")
-	private Answer appAnswer;
+	private PojoAnswer appAnswer;
 	
 	@Column(name = "point")
 	private Integer point;
@@ -73,11 +74,11 @@ public class DetailApplicantAnswer {
 		this.packQuestion = packQuestion;
 	}
 
-	public Answer getAppAnswer() {
+	public PojoAnswer getAppAnswer() {
 		return appAnswer;
 	}
 
-	public void setAppAnswer(Answer appAnswer) {
+	public void setAppAnswer(PojoAnswer appAnswer) {
 		this.appAnswer = appAnswer;
 	}
 

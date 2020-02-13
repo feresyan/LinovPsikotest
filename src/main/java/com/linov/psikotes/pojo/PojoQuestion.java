@@ -2,8 +2,6 @@ package com.linov.psikotes.pojo;
 
 import java.util.Date;
 
-import com.linov.psikotes.entity.Choice;
-import com.linov.psikotes.entity.ListImg;
 import com.linov.psikotes.entity.QuestionType;
 
 public class PojoQuestion {
@@ -12,8 +10,8 @@ public class PojoQuestion {
 	private QuestionType questionType;
 	private String questionTitle;
 	private String questionDesc;
-	private ListImg listImg;
-	private Choice choice;
+	private PojoListImg listImg;
+	private PojoChoice choice;
 	private Date timestamp;
 	private String activeState;
 	
@@ -41,16 +39,16 @@ public class PojoQuestion {
 	public void setQuestionDesc(String questionDesc) {
 		this.questionDesc = questionDesc;
 	}
-	public ListImg getListImg() {
+	public PojoListImg getListImg() {
 		return listImg;
 	}
-	public void setListImg(ListImg listImg) {
+	public void setListImg(PojoListImg listImg) {
 		this.listImg = listImg;
 	}
-	public Choice getChoice() {
+	public PojoChoice getChoice() {
 		return choice;
 	}
-	public void setChoice(Choice choice) {
+	public void setChoice(PojoChoice choice) {
 		this.choice = choice;
 	}
 	public Date getTimestamp() {

@@ -7,8 +7,8 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
-import com.linov.psikotes.entity.PojoUser;
 import com.linov.psikotes.entity.User;
+import com.linov.psikotes.pojo.PojoUser;
 
 @Repository("userDao")
 public class UserDao extends CommonDao {
@@ -127,10 +127,10 @@ public class UserDao extends CommonDao {
 			
 			for (int i = 0; i < list.size(); i++) {
 				PojoUser pu = new PojoUser();
-				pu.setUserId(list.get(0).getUserId());
-				pu.setUsername(list.get(0).getUsername());
-				pu.setRole(list.get(0).getRole());
-				pu.setProfile(list.get(0).getProfile());
+				pu.setUserId(list.get(i).getUserId());
+				pu.setUsername(list.get(i).getUsername());
+				pu.setRole(list.get(i).getRole());
+				pu.setProfile(list.get(i).getProfile());
 				listPojoUser.add(pu);
 			}
 			
@@ -154,10 +154,10 @@ public class UserDao extends CommonDao {
 			
 			for (int i = 0; i < list.size(); i++) {
 				PojoUser pu = new PojoUser();
-				pu.setUserId(list.get(0).getUserId());
-				pu.setUsername(list.get(0).getUsername());
-				pu.setRole(list.get(0).getRole());
-				pu.setProfile(list.get(0).getProfile());
+				pu.setUserId(list.get(i).getUserId());
+				pu.setUsername(list.get(i).getUsername());
+				pu.setRole(list.get(i).getRole());
+				pu.setProfile(list.get(i).getProfile());
 				listPojoUser.add(pu);
 			}
 			
@@ -181,10 +181,10 @@ public class UserDao extends CommonDao {
 			
 			for (int i = 0; i < list.size(); i++) {
 				PojoUser pu = new PojoUser();
-				pu.setUserId(list.get(0).getUserId());
-				pu.setUsername(list.get(0).getUsername());
-				pu.setRole(list.get(0).getRole());
-				pu.setProfile(list.get(0).getProfile());
+				pu.setUserId(list.get(i).getUserId());
+				pu.setUsername(list.get(i).getUsername());
+				pu.setRole(list.get(i).getRole());
+				pu.setProfile(list.get(i).getProfile());
 				listPojoUser.add(pu);
 			}
 			

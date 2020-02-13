@@ -1,6 +1,6 @@
-package com.linov.psikotes.entity;
+package com.linov.psikotes.pojo;
 
-public class Choice {
+public class PojoChoice {
 
 	private String choiceA;
 	private String choiceB;

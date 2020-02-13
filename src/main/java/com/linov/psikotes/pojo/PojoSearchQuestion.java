@@ -1,6 +1,6 @@
-package com.linov.psikotes.entity;
+package com.linov.psikotes.pojo;
 
-public class SearchQuestion {
+public class PojoSearchQuestion {
 	
 	private String type;
 	private String title;

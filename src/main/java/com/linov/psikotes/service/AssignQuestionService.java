@@ -10,7 +10,7 @@ import com.linov.psikotes.entity.Package;
 import com.linov.psikotes.dao.AssignQuestionDao;
 import com.linov.psikotes.entity.AssignQuestion;
 import com.linov.psikotes.entity.PackageQuestion;
-import com.linov.psikotes.entity.PojoSearchAssignQuest;
+import com.linov.psikotes.pojo.PojoSearchAssignQuest;
 
 @Service("assignQuestionService")
 public class AssignQuestionService {
@@ -54,7 +54,7 @@ public class AssignQuestionService {
 	public AssignQuestion insertAq(AssignQuestion aq) throws Exception{
 		try {
 			AssignQuestion newAq = aqDao.findBK(aq.getUser().getUserId(), aq.getPack().getPackageId());
-			if(newAq.getAssignQuestionId() != null) {
+			if(newAq.getAssignQuestionId() != null && newAq.getActiveState().equalsIgnoreCase("inactive")) {
 				newAq.setActiveState("active");
 				updateAq(newAq);
 				return newAq;

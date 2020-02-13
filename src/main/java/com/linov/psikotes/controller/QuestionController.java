@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.linov.psikotes.entity.Question;
-import com.linov.psikotes.entity.SearchQuestion;
 import com.linov.psikotes.exception.ErrorException;
+import com.linov.psikotes.pojo.PojoSearchQuestion;
 import com.linov.psikotes.service.QuestionService;
 
 @RestController
@@ -111,7 +111,7 @@ public class QuestionController {
 	}
 	
 	@PostMapping("/search")
-	public ResponseEntity<?> search(@RequestBody SearchQuestion searchQuest) throws ErrorException {
+	public ResponseEntity<?> search(@RequestBody PojoSearchQuestion searchQuest) throws ErrorException {
 		try {
 			 return ResponseEntity.ok(questionService.search(searchQuest));
 		} catch (Exception e) {
