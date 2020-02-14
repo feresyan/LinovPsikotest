@@ -65,12 +65,6 @@ Telp. 021 –  83702192
 				<reportElement x="381" y="7" width="119" height="30" uuid="b20b88fc-b3f8-4cdc-8077-5a78f5d8ecfe">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7da3c04a-7569-40c5-a708-524f44cffcb6"/>
 				</reportElement>
-				<box>
-					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
-				</box>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{totalCandidate}]]></textFieldExpression>
 			</textField>
