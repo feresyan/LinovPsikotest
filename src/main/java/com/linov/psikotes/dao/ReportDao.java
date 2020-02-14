@@ -10,6 +10,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.linov.psikotes.entity.User;
 import com.linov.psikotes.pojo.PojoPackReport;
 import com.linov.psikotes.pojo.PojoPackage;
 import com.linov.psikotes.pojo.PojoQuestReport;
@@ -56,8 +57,12 @@ public class ReportDao extends CommonDao{
 
 			List<BigInteger> listTotalQuest = query.getResultList();
 			
+		List<User> list = super.entityManager
+				.createQuery("from User where lower(active_state) = 'active' and role_id = 'role2' ")
+				.getResultList();
 		
-		
+		Integer totalCandidate = list.size();
+
 		//Make List Pojo Question Report
 		List<PojoQuestReport> listPqr = new ArrayList<PojoQuestReport>();
 		
@@ -66,12 +71,15 @@ public class ReportDao extends CommonDao{
 			PojoQuestReport pqr = new PojoQuestReport();
 			
 			//Buat persen dari total soal dengan total yang dijawab benar
-			Double percent =  (listTotalCorrect.get(i).doubleValue()/listTotalQuest.get(i).doubleValue())*100;
+			Double percent =  (listTotalCorrect.get(i).doubleValue()/listTotalQuest.get(i).doubleValue())*100; 
+			String format = String.format("%.2f", percent);
+			percent = Double.parseDouble(format);
 			
 			pqr.setQuestionTitle(listQuestTitle.get(i));
 			pqr.setTotalCorrect(listTotalCorrect.get(i).toString());
 			pqr.setTotalQuestion(listTotalQuest.get(i).toString());
 			pqr.setPercentation(percent.toString());
+			pqr.setTotalCandidate(totalCandidate.toString());
 			listPqr.add(pqr);
 		}
 		
@@ -136,6 +144,8 @@ public class ReportDao extends CommonDao{
 			
 			//Buat persen dari total soal dengan total yang dijawab benar
 			Double percent =  listTotalCorrect.get(i).doubleValue()/listTotalQuest.get(i).doubleValue()*100;
+			String format = String.format("%.2f", percent);
+			percent = Double.parseDouble(format);
 			
 			pqr.setQuestionTitle(listQuestTitle.get(i));
 			pqr.setTotalCorrect(listTotalCorrect.get(i).toString());
@@ -228,6 +238,8 @@ public class ReportDao extends CommonDao{
 				
 				//Get percentation
 				Double percentation = listTotalCorrect.get(j).doubleValue()/listTotalQuestion.get(j).doubleValue()*100;
+				String format = String.format("%.2f", percentation);
+				percentation = Double.parseDouble(format);
 				
 				ppr.setPackageName(listPackName.get(j));
 				ppr.setQuestionTitle(listQuestTitle.get(j));
@@ -320,6 +332,8 @@ public class ReportDao extends CommonDao{
 				
 				//Get percentation
 				Double percentation = listTotalCorrect.get(j).doubleValue()/listTotalQuestion.get(j).doubleValue()*100;
+				String format = String.format("%.2f", percentation);
+				percentation = Double.parseDouble(format);
 				
 				ppr.setPackageName(listPackName.get(j));
 				ppr.setQuestionTitle(listQuestTitle.get(j));
@@ -399,6 +413,8 @@ public class ReportDao extends CommonDao{
 				
 				//Get percentation
 				Double percentation = listTotalCorrect.get(j).doubleValue()/listTotalQuestion.get(j).doubleValue()*100;
+				String format = String.format("%.2f", percentation);
+				percentation = Double.parseDouble(format);
 				
 				ppr.setPackageName(listPackName.get(j));
 				ppr.setTotalCorrect(listTotalCorrect.get(j).toString());
@@ -478,6 +494,8 @@ public class ReportDao extends CommonDao{
 				
 				//Get percentation
 				Double percentation = listTotalCorrect.get(j).doubleValue()/listTotalQuestion.get(j).doubleValue()*100;
+				String format = String.format("%.2f", percentation);
+				percentation = Double.parseDouble(format);
 				
 				ppr.setPackageName(listPackName.get(j));
 				ppr.setTotalCorrect(listTotalCorrect.get(j).toString());

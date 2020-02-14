@@ -6,6 +6,7 @@ public class PojoQuestReport {
 	private String totalQuestion;
 	private String totalCorrect;
 	private String percentation;
+	private String totalCandidate;
 	
 	public String getQuestionTitle() {
 		return questionTitle;
@@ -37,6 +38,14 @@ public class PojoQuestReport {
 	
 	public void setPercentation(String percentation) {
 		this.percentation = percentation;
+	}
+
+	public String getTotalCandidate() {
+		return totalCandidate;
+	}
+
+	public void setTotalCandidate(String totalCandidate) {
+		this.totalCandidate = totalCandidate;
 	}
 	
 }
