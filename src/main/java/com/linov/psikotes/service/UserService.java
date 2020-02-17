@@ -93,18 +93,12 @@ public class UserService {
 	}
 	
 	public User checkPassword(String userId, String password) throws Exception {
-		try {
-			User user = userDao.findById(userId);
-//			String passBcrypt = passwordEncoder().encode(password);
-//			if (user.getPassword().equals(passBcrypt)) {
-//				return user;
-//			}
+		User user = userDao.findById(userId);
+		boolean status = passwordEncoder().matches(password, user.getPassword());
+		if (status) {
 			return user;
-		} catch (Exception e) {
-			// TODO: handle exception
-			throw new Exception(e.getMessage());
 		}
-//		return new User();
+		return new User();
 	}
 	
 	public void signUp(PojoSignUp pojoSignUp) throws Exception{
