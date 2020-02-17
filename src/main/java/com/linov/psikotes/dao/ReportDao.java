@@ -58,7 +58,7 @@ public class ReportDao extends CommonDao{
 			List<BigInteger> listTotalQuest = query.getResultList();
 			
 		List<User> list = super.entityManager
-				.createQuery("from User where lower(active_state) = 'active' and role_id = 'role2' ")
+				.createQuery("from User where role_id = 'role2' ")
 				.getResultList();
 		
 		Integer totalCandidate = list.size();
@@ -134,7 +134,13 @@ public class ReportDao extends CommonDao{
 							"order by total desc");
 
 			List<BigInteger> listTotalQuest = query.getResultList();
+			
+		List<User> list = super.entityManager
+				.createQuery("from User where role_id = 'role2' ")
+				.getResultList();
 		
+		Integer totalCandidate = list.size();
+	
 		//Make List Pojo Question Report
 		List<PojoQuestReport> listPqr = new ArrayList<PojoQuestReport>();
 		
@@ -151,6 +157,7 @@ public class ReportDao extends CommonDao{
 			pqr.setTotalCorrect(listTotalCorrect.get(i).toString());
 			pqr.setTotalQuestion(listTotalQuest.get(i).toString());
 			pqr.setPercentation(percent.toString());
+			pqr.setTotalCandidate(totalCandidate.toString());
 			listPqr.add(pqr);
 		}
 		
@@ -231,6 +238,11 @@ public class ReportDao extends CommonDao{
 
 				List<BigInteger> listTotalQuestion = query.getResultList();
 			
+			List<User> list = super.entityManager
+					.createQuery("from User where role_id = 'role2' ")
+					.getResultList();
+			
+			Integer totalCandidate = list.size();
 				
 			for (int j = 0; j < listPackName.size(); j++) {
 				
@@ -246,6 +258,7 @@ public class ReportDao extends CommonDao{
 				ppr.setTotalQuestion(listTotalQuestion.get(j).toString());
 				ppr.setTotalCorrect(listTotalCorrect.get(j).toString());
 				ppr.setPercentation(percentation.toString());
+				ppr.setTotalCandidate(totalCandidate.toString());
 				listPackReport.add(ppr);
 			}
 		} // end for package
@@ -326,6 +339,12 @@ public class ReportDao extends CommonDao{
 						"order by count(tmq.question_title) desc limit 10");
 
 					List<BigInteger> listTotalQuestion = query.getResultList();
+			
+			List<User> list = super.entityManager
+					.createQuery("from User where role_id = 'role2' ")
+					.getResultList();
+			
+			Integer totalCandidate = list.size();
 				
 			for (int j = 0; j < listPackName.size(); j++) {
 				PojoPackReport ppr = new PojoPackReport();
@@ -340,6 +359,7 @@ public class ReportDao extends CommonDao{
 				ppr.setTotalQuestion(listTotalQuestion.get(j).toString());
 				ppr.setTotalCorrect(listTotalCorrect.get(j).toString());
 				ppr.setPercentation(percentation.toString());
+				ppr.setTotalCandidate(totalCandidate.toString());
 				listPackReport.add(ppr);
 			}
 		} // end for package
@@ -407,6 +427,12 @@ public class ReportDao extends CommonDao{
 								"order by count(tmq.question_title) desc");
 
 			List<BigInteger> listTotalQuestion = query.getResultList();
+			
+			List<User> list = super.entityManager
+					.createQuery("from User where role_id = 'role2' ")
+					.getResultList();
+			
+			Integer totalCandidate = list.size();
 		
 			for (int j = 0; j < listPackName.size(); j++) {
 				PojoPackReport ppr = new PojoPackReport();
@@ -420,6 +446,7 @@ public class ReportDao extends CommonDao{
 				ppr.setTotalCorrect(listTotalCorrect.get(j).toString());
 				ppr.setTotalQuestion(listTotalQuestion.get(j).toString());
 				ppr.setPercentation(percentation.toString());
+				ppr.setTotalCandidate(totalCandidate.toString());
 				listPackReport.add(ppr);
 			}
 		
@@ -488,6 +515,12 @@ public class ReportDao extends CommonDao{
 								"order by count(tmq.question_title) desc");
 
 			List<BigInteger> listTotalQuestion = query.getResultList();
+			
+			List<User> list = super.entityManager
+					.createQuery("from User where role_id = 'role2' ")
+					.getResultList();
+			
+			Integer totalCandidate = list.size();
 		
 			for (int j = 0; j < listPackName.size(); j++) {
 				PojoPackReport ppr = new PojoPackReport();
@@ -501,6 +534,7 @@ public class ReportDao extends CommonDao{
 				ppr.setTotalCorrect(listTotalCorrect.get(j).toString());
 				ppr.setTotalQuestion(listTotalQuestion.get(j).toString());
 				ppr.setPercentation(percentation.toString());
+				ppr.setTotalCandidate(totalCandidate.toString());
 				listPackReport.add(ppr);
 			}
 		

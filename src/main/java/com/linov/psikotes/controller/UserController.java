@@ -1,5 +1,7 @@
 package com.linov.psikotes.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -98,6 +100,17 @@ public class UserController {
 	public ResponseEntity<?> getByPhone(@PathVariable String phone) throws ErrorException {
 		try {
 			return ResponseEntity.ok(userService.findByPhone(phone));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+		}
+	}
+	
+	@GetMapping("/check-password")
+	public ResponseEntity<?> checkPassword(@RequestBody Map<String,String> data) throws ErrorException {
+		try {
+			String userId = data.get("userId");
+			String password = data.get("password");
+			return ResponseEntity.ok(userService.checkPassword(userId,password));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
 		}

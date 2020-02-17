@@ -53,6 +53,20 @@ Telp. 021 –  83702192
 				</textElement>
 				<text><![CDATA[Questions Most Answered Wrongly on Package]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="280" y="7" width="101" height="30" uuid="c24210fe-96c8-4c15-a178-a8cc81d7c1f4"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Total Candidate :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="381" y="7" width="119" height="30" uuid="b20b88fc-b3f8-4cdc-8077-5a78f5d8ecfe">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7da3c04a-7569-40c5-a708-524f44cffcb6"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{totalCandidate}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
 	

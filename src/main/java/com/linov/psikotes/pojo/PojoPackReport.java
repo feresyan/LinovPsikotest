@@ -7,6 +7,7 @@ public class PojoPackReport {
 	private String totalQuestion;
 	private String totalCorrect;
 	private String percentation;
+	private String totalCandidate;
 	
 	public String getPackageName() {
 		return packageName;
@@ -46,6 +47,14 @@ public class PojoPackReport {
 	
 	public void setPercentation(String percentation) {
 		this.percentation = percentation;
+	}
+
+	public String getTotalCandidate() {
+		return totalCandidate;
+	}
+
+	public void setTotalCandidate(String totalCandidate) {
+		this.totalCandidate = totalCandidate;
 	}
 	
 }
