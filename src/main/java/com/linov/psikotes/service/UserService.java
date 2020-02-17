@@ -92,11 +92,16 @@ public class UserService {
 		return user;
 	}
 	
-	public User checkPassword(String userId, String password) {
-		User user = userDao.findById(userId);
-		String passBcrypt = passwordEncoder().encode(password);
-		if (user.getPassword().equals(passBcrypt)) {
-			return user;
+	public User checkPassword(String userId, String password) throws Exception {
+		try {
+			User user = userDao.findById(userId);
+			String passBcrypt = passwordEncoder().encode(password);
+			if (user.getPassword().equals(passBcrypt)) {
+				return user;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			throw new Exception(e.getMessage());
 		}
 		return new User();
 	}
