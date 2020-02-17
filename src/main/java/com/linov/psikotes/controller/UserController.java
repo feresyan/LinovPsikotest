@@ -105,7 +105,7 @@ public class UserController {
 		}
 	}
 	
-	@GetMapping("/check-password")
+	@PostMapping("/check-password")
 	public ResponseEntity<?> checkPassword(@RequestBody Map<String,String> data) throws ErrorException {
 		try {
 			String userId = data.get("userId");
