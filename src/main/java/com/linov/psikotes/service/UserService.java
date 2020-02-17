@@ -94,7 +94,7 @@ public class UserService {
 	
 	public User checkPassword(String userId, String password) {
 		User user = userDao.findById(userId);
-		String passBcrypt = passwordEncoder().encode(user.getPassword());
+		String passBcrypt = passwordEncoder().encode(password);
 		if (user.getPassword().equals(passBcrypt)) {
 			return user;
 		}
